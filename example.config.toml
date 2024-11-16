@@ -1,0 +1,15 @@
+[application]
+version = "1.0.0"
+log_level = "all"
+log_file_path = "./log/swan.log"
+chrome_executable_path = "C:/Program Files/Google/Chrome/Application/chrome.exe"
+data_directory = "./data"
+
+[account.dzdp]
+username = ""
+password = ""
+location = ""
+page_maximum = 600
+
+[account.test]
+username = ""

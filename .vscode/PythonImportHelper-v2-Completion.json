@@ -1,5 +1,23 @@
 [
     {
+        "label": "argparse",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "argparse",
+        "description": "argparse",
+        "detail": "argparse",
+        "documentation": {}
+    },
+    {
+        "label": "glob",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "glob",
+        "description": "glob",
+        "detail": "glob",
+        "documentation": {}
+    },
+    {
         "label": "os",
         "kind": 6,
         "isExtraImport": true,
@@ -9,46 +27,12 @@
         "documentation": {}
     },
     {
-        "label": "pathlib",
+        "label": "shutil",
         "kind": 6,
         "isExtraImport": true,
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "toml",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "toml",
-        "description": "toml",
-        "detail": "toml",
-        "documentation": {}
-    },
-    {
-        "label": "re",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "re",
-        "description": "re",
-        "detail": "re",
+        "importPath": "shutil",
+        "description": "shutil",
+        "detail": "shutil",
         "documentation": {}
     },
     {
@@ -58,6 +42,60 @@
         "importPath": "sys",
         "description": "sys",
         "detail": "sys",
+        "documentation": {}
+    },
+    {
+        "label": "sysconfig",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sysconfig",
+        "description": "sysconfig",
+        "detail": "sysconfig",
+        "documentation": {}
+    },
+    {
+        "label": "tempfile",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "tempfile",
+        "description": "tempfile",
+        "detail": "tempfile",
+        "documentation": {}
+    },
+    {
+        "label": "winreg",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "winreg",
+        "description": "winreg",
+        "detail": "winreg",
+        "documentation": {}
+    },
+    {
+        "label": "site",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "site",
+        "description": "site",
+        "detail": "site",
+        "documentation": {}
+    },
+    {
+        "label": "subprocess",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "subprocess",
+        "description": "subprocess",
+        "detail": "subprocess",
+        "documentation": {}
+    },
+    {
+        "label": "re",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "re",
+        "description": "re",
+        "detail": "re",
         "documentation": {}
     },
     {
@@ -117,19 +155,534 @@
         "documentation": {}
     },
     {
-        "label": "Config",
-        "importPath": "config",
-        "description": "config",
+        "label": "pathlib",
+        "kind": 6,
         "isExtraImport": true,
-        "detail": "config",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
         "documentation": {}
     },
     {
         "label": "Config",
-        "importPath": "config",
-        "description": "config",
+        "importPath": "src.utils.config",
+        "description": "src.utils.config",
         "isExtraImport": true,
-        "detail": "config",
+        "detail": "src.utils.config",
+        "documentation": {}
+    },
+    {
+        "label": "Config",
+        "importPath": "src.utils.config",
+        "description": "src.utils.config",
+        "isExtraImport": true,
+        "detail": "src.utils.config",
+        "documentation": {}
+    },
+    {
+        "label": "platform",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "platform",
+        "description": "platform",
+        "detail": "platform",
+        "documentation": {}
+    },
+    {
+        "label": "QDialog",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QVBoxLayout",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QLabel",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QPushButton",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QDialog",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QVBoxLayout",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QHBoxLayout",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QLabel",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QLineEdit",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QPushButton",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QFormLayout",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QFrame",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QDialog",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QVBoxLayout",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QHBoxLayout",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QTextEdit",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QPushButton",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QLabel",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QMessageBox",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QSpacerItem",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QSizePolicy",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QApplication",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QDialog",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QVBoxLayout",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QHBoxLayout",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QLabel",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QLineEdit",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QPushButton",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QFormLayout",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QMainWindow",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QMenuBar",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QMenu",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QSystemTrayIcon",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QStyle",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QGraphicsDropShadowEffect",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QApplication",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QApplication",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "Qt",
+        "importPath": "PyQt6.QtCore",
+        "description": "PyQt6.QtCore",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtCore",
+        "documentation": {}
+    },
+    {
+        "label": "QSettings",
+        "importPath": "PyQt6.QtCore",
+        "description": "PyQt6.QtCore",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtCore",
+        "documentation": {}
+    },
+    {
+        "label": "Qt",
+        "importPath": "PyQt6.QtCore",
+        "description": "PyQt6.QtCore",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtCore",
+        "documentation": {}
+    },
+    {
+        "label": "QTimer",
+        "importPath": "PyQt6.QtCore",
+        "description": "PyQt6.QtCore",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtCore",
+        "documentation": {}
+    },
+    {
+        "label": "QSettings",
+        "importPath": "PyQt6.QtCore",
+        "description": "PyQt6.QtCore",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtCore",
+        "documentation": {}
+    },
+    {
+        "label": "QSettings",
+        "importPath": "PyQt6.QtCore",
+        "description": "PyQt6.QtCore",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtCore",
+        "documentation": {}
+    },
+    {
+        "label": "Qt",
+        "importPath": "PyQt6.QtCore",
+        "description": "PyQt6.QtCore",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtCore",
+        "documentation": {}
+    },
+    {
+        "label": "QSettings",
+        "importPath": "PyQt6.QtCore",
+        "description": "PyQt6.QtCore",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtCore",
+        "documentation": {}
+    },
+    {
+        "label": "QFont",
+        "importPath": "PyQt6.QtGui",
+        "description": "PyQt6.QtGui",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtGui",
+        "documentation": {}
+    },
+    {
+        "label": "QClipboard",
+        "importPath": "PyQt6.QtGui",
+        "description": "PyQt6.QtGui",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtGui",
+        "documentation": {}
+    },
+    {
+        "label": "QTextCursor",
+        "importPath": "PyQt6.QtGui",
+        "description": "PyQt6.QtGui",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtGui",
+        "documentation": {}
+    },
+    {
+        "label": "QAction",
+        "importPath": "PyQt6.QtGui",
+        "description": "PyQt6.QtGui",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtGui",
+        "documentation": {}
+    },
+    {
+        "label": "QKeySequence",
+        "importPath": "PyQt6.QtGui",
+        "description": "PyQt6.QtGui",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtGui",
+        "documentation": {}
+    },
+    {
+        "label": "QIcon",
+        "importPath": "PyQt6.QtGui",
+        "description": "PyQt6.QtGui",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtGui",
+        "documentation": {}
+    },
+    {
+        "label": "QColor",
+        "importPath": "PyQt6.QtGui",
+        "description": "PyQt6.QtGui",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtGui",
+        "documentation": {}
+    },
+    {
+        "label": "AboutDialog",
+        "importPath": "src.gui.dialogs.about_dialog",
+        "description": "src.gui.dialogs.about_dialog",
+        "isExtraImport": true,
+        "detail": "src.gui.dialogs.about_dialog",
+        "documentation": {}
+    },
+    {
+        "label": "ProgramSettingsDialog",
+        "importPath": "src.gui.dialogs.program_settings_dialog",
+        "description": "src.gui.dialogs.program_settings_dialog",
+        "isExtraImport": true,
+        "detail": "src.gui.dialogs.program_settings_dialog",
+        "documentation": {}
+    },
+    {
+        "label": "AccountSettingsDialog",
+        "importPath": "src.gui.dialogs.account_settings_dialog",
+        "description": "src.gui.dialogs.account_settings_dialog",
+        "isExtraImport": true,
+        "detail": "src.gui.dialogs.account_settings_dialog",
+        "documentation": {}
+    },
+    {
+        "label": "LogViewerDialog",
+        "importPath": "src.gui.dialogs.log_viewer_dialog",
+        "description": "src.gui.dialogs.log_viewer_dialog",
+        "isExtraImport": true,
+        "detail": "src.gui.dialogs.log_viewer_dialog",
+        "documentation": {}
+    },
+    {
+        "label": "Swan",
+        "importPath": "src.core.swan",
+        "description": "src.core.swan",
+        "isExtraImport": true,
+        "detail": "src.core.swan",
+        "documentation": {}
+    },
+    {
+        "label": "comment_swan_main",
+        "importPath": "src.core.swan",
+        "description": "src.core.swan",
+        "isExtraImport": true,
+        "detail": "src.core.swan",
+        "documentation": {}
+    },
+    {
+        "label": "Swan",
+        "importPath": "src.core.swan",
+        "description": "src.core.swan",
+        "isExtraImport": true,
+        "detail": "src.core.swan",
+        "documentation": {}
+    },
+    {
+        "label": "toml",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "toml",
+        "description": "toml",
+        "detail": "toml",
         "documentation": {}
     },
     {
@@ -151,111 +704,434 @@
         "documentation": {}
     },
     {
-        "label": "platform",
-        "kind": 6,
+        "label": "MainWindow",
+        "importPath": "src.gui.main_window",
+        "description": "src.gui.main_window",
         "isExtraImport": true,
-        "importPath": "platform",
-        "description": "platform",
-        "detail": "platform",
+        "detail": "src.gui.main_window",
         "documentation": {}
     },
     {
-        "label": "Config",
+        "label": "Tee",
         "kind": 6,
-        "importPath": "config",
-        "description": "config",
-        "peekOfCode": "class Config:\n    __config_obj = None\n    __config_file_path = ''\n    def __init__(self, config_file_path) -> None:\n        if not os.path.exists(config_file_path):\n            raise FileNotFoundError('Cannot find the config file at %s' %\n                                    config_file_path)\n        config = toml.load(config_file_path)\n        self.__config_file_path = config_file_path\n        self.__config_obj = config",
-        "detail": "config",
+        "importPath": "env.Scripts.pywin32_postinstall",
+        "description": "env.Scripts.pywin32_postinstall",
+        "peekOfCode": "class Tee:\n    def __init__(self, file):\n        self.f = file\n    def write(self, what):\n        if self.f is not None:\n            try:\n                self.f.write(what.replace(\"\\n\", \"\\r\\n\"))\n            except OSError:\n                pass\n        tee_f.write(what)",
+        "detail": "env.Scripts.pywin32_postinstall",
+        "documentation": {}
+    },
+    {
+        "label": "CopyTo",
+        "kind": 2,
+        "importPath": "env.Scripts.pywin32_postinstall",
+        "description": "env.Scripts.pywin32_postinstall",
+        "peekOfCode": "def CopyTo(desc, src, dest):\n    import win32api\n    import win32con\n    while 1:\n        try:\n            win32api.CopyFile(src, dest, 0)\n            return\n        except win32api.error as details:\n            if details.winerror == 5:  # access denied - user not admin.\n                raise",
+        "detail": "env.Scripts.pywin32_postinstall",
+        "documentation": {}
+    },
+    {
+        "label": "LoadSystemModule",
+        "kind": 2,
+        "importPath": "env.Scripts.pywin32_postinstall",
+        "description": "env.Scripts.pywin32_postinstall",
+        "peekOfCode": "def LoadSystemModule(lib_dir, modname):\n    # See if this is a debug build.\n    import importlib.machinery\n    import importlib.util\n    suffix = \"_d\" if \"_d.pyd\" in importlib.machinery.EXTENSION_SUFFIXES else \"\"\n    filename = \"%s%d%d%s.dll\" % (\n        modname,\n        sys.version_info.major,\n        sys.version_info.minor,\n        suffix,",
+        "detail": "env.Scripts.pywin32_postinstall",
+        "documentation": {}
+    },
+    {
+        "label": "SetPyKeyVal",
+        "kind": 2,
+        "importPath": "env.Scripts.pywin32_postinstall",
+        "description": "env.Scripts.pywin32_postinstall",
+        "peekOfCode": "def SetPyKeyVal(key_name, value_name, value):\n    root_hkey = get_root_hkey()\n    root_key = winreg.OpenKey(root_hkey, root_key_name)\n    try:\n        my_key = winreg.CreateKey(root_key, key_name)\n        try:\n            winreg.SetValueEx(my_key, value_name, 0, winreg.REG_SZ, value)\n            if verbose:\n                print(f\"-> {root_key_name}\\\\{key_name}[{value_name}]={value!r}\")\n        finally:",
+        "detail": "env.Scripts.pywin32_postinstall",
+        "documentation": {}
+    },
+    {
+        "label": "UnsetPyKeyVal",
+        "kind": 2,
+        "importPath": "env.Scripts.pywin32_postinstall",
+        "description": "env.Scripts.pywin32_postinstall",
+        "peekOfCode": "def UnsetPyKeyVal(key_name, value_name, delete_key=False):\n    root_hkey = get_root_hkey()\n    root_key = winreg.OpenKey(root_hkey, root_key_name)\n    try:\n        my_key = winreg.OpenKey(root_key, key_name, 0, winreg.KEY_SET_VALUE)\n        try:\n            winreg.DeleteValue(my_key, value_name)\n            if verbose:\n                print(f\"-> DELETE {root_key_name}\\\\{key_name}[{value_name}]\")\n        finally:",
+        "detail": "env.Scripts.pywin32_postinstall",
+        "documentation": {}
+    },
+    {
+        "label": "RegisterCOMObjects",
+        "kind": 2,
+        "importPath": "env.Scripts.pywin32_postinstall",
+        "description": "env.Scripts.pywin32_postinstall",
+        "peekOfCode": "def RegisterCOMObjects(register=True):\n    import win32com.server.register\n    if register:\n        func = win32com.server.register.RegisterClasses\n    else:\n        func = win32com.server.register.UnregisterClasses\n    flags = {}\n    if not verbose:\n        flags[\"quiet\"] = 1\n    for module, klass_name in com_modules:",
+        "detail": "env.Scripts.pywin32_postinstall",
+        "documentation": {}
+    },
+    {
+        "label": "RegisterHelpFile",
+        "kind": 2,
+        "importPath": "env.Scripts.pywin32_postinstall",
+        "description": "env.Scripts.pywin32_postinstall",
+        "peekOfCode": "def RegisterHelpFile(register=True, lib_dir=None):\n    if lib_dir is None:\n        lib_dir = sysconfig.get_paths()[\"platlib\"]\n    if register:\n        # Register the .chm help file.\n        chm_file = os.path.join(lib_dir, \"PyWin32.chm\")\n        if os.path.isfile(chm_file):\n            # This isn't recursive, so if 'Help' doesn't exist, we croak\n            SetPyKeyVal(\"Help\", None, None)\n            SetPyKeyVal(\"Help\\\\Pythonwin Reference\", None, chm_file)",
+        "detail": "env.Scripts.pywin32_postinstall",
+        "documentation": {}
+    },
+    {
+        "label": "RegisterPythonwin",
+        "kind": 2,
+        "importPath": "env.Scripts.pywin32_postinstall",
+        "description": "env.Scripts.pywin32_postinstall",
+        "peekOfCode": "def RegisterPythonwin(register=True, lib_dir=None):\n    \"\"\"Add (or remove) Pythonwin to context menu for python scripts.\n    ??? Should probably also add Edit command for pys files also.\n    Also need to remove these keys on uninstall, but there's no function\n        like file_created to add registry entries to uninstall log ???\n    \"\"\"\n    import os\n    if lib_dir is None:\n        lib_dir = sysconfig.get_paths()[\"platlib\"]\n    classes_root = get_root_hkey()",
+        "detail": "env.Scripts.pywin32_postinstall",
+        "documentation": {}
+    },
+    {
+        "label": "get_shortcuts_folder",
+        "kind": 2,
+        "importPath": "env.Scripts.pywin32_postinstall",
+        "description": "env.Scripts.pywin32_postinstall",
+        "peekOfCode": "def get_shortcuts_folder():\n    if get_root_hkey() == winreg.HKEY_LOCAL_MACHINE:\n        try:\n            fldr = get_special_folder_path(\"CSIDL_COMMON_PROGRAMS\")\n        except OSError:\n            # No CSIDL_COMMON_PROGRAMS on this platform\n            fldr = get_special_folder_path(\"CSIDL_PROGRAMS\")\n    else:\n        # non-admin install - always goes in this user's start menu.\n        fldr = get_special_folder_path(\"CSIDL_PROGRAMS\")",
+        "detail": "env.Scripts.pywin32_postinstall",
+        "documentation": {}
+    },
+    {
+        "label": "get_system_dir",
+        "kind": 2,
+        "importPath": "env.Scripts.pywin32_postinstall",
+        "description": "env.Scripts.pywin32_postinstall",
+        "peekOfCode": "def get_system_dir():\n    import win32api  # we assume this exists.\n    try:\n        import pythoncom\n        import win32process\n        from win32com.shell import shell, shellcon\n        try:\n            if win32process.IsWow64Process():\n                return shell.SHGetSpecialFolderPath(0, shellcon.CSIDL_SYSTEMX86)\n            return shell.SHGetSpecialFolderPath(0, shellcon.CSIDL_SYSTEM)",
+        "detail": "env.Scripts.pywin32_postinstall",
+        "documentation": {}
+    },
+    {
+        "label": "fixup_dbi",
+        "kind": 2,
+        "importPath": "env.Scripts.pywin32_postinstall",
+        "description": "env.Scripts.pywin32_postinstall",
+        "peekOfCode": "def fixup_dbi():\n    # We used to have a dbi.pyd with our .pyd files, but now have a .py file.\n    # If the user didn't uninstall, they will find the .pyd which will cause\n    # problems - so handle that.\n    import win32api\n    import win32con\n    pyd_name = os.path.join(os.path.dirname(win32api.__file__), \"dbi.pyd\")\n    pyd_d_name = os.path.join(os.path.dirname(win32api.__file__), \"dbi_d.pyd\")\n    py_name = os.path.join(os.path.dirname(win32con.__file__), \"dbi.py\")\n    for this_pyd in (pyd_name, pyd_d_name):",
+        "detail": "env.Scripts.pywin32_postinstall",
+        "documentation": {}
+    },
+    {
+        "label": "install",
+        "kind": 2,
+        "importPath": "env.Scripts.pywin32_postinstall",
+        "description": "env.Scripts.pywin32_postinstall",
+        "peekOfCode": "def install(lib_dir):\n    import traceback\n    # The .pth file is now installed as a regular file.\n    # Create the .pth file in the site-packages dir, and use only relative paths\n    # We used to write a .pth directly to sys.prefix - clobber it.\n    if os.path.isfile(os.path.join(sys.prefix, \"pywin32.pth\")):\n        os.unlink(os.path.join(sys.prefix, \"pywin32.pth\"))\n    # The .pth may be new and therefore not loaded in this session.\n    # Setup the paths just in case.\n    for name in \"win32 win32\\\\lib Pythonwin\".split():",
+        "detail": "env.Scripts.pywin32_postinstall",
+        "documentation": {}
+    },
+    {
+        "label": "uninstall",
+        "kind": 2,
+        "importPath": "env.Scripts.pywin32_postinstall",
+        "description": "env.Scripts.pywin32_postinstall",
+        "peekOfCode": "def uninstall(lib_dir):\n    # First ensure our system modules are loaded from pywin32_system, so\n    # we can remove the ones we copied...\n    LoadSystemModule(lib_dir, \"pywintypes\")\n    LoadSystemModule(lib_dir, \"pythoncom\")\n    try:\n        RegisterCOMObjects(False)\n    except Exception as why:\n        print(f\"Failed to unregister COM objects: {why}\")\n    try:",
+        "detail": "env.Scripts.pywin32_postinstall",
+        "documentation": {}
+    },
+    {
+        "label": "verify_destination",
+        "kind": 2,
+        "importPath": "env.Scripts.pywin32_postinstall",
+        "description": "env.Scripts.pywin32_postinstall",
+        "peekOfCode": "def verify_destination(location):\n    if not os.path.isdir(location):\n        raise argparse.ArgumentTypeError(f'Path \"{location}\" does not exist!')\n    return location\ndef main():\n    parser = argparse.ArgumentParser(\n        formatter_class=argparse.RawDescriptionHelpFormatter,\n        description=\"\"\"A post-install script for the pywin32 extensions.\n    * Typical usage:\n    > python pywin32_postinstall.py -install",
+        "detail": "env.Scripts.pywin32_postinstall",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "env.Scripts.pywin32_postinstall",
+        "description": "env.Scripts.pywin32_postinstall",
+        "peekOfCode": "def main():\n    parser = argparse.ArgumentParser(\n        formatter_class=argparse.RawDescriptionHelpFormatter,\n        description=\"\"\"A post-install script for the pywin32 extensions.\n    * Typical usage:\n    > python pywin32_postinstall.py -install\n    If you installed pywin32 via a .exe installer, this should be run\n    automatically after installation, but if it fails you can run it again.\n    If you installed pywin32 via PIP, you almost certainly need to run this to\n    setup the environment correctly.",
+        "detail": "env.Scripts.pywin32_postinstall",
+        "documentation": {}
+    },
+    {
+        "label": "tee_f",
+        "kind": 5,
+        "importPath": "env.Scripts.pywin32_postinstall",
+        "description": "env.Scripts.pywin32_postinstall",
+        "peekOfCode": "tee_f = open(os.path.join(tempfile.gettempdir(), \"pywin32_postinstall.log\"), \"w\")\nclass Tee:\n    def __init__(self, file):\n        self.f = file\n    def write(self, what):\n        if self.f is not None:\n            try:\n                self.f.write(what.replace(\"\\n\", \"\\r\\n\"))\n            except OSError:\n                pass",
+        "detail": "env.Scripts.pywin32_postinstall",
+        "documentation": {}
+    },
+    {
+        "label": "sys.stderr",
+        "kind": 5,
+        "importPath": "env.Scripts.pywin32_postinstall",
+        "description": "env.Scripts.pywin32_postinstall",
+        "peekOfCode": "sys.stderr = Tee(sys.stderr)\nsys.stdout = Tee(sys.stdout)\ncom_modules = [\n    # module_name,                      class_names\n    (\"win32com.servers.interp\", \"Interpreter\"),\n    (\"win32com.servers.dictionary\", \"DictionaryPolicy\"),\n    (\"win32com.axscript.client.pyscript\", \"PyScript\"),\n]\n# Is this a 'silent' install - ie, avoid all dialogs.\n# Different than 'verbose'",
+        "detail": "env.Scripts.pywin32_postinstall",
+        "documentation": {}
+    },
+    {
+        "label": "sys.stdout",
+        "kind": 5,
+        "importPath": "env.Scripts.pywin32_postinstall",
+        "description": "env.Scripts.pywin32_postinstall",
+        "peekOfCode": "sys.stdout = Tee(sys.stdout)\ncom_modules = [\n    # module_name,                      class_names\n    (\"win32com.servers.interp\", \"Interpreter\"),\n    (\"win32com.servers.dictionary\", \"DictionaryPolicy\"),\n    (\"win32com.axscript.client.pyscript\", \"PyScript\"),\n]\n# Is this a 'silent' install - ie, avoid all dialogs.\n# Different than 'verbose'\nsilent = 0",
+        "detail": "env.Scripts.pywin32_postinstall",
+        "documentation": {}
+    },
+    {
+        "label": "com_modules",
+        "kind": 5,
+        "importPath": "env.Scripts.pywin32_postinstall",
+        "description": "env.Scripts.pywin32_postinstall",
+        "peekOfCode": "com_modules = [\n    # module_name,                      class_names\n    (\"win32com.servers.interp\", \"Interpreter\"),\n    (\"win32com.servers.dictionary\", \"DictionaryPolicy\"),\n    (\"win32com.axscript.client.pyscript\", \"PyScript\"),\n]\n# Is this a 'silent' install - ie, avoid all dialogs.\n# Different than 'verbose'\nsilent = 0\n# Verbosity of output messages.",
+        "detail": "env.Scripts.pywin32_postinstall",
+        "documentation": {}
+    },
+    {
+        "label": "silent",
+        "kind": 5,
+        "importPath": "env.Scripts.pywin32_postinstall",
+        "description": "env.Scripts.pywin32_postinstall",
+        "peekOfCode": "silent = 0\n# Verbosity of output messages.\nverbose = 1\nroot_key_name = \"Software\\\\Python\\\\PythonCore\\\\\" + sys.winver\ntry:\n    # When this script is run from inside the bdist_wininst installer,\n    # file_created() and directory_created() are additional builtin\n    # functions which write lines to PythonXX\\pywin32-install.log. This is\n    # a list of actions for the uninstaller, the format is inspired by what\n    # the Wise installer also creates.",
+        "detail": "env.Scripts.pywin32_postinstall",
+        "documentation": {}
+    },
+    {
+        "label": "verbose",
+        "kind": 5,
+        "importPath": "env.Scripts.pywin32_postinstall",
+        "description": "env.Scripts.pywin32_postinstall",
+        "peekOfCode": "verbose = 1\nroot_key_name = \"Software\\\\Python\\\\PythonCore\\\\\" + sys.winver\ntry:\n    # When this script is run from inside the bdist_wininst installer,\n    # file_created() and directory_created() are additional builtin\n    # functions which write lines to PythonXX\\pywin32-install.log. This is\n    # a list of actions for the uninstaller, the format is inspired by what\n    # the Wise installer also creates.\n    file_created  # type: ignore[used-before-def]\n    # 3.10 stopped supporting bdist_wininst, but we can still build them with 3.9.",
+        "detail": "env.Scripts.pywin32_postinstall",
+        "documentation": {}
+    },
+    {
+        "label": "root_key_name",
+        "kind": 5,
+        "importPath": "env.Scripts.pywin32_postinstall",
+        "description": "env.Scripts.pywin32_postinstall",
+        "peekOfCode": "root_key_name = \"Software\\\\Python\\\\PythonCore\\\\\" + sys.winver\ntry:\n    # When this script is run from inside the bdist_wininst installer,\n    # file_created() and directory_created() are additional builtin\n    # functions which write lines to PythonXX\\pywin32-install.log. This is\n    # a list of actions for the uninstaller, the format is inspired by what\n    # the Wise installer also creates.\n    file_created  # type: ignore[used-before-def]\n    # 3.10 stopped supporting bdist_wininst, but we can still build them with 3.9.\n    # This can be kept until Python 3.9 or exe installers support is dropped.",
+        "detail": "env.Scripts.pywin32_postinstall",
+        "documentation": {}
+    },
+    {
+        "label": "run_test",
+        "kind": 2,
+        "importPath": "env.Scripts.pywin32_testall",
+        "description": "env.Scripts.pywin32_testall",
+        "peekOfCode": "def run_test(script, cmdline_extras):\n    dirname, scriptname = os.path.split(script)\n    # some tests prefer to be run from their directory.\n    cmd = [sys.executable, \"-u\", scriptname] + cmdline_extras\n    print(\"--- Running '%s' ---\" % script)\n    sys.stdout.flush()\n    result = subprocess.run(cmd, check=False, cwd=dirname)\n    print(f\"*** Test script '{script}' exited with {result.returncode}\")\n    sys.stdout.flush()\n    if result.returncode:",
+        "detail": "env.Scripts.pywin32_testall",
+        "documentation": {}
+    },
+    {
+        "label": "find_and_run",
+        "kind": 2,
+        "importPath": "env.Scripts.pywin32_testall",
+        "description": "env.Scripts.pywin32_testall",
+        "peekOfCode": "def find_and_run(possible_locations, extras):\n    for maybe in possible_locations:\n        if os.path.isfile(maybe):\n            run_test(maybe, extras)\n            break\n    else:\n        raise RuntimeError(\n            \"Failed to locate a test script in one of %s\" % possible_locations\n        )\ndef main():",
+        "detail": "env.Scripts.pywin32_testall",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "env.Scripts.pywin32_testall",
+        "description": "env.Scripts.pywin32_testall",
+        "peekOfCode": "def main():\n    import argparse\n    code_directories = [this_dir] + site_packages\n    parser = argparse.ArgumentParser(\n        description=\"A script to trigger tests in all subprojects of PyWin32.\"\n    )\n    parser.add_argument(\n        \"-no-user-interaction\",\n        default=False,\n        action=\"store_true\",",
+        "detail": "env.Scripts.pywin32_testall",
+        "documentation": {}
+    },
+    {
+        "label": "this_dir",
+        "kind": 5,
+        "importPath": "env.Scripts.pywin32_testall",
+        "description": "env.Scripts.pywin32_testall",
+        "peekOfCode": "this_dir = os.path.dirname(__file__)\nsite_packages = [\n    site.getusersitepackages(),\n] + site.getsitepackages()\nfailures = []\n# Run a test using subprocess and wait for the result.\n# If we get an returncode != 0, we know that there was an error, but we don't\n# abort immediately - we run as many tests as we can.\ndef run_test(script, cmdline_extras):\n    dirname, scriptname = os.path.split(script)",
+        "detail": "env.Scripts.pywin32_testall",
+        "documentation": {}
+    },
+    {
+        "label": "site_packages",
+        "kind": 5,
+        "importPath": "env.Scripts.pywin32_testall",
+        "description": "env.Scripts.pywin32_testall",
+        "peekOfCode": "site_packages = [\n    site.getusersitepackages(),\n] + site.getsitepackages()\nfailures = []\n# Run a test using subprocess and wait for the result.\n# If we get an returncode != 0, we know that there was an error, but we don't\n# abort immediately - we run as many tests as we can.\ndef run_test(script, cmdline_extras):\n    dirname, scriptname = os.path.split(script)\n    # some tests prefer to be run from their directory.",
+        "detail": "env.Scripts.pywin32_testall",
+        "documentation": {}
+    },
+    {
+        "label": "failures",
+        "kind": 5,
+        "importPath": "env.Scripts.pywin32_testall",
+        "description": "env.Scripts.pywin32_testall",
+        "peekOfCode": "failures = []\n# Run a test using subprocess and wait for the result.\n# If we get an returncode != 0, we know that there was an error, but we don't\n# abort immediately - we run as many tests as we can.\ndef run_test(script, cmdline_extras):\n    dirname, scriptname = os.path.split(script)\n    # some tests prefer to be run from their directory.\n    cmd = [sys.executable, \"-u\", scriptname] + cmdline_extras\n    print(\"--- Running '%s' ---\" % script)\n    sys.stdout.flush()",
+        "detail": "env.Scripts.pywin32_testall",
         "documentation": {}
     },
     {
         "label": "Location",
         "kind": 6,
-        "importPath": "main",
-        "description": "main",
-        "peekOfCode": "class Location(Enum):\n    SHUHE_TOWN = 'https://www.dianping.com/shop/iDYbcrjcbQJyvJyu/review_all',\n    BAISHA_TOWN = 'https://www.dianping.com/shop/k6ttY31GVwu40nbW/review_all'\n# remove the trailing whitespace\ndef sanitize_text(text: str) -> str:\n    return re.sub(r'\\s+', '', text.strip())\nclass Swan():\n    config_file_path = ''\n    data_directory = ''\n    __config: Config = None",
-        "detail": "main",
+        "importPath": "src.core.swan",
+        "description": "src.core.swan",
+        "peekOfCode": "class Location(Enum):\n    SHUHE_TOWN = 'https://www.dianping.com/shop/iDYbcrjcbQJyvJyu/review_all',\n    BAISHA_TOWN = 'https://www.dianping.com/shop/k6ttY31GVwu40nbW/review_all'\n# remove the trailing whitespace\ndef sanitize_text(text: str, remove_all: bool = True) -> str:\n    if remove_all:\n        return re.sub(r'\\s+', '', text.strip())\n    else:\n        return text.strip()\nclass Swan():",
+        "detail": "src.core.swan",
         "documentation": {}
     },
     {
         "label": "Swan",
         "kind": 6,
-        "importPath": "main",
-        "description": "main",
+        "importPath": "src.core.swan",
+        "description": "src.core.swan",
         "peekOfCode": "class Swan():\n    config_file_path = ''\n    data_directory = ''\n    __config: Config = None\n    config = None\n    location: Location = None\n    chromium_tabs: list = []\n    chromium_options = ChromiumOptions\n    def __init__(self, config_file_path: str) -> None:\n        self.config_file_path = config_file_path",
-        "detail": "main",
+        "detail": "src.core.swan",
         "documentation": {}
     },
     {
         "label": "sanitize_text",
         "kind": 2,
-        "importPath": "main",
-        "description": "main",
-        "peekOfCode": "def sanitize_text(text: str) -> str:\n    return re.sub(r'\\s+', '', text.strip())\nclass Swan():\n    config_file_path = ''\n    data_directory = ''\n    __config: Config = None\n    config = None\n    location: Location = None\n    chromium_tabs: list = []\n    chromium_options = ChromiumOptions",
-        "detail": "main",
+        "importPath": "src.core.swan",
+        "description": "src.core.swan",
+        "peekOfCode": "def sanitize_text(text: str, remove_all: bool = True) -> str:\n    if remove_all:\n        return re.sub(r'\\s+', '', text.strip())\n    else:\n        return text.strip()\nclass Swan():\n    config_file_path = ''\n    data_directory = ''\n    __config: Config = None\n    config = None",
+        "detail": "src.core.swan",
         "documentation": {}
     },
     {
         "label": "comment_swan_main",
         "kind": 2,
-        "importPath": "main",
-        "description": "main",
+        "importPath": "src.core.swan",
+        "description": "src.core.swan",
         "peekOfCode": "def comment_swan_main():\n    swan = Swan('./swan.config.toml').launch()\n    try:\n        swan.task_dzdp()\n    except KeyboardInterrupt:\n        swan.grace_shutdown()\n        sys.exit(0)\nif __name__ == '__main__':\n    comment_swan_main()",
-        "detail": "main",
+        "detail": "src.core.swan",
+        "documentation": {}
+    },
+    {
+        "label": "AboutDialog",
+        "kind": 6,
+        "importPath": "src.gui.dialogs.about_dialog",
+        "description": "src.gui.dialogs.about_dialog",
+        "peekOfCode": "class AboutDialog(QDialog):\n    def __init__(self, parent=None):\n        super().__init__(parent)\n        self.setWindowTitle(\"关于\")\n        self.setFixedSize(400, 270)\n        layout = QVBoxLayout()\n        # 添加软件信息\n        title_label = QLabel(\"Swan (天鹅)\")\n        title_label.setAlignment(Qt.AlignmentFlag.AlignCenter)\n        title_label.setStyleSheet(\"font-size: 18px; font-weight: bold;\")",
+        "detail": "src.gui.dialogs.about_dialog",
+        "documentation": {}
+    },
+    {
+        "label": "AccountSettingsDialog",
+        "kind": 6,
+        "importPath": "src.gui.dialogs.account_settings_dialog",
+        "description": "src.gui.dialogs.account_settings_dialog",
+        "peekOfCode": "class AccountSettingsDialog(QDialog):\n    def __init__(self, settings: QSettings, parent=None):\n        super().__init__(parent)\n        self.settings = settings\n        self.setWindowTitle(\"账号设置\")\n        self.setFixedSize(300, 500)\n        layout = QVBoxLayout()\n        # 字体加粗\n        font = QFont()\n        font.setBold(True)",
+        "detail": "src.gui.dialogs.account_settings_dialog",
+        "documentation": {}
+    },
+    {
+        "label": "LogViewerDialog",
+        "kind": 6,
+        "importPath": "src.gui.dialogs.log_viewer_dialog",
+        "description": "src.gui.dialogs.log_viewer_dialog",
+        "peekOfCode": "class LogViewerDialog(QDialog):\n    def __init__(self, settings: QSettings, parent=None):\n        super().__init__(parent)\n        self.setWindowTitle(\"日志查看器\")\n        self.resize(800, 600)\n        self.settings = settings\n        # 创建主布局\n        layout = QVBoxLayout()\n        # 创建工具栏布局\n        toolbar_layout = QHBoxLayout()",
+        "detail": "src.gui.dialogs.log_viewer_dialog",
+        "documentation": {}
+    },
+    {
+        "label": "ProgramSettingsDialog",
+        "kind": 6,
+        "importPath": "src.gui.dialogs.program_settings_dialog",
+        "description": "src.gui.dialogs.program_settings_dialog",
+        "peekOfCode": "class ProgramSettingsDialog(QDialog):\n    def __init__(self, settings: QSettings, parent=None):\n        super().__init__(parent)\n        self.settings = settings\n        self.setWindowTitle(\"程序设置\")\n        self.setFixedSize(500, 300)\n        layout = QVBoxLayout()\n        # 创建表单布局\n        form_layout = QFormLayout()\n        # 从QSettings中加载设置或使用默认值",
+        "detail": "src.gui.dialogs.program_settings_dialog",
+        "documentation": {}
+    },
+    {
+        "label": "MainWindow",
+        "kind": 6,
+        "importPath": "src.gui.main_window",
+        "description": "src.gui.main_window",
+        "peekOfCode": "class MainWindow(QMainWindow):\n    def __init__(self):\n        super().__init__()\n        self.setWindowTitle(\"Swan GUI\")\n        self.resize(800, 600)\n        # 设置菜单栏样式\n        # self.setStyleSheet(\"\"\"\n        #      QMenuBar {\n        #         border-bottom: 1px solid #f0f0f0;\n        #     }",
+        "detail": "src.gui.main_window",
+        "documentation": {}
+    },
+    {
+        "label": "Config",
+        "kind": 6,
+        "importPath": "src.utils.config",
+        "description": "src.utils.config",
+        "peekOfCode": "class Config:\n    __config_obj = None\n    __config_file_path = ''\n    def __init__(self, config_file_path) -> None:\n        if not os.path.exists(config_file_path):\n            raise FileNotFoundError('Cannot find the config file at %s' %\n                                    config_file_path)\n        config = toml.load(config_file_path)\n        self.__config_file_path = config_file_path\n        self.__config_obj = config",
+        "detail": "src.utils.config",
         "documentation": {}
     },
     {
         "label": "config",
         "kind": 5,
-        "importPath": "test",
-        "description": "test",
+        "importPath": "tests.test",
+        "description": "tests.test",
         "peekOfCode": "config = Config('./swan.config.toml')\nc = config.load()\n# print(c['account']['test']['username'])\n# c['account']['test']['username'] = 'jjj'\n# print(c['account']['test']['username'])\n# config.save()\nprint(c['account']['dzdp']['page_maximum'])\n# chrome_executable_path = Path(config['application']['chrome_executable_path'])\n# print(os.path.exists(chrome_executable_path))",
-        "detail": "test",
+        "detail": "tests.test",
         "documentation": {}
     },
     {
         "label": "c",
         "kind": 5,
-        "importPath": "test",
-        "description": "test",
+        "importPath": "tests.test",
+        "description": "tests.test",
         "peekOfCode": "c = config.load()\n# print(c['account']['test']['username'])\n# c['account']['test']['username'] = 'jjj'\n# print(c['account']['test']['username'])\n# config.save()\nprint(c['account']['dzdp']['page_maximum'])\n# chrome_executable_path = Path(config['application']['chrome_executable_path'])\n# print(os.path.exists(chrome_executable_path))",
-        "detail": "test",
+        "detail": "tests.test",
         "documentation": {}
     },
     {
         "label": "show_about",
         "kind": 2,
-        "importPath": "test_gui",
-        "description": "test_gui",
+        "importPath": "tests.test_gui",
+        "description": "tests.test_gui",
         "peekOfCode": "def show_about():\n    message = f\"\"\"\n    Swan (天鹅)\n    为了完成这该死的论文开发的程序，能够方便的爬取网络文本。\n    作者: Elias\n    版本号: 1.0.0\n    操作系统: %s\n    Python版本: %s (%s)\n    编译日期: 2024.11.16\n    \"\"\" % (platform.platform(), platform.python_version(), platform.python_compiler())",
-        "detail": "test_gui",
+        "detail": "tests.test_gui",
         "documentation": {}
     },
     {
         "label": "window",
         "kind": 5,
-        "importPath": "test_gui",
-        "description": "test_gui",
+        "importPath": "tests.test_gui",
+        "description": "tests.test_gui",
         "peekOfCode": "window = tk.Tk()\nwindow.title('Swan - Default Mode')\nwindow.geometry('800x500')\nmenu_bar = tk.Menu(window)\nwindow.config(menu=menu_bar)\n# file menu\n# file_menu = tk.Menu(menu_bar, tearoff=0)\n# menu_bar.add_cascade(label='文件', menu=file_menu)\n# file_menu.add_command(label='打开 (Open)')\n# file_menu.add_separator()",
-        "detail": "test_gui",
+        "detail": "tests.test_gui",
         "documentation": {}
     },
     {
         "label": "menu_bar",
         "kind": 5,
-        "importPath": "test_gui",
-        "description": "test_gui",
+        "importPath": "tests.test_gui",
+        "description": "tests.test_gui",
         "peekOfCode": "menu_bar = tk.Menu(window)\nwindow.config(menu=menu_bar)\n# file menu\n# file_menu = tk.Menu(menu_bar, tearoff=0)\n# menu_bar.add_cascade(label='文件', menu=file_menu)\n# file_menu.add_command(label='打开 (Open)')\n# file_menu.add_separator()\n# file_menu.add_command(label='关闭 (Close)')\n# setting menu\nsetting_menu = tk.Menu(menu_bar, tearoff=0)",
-        "detail": "test_gui",
+        "detail": "tests.test_gui",
         "documentation": {}
     },
     {
         "label": "setting_menu",
         "kind": 5,
-        "importPath": "test_gui",
-        "description": "test_gui",
+        "importPath": "tests.test_gui",
+        "description": "tests.test_gui",
         "peekOfCode": "setting_menu = tk.Menu(menu_bar, tearoff=0)\nmenu_bar.add_cascade(label='设置', menu=setting_menu)\nsetting_menu.add_command(label='程序设置 (Ctrl + E)')\nsetting_menu.add_command(label='账号设置 (Ctrl + R)')\ndef show_about():\n    message = f\"\"\"\n    Swan (天鹅)\n    为了完成这该死的论文开发的程序，能够方便的爬取网络文本。\n    作者: Elias\n    版本号: 1.0.0",
-        "detail": "test_gui",
+        "detail": "tests.test_gui",
+        "documentation": {}
+    },
+    {
+        "label": "extract_and_convert_score",
+        "kind": 2,
+        "importPath": "tests.test_score",
+        "description": "tests.test_score",
+        "peekOfCode": "def extract_and_convert_score(text):\n    # 定义映射关系\n    score_mapping = {\n        'sml-str5': 0.5,\n        'sml-str10': 1.0,\n        'sml-str15': 1.5,\n        'sml-str20': 2.0,\n        'sml-str25': 2.5,\n        'sml-str30': 3.0,\n        'sml-str35': 3.5,",
+        "detail": "tests.test_score",
+        "documentation": {}
+    },
+    {
+        "label": "s",
+        "kind": 5,
+        "importPath": "tests.test_score",
+        "description": "tests.test_score",
+        "peekOfCode": "s = extract_and_convert_score(\"sml-rank-stars sml-str45 star\")\nprint(s)",
+        "detail": "tests.test_score",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "def main():\n    app = QApplication(sys.argv)\n    window = MainWindow()\n    window.show()\n    sys.exit(app.exec())\nif __name__ == '__main__':\n    main()",
+        "detail": "main",
         "documentation": {}
     }
 ]

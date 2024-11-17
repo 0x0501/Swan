@@ -1,6 +1,7 @@
-from config import Config
 import os
 from pathlib import Path
+from src.utils.config import Config
+
 config = Config('./swan.config.toml')
 
 c = config.load()

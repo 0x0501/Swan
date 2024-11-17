@@ -15,26 +15,57 @@ class MainWindow(QMainWindow):
 
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Swan GUI")
+        self.setWindowTitle("Swan - Default")
         self.resize(800, 600)
 
         # 设置菜单栏样式
-        # self.setStyleSheet("""
-        #      QMenuBar {
-        #         border-bottom: 1px solid #f0f0f0;
-        #     }
-        #     QMenuBar::item {
-        #         background-color: transparent;
-        #     }
-        #     QMenu {
-        #         background-color: white;
-        #         border-radius: 5px;
-        #         border: 1px solid #cccccc;  /* 可选：添加边框替代阴影 */
-        #     }
-        #     QMenu::item {
-        #         background-color: transparent;
-        #     }
-        # """)
+        self.setStyleSheet("""
+            QMenuBar {
+                border-bottom:1px solid #d9d9d9;
+                font-size: 10pt;
+                padding: 0;
+                margin: 0;
+            }
+            QMenuBar::item {
+                padding-top: 5px;
+                padding-left: 15px;
+                padding-right: 15px;
+                padding-bottom: 5px;
+                font-size: 10pt;
+                background: transparent;  /* 确保背景透明 */
+            }
+            QMenuBar::item::selected, QMenuBar::item::hover  {
+                color: black;
+                background-color: #f0f0f0;
+                font-size: 10pt;
+                padding: 5px 15px;  /* 确保悬停时padding不变 */
+            }
+            QMenu {
+                color:black;
+                background-color:white; 
+                border-radius:0;
+                font-size: 10pt;
+                border:1px solid #bbbbbb;
+            }
+            QMenu::item {
+                padding: 4px 20px;
+            }
+            QMenu::item::text {
+                margin: 5px 2px;
+            }
+
+            QMenu::item:selected { 
+                color:#1aa3ff;
+                background-color: #e5f5ff;
+            }
+            QMenu::separator{
+                height:10px;
+                background:#bbbbbb;
+                margin:5px;
+                margin-left:10px;
+                margin-right:10px;
+            }
+        """)
         # 判断是最小化还是退出
         self.settings = QSettings('swan_gui', 'settings')
         self.force_quit = not self.settings.value('is_system_tray', type=bool)
@@ -48,7 +79,8 @@ class MainWindow(QMainWindow):
 
     def _create_menu_bar(self):
         menubar = self.menuBar()
-
+        # menubar.setWindowFlags(Qt.WindowType.NoDropShadowWindowHint
+        #                        | Qt.WindowType.FramelessWindowHint)
         settings_menu = menubar.addMenu('设置')
 
         # 程序设置动作

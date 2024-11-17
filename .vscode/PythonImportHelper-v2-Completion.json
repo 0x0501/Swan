@@ -1052,7 +1052,7 @@
         "kind": 6,
         "importPath": "src.gui.dialogs.account_settings_dialog",
         "description": "src.gui.dialogs.account_settings_dialog",
-        "peekOfCode": "class AccountSettingsDialog(QDialog):\n    def __init__(self, settings: QSettings, parent=None):\n        super().__init__(parent)\n        self.settings = settings\n        self.setWindowTitle(\"账号设置\")\n        self.setFixedSize(300, 500)\n        layout = QVBoxLayout()\n        # 字体加粗\n        font = QFont()\n        font.setBold(True)",
+        "peekOfCode": "class AccountSettingsDialog(QDialog):\n    def __init__(self, settings: QSettings, parent=None):\n        super().__init__(parent)\n        self.settings = settings\n        self.setWindowTitle(\"账号设置\")\n        self.setFixedSize(300, 500)\n        # 账号密码项\n        layout = QVBoxLayout()\n        # 字体加粗\n        font = QFont()",
         "detail": "src.gui.dialogs.account_settings_dialog",
         "documentation": {}
     },
@@ -1079,7 +1079,7 @@
         "kind": 6,
         "importPath": "src.gui.main_window",
         "description": "src.gui.main_window",
-        "peekOfCode": "class MainWindow(QMainWindow):\n    def __init__(self):\n        super().__init__()\n        self.setWindowTitle(\"Swan GUI\")\n        self.resize(800, 600)\n        # 设置菜单栏样式\n        # self.setStyleSheet(\"\"\"\n        #      QMenuBar {\n        #         border-bottom: 1px solid #f0f0f0;\n        #     }",
+        "peekOfCode": "class MainWindow(QMainWindow):\n    def __init__(self):\n        super().__init__()\n        self.setWindowTitle(\"Swan - Default\")\n        self.resize(800, 600)\n        # 设置菜单栏样式\n        self.setStyleSheet(\"\"\"\n            QMenuBar {\n                border-bottom:1px solid #d9d9d9;\n                font-size: 10pt;",
         "detail": "src.gui.main_window",
         "documentation": {}
     },

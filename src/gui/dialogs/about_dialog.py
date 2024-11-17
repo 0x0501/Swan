@@ -41,6 +41,7 @@ class AboutDialog(QDialog):
         
         # 添加确定按钮
         ok_button = QPushButton("确定")
+        ok_button.setMinimumHeight(30)
         ok_button.clicked.connect(self.accept)
         
         # 将所有控件添加到布局中

@@ -12,6 +12,8 @@ class AccountSettingsDialog(QDialog):
         self.setWindowTitle("账号设置")
         self.setFixedSize(300, 500)
 
+        # 账号密码项
+        
         layout = QVBoxLayout()
 
         # 字体加粗
@@ -24,13 +26,13 @@ class AccountSettingsDialog(QDialog):
         dzdp_label.setFont(font)
 
         # 从QSettings中加载设置或使用默认值
-        self.username = QLineEdit(self.settings.value("username", ""))
-        self.password = QLineEdit(self.settings.value("password", ""))
-        self.password.setEchoMode(QLineEdit.EchoMode.Password)
+        self.dzdp_username = QLineEdit(self.settings.value("dzdp_username", ""))
+        self.dzdp_password = QLineEdit(self.settings.value("dzdp_password", ""))
+        self.dzdp_password.setEchoMode(QLineEdit.EchoMode.Password)
 
         # 添加表单项
-        dzdp_form_layout.addRow("用户名:", self.username)
-        dzdp_form_layout.addRow("密码:", self.password)
+        dzdp_form_layout.addRow("用户名:", self.dzdp_username)
+        dzdp_form_layout.addRow("密码:", self.dzdp_password)
         dzdp_form_layout.setContentsMargins(0, 0, 0, 10)
 
         # 创建表单布局（携程）
@@ -39,13 +41,13 @@ class AccountSettingsDialog(QDialog):
         xiecheng_label.setFont(font)
 
         # 从QSettings中加载设置或使用默认值
-        self.username = QLineEdit(self.settings.value("username", ""))
-        self.password = QLineEdit(self.settings.value("password", ""))
-        self.password.setEchoMode(QLineEdit.EchoMode.Password)
+        self.xiecheng_username = QLineEdit(self.settings.value("xiecheng_username", ""))
+        self.xiecheng_password = QLineEdit(self.settings.value("xiecheng_password", ""))
+        self.xiecheng_password.setEchoMode(QLineEdit.EchoMode.Password)
 
         # 添加表单项
-        xiecheng_form_layout.addRow("用户名:", self.username)
-        xiecheng_form_layout.addRow("密码:", self.password)
+        xiecheng_form_layout.addRow("用户名:", self.xiecheng_username)
+        xiecheng_form_layout.addRow("密码:", self.xiecheng_password)
         xiecheng_form_layout.setContentsMargins(0, 0, 0, 10)
 
         # 创建表单布局（小红书）
@@ -54,13 +56,13 @@ class AccountSettingsDialog(QDialog):
         red_label.setFont(font)
 
         # 从QSettings中加载设置或使用默认值
-        self.username = QLineEdit(self.settings.value("username", ""))
-        self.password = QLineEdit(self.settings.value("password", ""))
-        self.password.setEchoMode(QLineEdit.EchoMode.Password)
+        self.red_username = QLineEdit(self.settings.value("red_username", ""))
+        self.red_password = QLineEdit(self.settings.value("red_password", ""))
+        self.red_password.setEchoMode(QLineEdit.EchoMode.Password)
 
         # 添加表单项
-        red_form_layout.addRow("用户名:", self.username)
-        red_form_layout.addRow("密码:", self.password)
+        red_form_layout.addRow("用户名:", self.red_username)
+        red_form_layout.addRow("密码:", self.red_password)
 
         # 大众点评
         layout.addWidget(dzdp_label)
@@ -111,6 +113,13 @@ class AccountSettingsDialog(QDialog):
 
     def save_settings(self):
         # 保存设置到QSettings
-        self.settings.setValue("username", self.username.text())
-        self.settings.setValue("password", self.password.text())
+        # 大众点评
+        self.settings.setValue("username", self.dzdp_username.text())
+        self.settings.setValue("password", self.dzdp_password.text())
+        # 携程
+        self.settings.setValue("username", self.xiecheng_username.text())
+        self.settings.setValue("password", self.xiecheng_password.text())
+        #小红书
+        self.settings.setValue("username", self.red_username.text())
+        self.settings.setValue("password", self.red_password.text())
         self.accept()

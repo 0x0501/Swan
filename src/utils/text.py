@@ -1,6 +1,30 @@
 import re
 
-def extract_and_convert_score(text):
+
+def extract_update_date(text):
+    # 使用正则表达式匹配“更新于”后面的日期
+    # \s* 表示任意数量的空白字符（包括空格、制表符、换行符等）
+    # \d{4}-\d{2}-\d{2} 表示 YYYY-MM-DD 格式的日期
+    # \s*\d{2}:\d{2} 表示 HH:MM 格式的时分
+    match = re.search(r'更新于\s*(\d{4}-\d{2}-\d{2}\s*\d{2}:\d{2})', text)
+
+    if match:
+        # 提取匹配的日期和时间
+        update_date = match.group(1).strip()
+        return update_date
+    else:
+        return text
+
+
+# remove the trailing whitespace
+def sanitize_text(text: str, remove_all: bool = True) -> str:
+    if remove_all:
+        return re.sub(r'\s+', '', text.strip())
+    else:
+        return text.strip()
+
+
+def extract_and_convert_score(text: str):
     # 定义映射关系
     score_mapping = {
         'sml-str5': 0.5,
@@ -30,6 +54,3 @@ def extract_and_convert_score(text):
             return -1
     else:
         return -1
-    
-s = extract_and_convert_score("sml-rank-stars sml-str45 star")
-print(s)

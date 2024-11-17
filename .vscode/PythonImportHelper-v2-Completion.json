@@ -106,15 +106,6 @@
         "documentation": {}
     },
     {
-        "label": "re",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "re",
-        "description": "re",
-        "detail": "re",
-        "documentation": {}
-    },
-    {
         "label": "Recorder",
         "importPath": "DataRecorder",
         "description": "DataRecorder",
@@ -201,6 +192,30 @@
         "description": "src.utils.config",
         "isExtraImport": true,
         "detail": "src.utils.config",
+        "documentation": {}
+    },
+    {
+        "label": "extract_and_convert_score",
+        "importPath": "src.utils.text",
+        "description": "src.utils.text",
+        "isExtraImport": true,
+        "detail": "src.utils.text",
+        "documentation": {}
+    },
+    {
+        "label": "extract_update_date",
+        "importPath": "src.utils.text",
+        "description": "src.utils.text",
+        "isExtraImport": true,
+        "detail": "src.utils.text",
+        "documentation": {}
+    },
+    {
+        "label": "sanitize_text",
+        "importPath": "src.utils.text",
+        "description": "src.utils.text",
+        "isExtraImport": true,
+        "detail": "src.utils.text",
         "documentation": {}
     },
     {
@@ -694,6 +709,15 @@
         "documentation": {}
     },
     {
+        "label": "re",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "re",
+        "description": "re",
+        "detail": "re",
+        "documentation": {}
+    },
+    {
         "label": "tkinter",
         "kind": 6,
         "isExtraImport": true,
@@ -990,15 +1014,6 @@
         "documentation": {}
     },
     {
-        "label": "sanitize_text",
-        "kind": 2,
-        "importPath": "src.core.swan",
-        "description": "src.core.swan",
-        "peekOfCode": "def sanitize_text(text: str, remove_all: bool = True) -> str:\n    if remove_all:\n        return re.sub(r'\\s+', '', text.strip())\n    else:\n        return text.strip()\nclass Swan():\n    config_file_path = ''\n    data_directory = ''\n    __config: Config = None\n    config = None",
-        "detail": "src.core.swan",
-        "documentation": {}
-    },
-    {
         "label": "comment_swan_main",
         "kind": 2,
         "importPath": "src.core.swan",
@@ -1062,6 +1077,33 @@
         "documentation": {}
     },
     {
+        "label": "extract_update_date",
+        "kind": 2,
+        "importPath": "src.utils.text",
+        "description": "src.utils.text",
+        "peekOfCode": "def extract_update_date(text):\n    # 使用正则表达式匹配“更新于”后面的日期\n    # \\s* 表示任意数量的空白字符（包括空格、制表符、换行符等）\n    # \\d{4}-\\d{2}-\\d{2} 表示 YYYY-MM-DD 格式的日期\n    # \\s*\\d{2}:\\d{2} 表示 HH:MM 格式的时分\n    match = re.search(r'更新于\\s*(\\d{4}-\\d{2}-\\d{2}\\s*\\d{2}:\\d{2})', text)\n    if match:\n        # 提取匹配的日期和时间\n        update_date = match.group(1).strip()\n        return update_date",
+        "detail": "src.utils.text",
+        "documentation": {}
+    },
+    {
+        "label": "sanitize_text",
+        "kind": 2,
+        "importPath": "src.utils.text",
+        "description": "src.utils.text",
+        "peekOfCode": "def sanitize_text(text: str, remove_all: bool = True) -> str:\n    if remove_all:\n        return re.sub(r'\\s+', '', text.strip())\n    else:\n        return text.strip()\ndef extract_and_convert_score(text: str):\n    # 定义映射关系\n    score_mapping = {\n        'sml-str5': 0.5,\n        'sml-str10': 1.0,",
+        "detail": "src.utils.text",
+        "documentation": {}
+    },
+    {
+        "label": "extract_and_convert_score",
+        "kind": 2,
+        "importPath": "src.utils.text",
+        "description": "src.utils.text",
+        "peekOfCode": "def extract_and_convert_score(text: str):\n    # 定义映射关系\n    score_mapping = {\n        'sml-str5': 0.5,\n        'sml-str10': 1.0,\n        'sml-str15': 1.5,\n        'sml-str20': 2.0,\n        'sml-str25': 2.5,\n        'sml-str30': 3.0,\n        'sml-str35': 3.5,",
+        "detail": "src.utils.text",
+        "documentation": {}
+    },
+    {
         "label": "config",
         "kind": 5,
         "importPath": "tests.test",
@@ -1095,6 +1137,42 @@
         "description": "tests.test",
         "peekOfCode": "s = [sd]\nprint(s)\nprint(sd)\n# chrome_executable_path = Path(config['application']['chrome_executable_path'])\n# print(os.path.exists(chrome_executable_path))",
         "detail": "tests.test",
+        "documentation": {}
+    },
+    {
+        "label": "extract_update_date",
+        "kind": 2,
+        "importPath": "tests.test_date",
+        "description": "tests.test_date",
+        "peekOfCode": "def extract_update_date(text):\n    # 使用正则表达式匹配“更新于”后面的日期\n    # \\s* 表示任意数量的空白字符（包括空格、制表符、换行符等）\n    # \\d{4}-\\d{2}-\\d{2} 表示 YYYY-MM-DD 格式的日期\n    # \\s*\\d{2}:\\d{2} 表示 HH:MM 格式的时分\n    match = re.search(r'更新于\\s*(\\d{4}-\\d{2}-\\d{2}\\s*\\d{2}:\\d{2})', text)\n    if match:\n        # 提取匹配的日期和时间\n        update_date = match.group(1).strip()\n        return update_date",
+        "detail": "tests.test_date",
+        "documentation": {}
+    },
+    {
+        "label": "text",
+        "kind": 5,
+        "importPath": "tests.test_date",
+        "description": "tests.test_date",
+        "peekOfCode": "text = \"\"\"\n                                2024-10-10\n  更新于2024-10-12 09:12                            \n\"\"\"\n# 提取更新日期\nupdate_date = extract_update_date(text)\nif update_date:\n    print(f\"提取的更新日期: {update_date}\")\nelse:\n    print(\"未找到更新日期\")",
+        "detail": "tests.test_date",
+        "documentation": {}
+    },
+    {
+        "label": "update_date",
+        "kind": 5,
+        "importPath": "tests.test_date",
+        "description": "tests.test_date",
+        "peekOfCode": "update_date = extract_update_date(text)\nif update_date:\n    print(f\"提取的更新日期: {update_date}\")\nelse:\n    print(\"未找到更新日期\")\nu2 = extract_update_date('2024-10-14\\n  更新于2024-10-15 17:07')\nprint(u2)",
+        "detail": "tests.test_date",
+        "documentation": {}
+    },
+    {
+        "label": "u2",
+        "kind": 5,
+        "importPath": "tests.test_date",
+        "description": "tests.test_date",
+        "peekOfCode": "u2 = extract_update_date('2024-10-14\\n  更新于2024-10-15 17:07')\nprint(u2)",
+        "detail": "tests.test_date",
         "documentation": {}
     },
     {

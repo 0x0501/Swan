@@ -21,5 +21,6 @@ sd = 'sdsdsds'
 s = [sd]
 print(s)
 print(sd)
+
 # chrome_executable_path = Path(config['application']['chrome_executable_path'])
 # print(os.path.exists(chrome_executable_path))

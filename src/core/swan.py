@@ -1,4 +1,3 @@
-import re
 import os
 import sys
 from DataRecorder import Recorder
@@ -9,14 +8,7 @@ from DrissionPage.errors import *
 from pathlib import Path
 from src.core.location import Location
 from src.utils.config import Config
-
-
-# remove the trailing whitespace
-def sanitize_text(text: str, remove_all: bool = True) -> str:
-    if remove_all:
-        return re.sub(r'\s+', '', text.strip())
-    else:
-        return text.strip()
+from src.utils.text import extract_and_convert_score, extract_update_date, sanitize_text
 
 
 class Swan():
@@ -79,37 +71,6 @@ class Swan():
             i.close()
         logger.warning('Grace shutdown Swan, closing all the tabs.')
 
-    def extract_and_convert_score(self, text: str):
-        # 定义映射关系
-        score_mapping = {
-            'sml-str5': 0.5,
-            'sml-str10': 1.0,
-            'sml-str15': 1.5,
-            'sml-str20': 2.0,
-            'sml-str25': 2.5,
-            'sml-str30': 3.0,
-            'sml-str35': 3.5,
-            'sml-str40': 4.0,
-            'sml-str45': 4.5,
-            'sml-str50': 5.0
-        }
-
-        # 正则表达式模式，用于匹配 `sml-str*` 或 `sml-strs*`
-        pattern = r'\bsml-str[s]?\d+\b'
-
-        # 查找第一个匹配的子字符串
-        match = re.search(pattern, text)
-
-        if match:
-            semantic_text = match.group(0)
-            # 将匹配的子字符串转换为对应的分数
-            if semantic_text in score_mapping:
-                return score_mapping[semantic_text]
-            else:
-                return -1
-        else:
-            return -1
-
     def task_dzdp_login(self, tab):
         tab.get(
             'https://account.dianping.com/pclogin?redir=https://m.dianping.com/dphome',
@@ -127,6 +88,9 @@ class Swan():
             '@id=pc-check').check()
         login_button = tab.ele('@class=login-box').ele(
             '@class=button-pc').click()
+        
+        # check whether CAPTCHA was displayed
+        
         pass
 
     def task_dzdp(self, loc: Location = Location.SHUHE_TOWN):
@@ -252,8 +216,14 @@ class Swan():
                         review_item.ele('@@tag()=div@@class=main-review').ele(
                             'css:div.misc-info > span.time').texts()[0], False)
 
+                    if "更新于" in review_date:
+                        review_date = extract_update_date(review_date)
+                        logger.debug(
+                            'Got updated date, trying to extract it. The result: %s'
+                            % review_date)
+
                     # review score
-                    review_score = self.extract_and_convert_score(
+                    review_score = extract_and_convert_score(
                         review_item.ele('@@tag()=div@@class=main-review').ele(
                             'css:div.review-rank > span').attr('class'))
                     # joint them together

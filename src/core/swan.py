@@ -6,15 +6,9 @@ from DrissionPage import Chromium
 from DrissionPage import ChromiumOptions
 from loguru import logger
 from DrissionPage.errors import *
-from enum import Enum, unique
 from pathlib import Path
+from src.core.location import Location
 from src.utils.config import Config
-
-
-@unique
-class Location(Enum):
-    SHUHE_TOWN = 'https://www.dianping.com/shop/iDYbcrjcbQJyvJyu/review_all',
-    BAISHA_TOWN = 'https://www.dianping.com/shop/k6ttY31GVwu40nbW/review_all'
 
 
 # remove the trailing whitespace
@@ -34,6 +28,7 @@ class Swan():
     location: Location = None
     chromium_tabs: list = []
     chromium_options = ChromiumOptions
+    recorder: Recorder = None
 
     def __init__(self, config_file_path: str) -> None:
         self.config_file_path = config_file_path
@@ -73,6 +68,8 @@ class Swan():
         return location
 
     def grace_shutdown(self):
+        # flush the cache
+        self.recorder.record()
         if len(self.chromium_tabs) == 0:
             logger.warning('No tab was opened, shut down Swan right now.')
             return
@@ -113,7 +110,26 @@ class Swan():
         else:
             return -1
 
-    def task_dzdp(self):
+    def task_dzdp_login(self, tab):
+        tab.get(
+            'https://account.dianping.com/pclogin?redir=https://m.dianping.com/dphome',
+            True)
+        tab.ele('@@class=bottom-password-login@@tag()=span').click()
+        tab.ele('@@class=pwd@@tag()=div').click()
+        logger.info(
+            "Switch to manual login, trying to input username and password.")
+        # filling info
+        phone_number = tab.ele('@id=mobile-number-textbox').input(
+            self.config['account']['dzdp']['username'])
+        password = tab.ele('@id=password-textbox').input(
+            self.config['account']['dzdp']['password'])
+        user_agreement = tab.ele('@class=pc-agreement').ele(
+            '@id=pc-check').check()
+        login_button = tab.ele('@class=login-box').ele(
+            '@class=button-pc').click()
+        pass
+
+    def task_dzdp(self, loc: Location = Location.SHUHE_TOWN):
         # launch a new tab
         tab = Chromium(self.chromium_options).latest_tab
 
@@ -131,21 +147,12 @@ class Swan():
                    tab.cookies().as_dict().items()))
 
         if len(logged_in_cookie) == 0:
-            tab.ele('@@class=bottom-password-login@@tag()=span').click()
-            tab.ele('@@class=pwd@@tag()=div').click()
-            logger.info(
-                "Switch to manual login, trying to input username and password."
-            )
-
-            # filling info
-            phone_number = tab.ele('@id=mobile-number-textbox').input(
-                self.config['account']['dzdp']['username'])
-            password = tab.ele('@id=password-textbox').input(
-                self.config['account']['dzdp']['password'])
-            user_agreement = tab.ele('@class=pc-agreement').ele(
-                '@id=pc-check').check()
-            login_button = tab.ele('@class=login-box').ele(
-                '@class=button-pc').click()
+            self.task_dzdp_login()
+            # tab.ele('@@class=bottom-password-login@@tag()=span').click()
+            # tab.ele('@@class=pwd@@tag()=div').click()
+            # logger.info(
+            #     "Switch to manual login, trying to input username and password."
+            # )
         else:
             # detect cookie, skip login
             logger.info('Got logan_session_token, skip login.')
@@ -170,27 +177,37 @@ class Swan():
                          self.config['account']['dzdp']['location'])
 
         # navigate to shuhe/baisha town
-        self.set_location(Location.SHUHE_TOWN)
+        self.set_location(loc)
 
         tab.get(self.location.value[0])
         logger.info('Navigate to %s.' % self.location.name)
 
         # check whether the shop name match the intended one
-        logger.debug('Shop name value: %s' %
-                     tab.ele('@@tag()=h1@@class=shop-name').texts(
-                         text_node_only=True)[0])
-        logger.debug('desired_location: %s ' % self.location.literal)
-        if tab.ele('@@tag()=h1@@class=shop-name').texts(
-                text_node_only=True)[0] == self.location.literal:
-            logger.info(
-                'Successfully Navigated to %s. Preparing data collector.' %
-                self.location.name)
+        try:
+            shop_name = tab.ele('@@tag()=h1@@class=shop-name')
+            logger.debug('Shop name value: %s' %
+                         shop_name.texts(text_node_only=True)[0])
+            logger.debug('desired_location: %s ' % self.location.literal)
+            if tab.ele('@@tag()=h1@@class=shop-name').texts(
+                    text_node_only=True)[0] == self.location.literal:
+                logger.info(
+                    'Successfully Navigated to %s. Preparing data collector.' %
+                    self.location.name)
+        except ElementNotFoundError as e:
+            # if the ip has been banned, clear all the cookies, and re-login
+            logger.warning(
+                'Oops, our ip address might have been banned, let\'s try to re-login in. :('
+            )
+            logger.info('Clear all the cookies and cache.')
+            tab.cookies().clear()  # clear all the cookies
+            tab.clear_cache()  # clear all the cache
+            self.task_dzdp_login(tab)
 
         ############################## Data collector #######################################
 
         # change browser mode to `s` (session mode)
         tab.change_mode()
-        tab.close()
+        # tab.close()
         logger.info('Change browser mode to: `%s`' % tab.mode)
 
         # change page element to static element
@@ -215,14 +232,21 @@ class Swan():
                 logger.info("The page %d has %d comments, grab them!" %
                             (current_page, len(review_list)))
                 # iterate review items
-                for review_item in review_list:
+                for index, review_item in enumerate(review_list):
                     raw_review_content: list[str] = review_item.ele(
                         '@@tag()=div@@class=main-review').ele(
                             '@|class=review-words@|class=review-words Hide'
                         ).texts(text_node_only=True)
+                    # For emoji and other rendering problem, we have to join the str list
+
                     # review content
-                    review_content = list(
-                        map(lambda s: sanitize_text(s), raw_review_content))
+                    review_content = [
+                        '。'.join(
+                            list(
+                                map(lambda s: sanitize_text(s),
+                                    raw_review_content)))
+                    ]
+
                     # review date
                     review_date = sanitize_text(
                         review_item.ele('@@tag()=div@@class=main-review').ele(
@@ -232,22 +256,37 @@ class Swan():
                     review_score = self.extract_and_convert_score(
                         review_item.ele('@@tag()=div@@class=main-review').ele(
                             'css:div.review-rank > span').attr('class'))
-
                     # joint them together
                     review_content.append(review_date)
                     review_content.append(review_score)
+                    review_content.append(current_page)
+                    review_content.append(index)  # index started from 0
                     logger.info(review_content)
                     # TODO! write comment data to file
-                    
-                    
+
+                    # store the data as CSV file
+                    data_file_path = Path.joinpath(
+                        Path(self.config['application']['data_directory']),
+                        'dazhongdianping.csv')
+
+                    recorder = Recorder(path=data_file_path, cache_size=75)
+                    recorder.set.delimiter('|')
+                    recorder.set.encoding('utf-8')
+                    # set header and backup
+                    recorder.set.head(
+                        ['Comment', 'Comment Date', 'Score', 'Page', 'Index'])
+                    recorder.set.auto_backup(60)
+                    recorder.add_data(review_content)
 
                 # sleep for 3 ~ 10 secs
-                tab.wait(3, 10)
+                tab.wait(5, 10)
 
             except ElementNotFoundError:
                 logger.error(
                     'Cannot find review elements, by: css:div[class=reviews-items] > ul > li'
                 )
+                # flush the cache
+                self.recorder.record()
         logger.warning('The task `dzdp` has finished.')
 
 

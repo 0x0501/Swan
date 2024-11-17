@@ -90,6 +90,22 @@
         "documentation": {}
     },
     {
+        "label": "Enum",
+        "importPath": "enum",
+        "description": "enum",
+        "isExtraImport": true,
+        "detail": "enum",
+        "documentation": {}
+    },
+    {
+        "label": "unique",
+        "importPath": "enum",
+        "description": "enum",
+        "isExtraImport": true,
+        "detail": "enum",
+        "documentation": {}
+    },
+    {
         "label": "re",
         "kind": 6,
         "isExtraImport": true,
@@ -139,22 +155,6 @@
         "documentation": {}
     },
     {
-        "label": "Enum",
-        "importPath": "enum",
-        "description": "enum",
-        "isExtraImport": true,
-        "detail": "enum",
-        "documentation": {}
-    },
-    {
-        "label": "unique",
-        "importPath": "enum",
-        "description": "enum",
-        "isExtraImport": true,
-        "detail": "enum",
-        "documentation": {}
-    },
-    {
         "label": "pathlib",
         "kind": 6,
         "isExtraImport": true,
@@ -177,6 +177,14 @@
         "description": "pathlib",
         "isExtraImport": true,
         "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Location",
+        "importPath": "src.core.location",
+        "description": "src.core.location",
+        "isExtraImport": true,
+        "detail": "src.core.location",
         "documentation": {}
     },
     {
@@ -966,10 +974,10 @@
     {
         "label": "Location",
         "kind": 6,
-        "importPath": "src.core.swan",
-        "description": "src.core.swan",
-        "peekOfCode": "class Location(Enum):\n    SHUHE_TOWN = 'https://www.dianping.com/shop/iDYbcrjcbQJyvJyu/review_all',\n    BAISHA_TOWN = 'https://www.dianping.com/shop/k6ttY31GVwu40nbW/review_all'\n# remove the trailing whitespace\ndef sanitize_text(text: str, remove_all: bool = True) -> str:\n    if remove_all:\n        return re.sub(r'\\s+', '', text.strip())\n    else:\n        return text.strip()\nclass Swan():",
-        "detail": "src.core.swan",
+        "importPath": "src.core.location",
+        "description": "src.core.location",
+        "peekOfCode": "class Location(Enum):\n    SHUHE_TOWN = 'https://www.dianping.com/shop/iDYbcrjcbQJyvJyu/review_all',\n    BAISHA_TOWN = 'https://www.dianping.com/shop/k6ttY31GVwu40nbW/review_all'",
+        "detail": "src.core.location",
         "documentation": {}
     },
     {
@@ -977,7 +985,7 @@
         "kind": 6,
         "importPath": "src.core.swan",
         "description": "src.core.swan",
-        "peekOfCode": "class Swan():\n    config_file_path = ''\n    data_directory = ''\n    __config: Config = None\n    config = None\n    location: Location = None\n    chromium_tabs: list = []\n    chromium_options = ChromiumOptions\n    def __init__(self, config_file_path: str) -> None:\n        self.config_file_path = config_file_path",
+        "peekOfCode": "class Swan():\n    config_file_path = ''\n    data_directory = ''\n    __config: Config = None\n    config = None\n    location: Location = None\n    chromium_tabs: list = []\n    chromium_options = ChromiumOptions\n    recorder: Recorder = None\n    def __init__(self, config_file_path: str) -> None:",
         "detail": "src.core.swan",
         "documentation": {}
     },
@@ -1058,7 +1066,7 @@
         "kind": 5,
         "importPath": "tests.test",
         "description": "tests.test",
-        "peekOfCode": "config = Config('./swan.config.toml')\nc = config.load()\n# print(c['account']['test']['username'])\n# c['account']['test']['username'] = 'jjj'\n# print(c['account']['test']['username'])\n# config.save()\nprint(c['account']['dzdp']['page_maximum'])\n# chrome_executable_path = Path(config['application']['chrome_executable_path'])\n# print(os.path.exists(chrome_executable_path))",
+        "peekOfCode": "config = Config('./swan.config.toml')\nc = config.load()\n# print(c['account']['test']['username'])\n# c['account']['test']['username'] = 'jjj'\n# print(c['account']['test']['username'])\n# config.save()\nprint(c['account']['dzdp']['page_maximum'])\nprint(Path.joinpath(Path(c['application']['data_directory']), 'dazhongdianping.xlsx'))\nsd = 'sdsdsds'\ns = [sd]",
         "detail": "tests.test",
         "documentation": {}
     },
@@ -1067,7 +1075,25 @@
         "kind": 5,
         "importPath": "tests.test",
         "description": "tests.test",
-        "peekOfCode": "c = config.load()\n# print(c['account']['test']['username'])\n# c['account']['test']['username'] = 'jjj'\n# print(c['account']['test']['username'])\n# config.save()\nprint(c['account']['dzdp']['page_maximum'])\n# chrome_executable_path = Path(config['application']['chrome_executable_path'])\n# print(os.path.exists(chrome_executable_path))",
+        "peekOfCode": "c = config.load()\n# print(c['account']['test']['username'])\n# c['account']['test']['username'] = 'jjj'\n# print(c['account']['test']['username'])\n# config.save()\nprint(c['account']['dzdp']['page_maximum'])\nprint(Path.joinpath(Path(c['application']['data_directory']), 'dazhongdianping.xlsx'))\nsd = 'sdsdsds'\ns = [sd]\nprint(s)",
+        "detail": "tests.test",
+        "documentation": {}
+    },
+    {
+        "label": "sd",
+        "kind": 5,
+        "importPath": "tests.test",
+        "description": "tests.test",
+        "peekOfCode": "sd = 'sdsdsds'\ns = [sd]\nprint(s)\nprint(sd)\n# chrome_executable_path = Path(config['application']['chrome_executable_path'])\n# print(os.path.exists(chrome_executable_path))",
+        "detail": "tests.test",
+        "documentation": {}
+    },
+    {
+        "label": "s",
+        "kind": 5,
+        "importPath": "tests.test",
+        "description": "tests.test",
+        "peekOfCode": "s = [sd]\nprint(s)\nprint(sd)\n# chrome_executable_path = Path(config['application']['chrome_executable_path'])\n# print(os.path.exists(chrome_executable_path))",
         "detail": "tests.test",
         "documentation": {}
     },

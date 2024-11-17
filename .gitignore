@@ -1,5 +1,7 @@
 # Swan config
 swan.config.toml
+data/
+.vscode
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

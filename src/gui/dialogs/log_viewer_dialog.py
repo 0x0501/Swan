@@ -41,7 +41,7 @@ class LogViewerDialog(QDialog):
         
         # 添加自动刷新选项
         self.auto_refresh = False
-        self.auto_refresh_button = QPushButton("启用自动刷新", self)
+        self.auto_refresh_button = QPushButton("启用自动刷新 (5s)", self)
         self.auto_refresh_button.setCheckable(True)
         self.auto_refresh_button.clicked.connect(self._toggle_auto_refresh)
         toolbar_layout.addWidget(self.auto_refresh_button)

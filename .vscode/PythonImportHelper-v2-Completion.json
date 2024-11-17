@@ -460,6 +460,22 @@
         "documentation": {}
     },
     {
+        "label": "QComboBox",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QCheckBox",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
         "label": "QMainWindow",
         "importPath": "PyQt6.QtWidgets",
         "description": "PyQt6.QtWidgets",
@@ -1054,7 +1070,7 @@
         "kind": 6,
         "importPath": "src.gui.dialogs.program_settings_dialog",
         "description": "src.gui.dialogs.program_settings_dialog",
-        "peekOfCode": "class ProgramSettingsDialog(QDialog):\n    def __init__(self, settings: QSettings, parent=None):\n        super().__init__(parent)\n        self.settings = settings\n        self.setWindowTitle(\"程序设置\")\n        self.setFixedSize(500, 300)\n        layout = QVBoxLayout()\n        # 创建表单布局\n        form_layout = QFormLayout()\n        # 从QSettings中加载设置或使用默认值",
+        "peekOfCode": "class ProgramSettingsDialog(QDialog):\n    def __init__(self, settings: QSettings, parent=None):\n        super().__init__(parent)\n        self.settings = settings\n        self.setWindowTitle('程序设置')\n        self.setFixedSize(500, 300)\n        self.is_system_tray_state = False\n        layout = QVBoxLayout()\n        h_layout = QHBoxLayout()\n        # 创建表单布局",
         "detail": "src.gui.dialogs.program_settings_dialog",
         "documentation": {}
     },

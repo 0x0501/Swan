@@ -92,7 +92,7 @@ class Swan():
         # check whether CAPTCHA was displayed
         
         pass
-
+    
     def task_dzdp(self, loc: Location = Location.SHUHE_TOWN):
         # launch a new tab
         tab = Chromium(self.chromium_options).latest_tab

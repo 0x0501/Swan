@@ -36,8 +36,8 @@ class MainWindow(QMainWindow):
         #     }
         # """)
         # 判断是最小化还是退出
-        self.force_quit = False
         self.settings = QSettings('swan_gui', 'settings')
+        self.force_quit = not self.settings.value('is_system_tray', type=bool)
         self.is_first_time_hide_tray = False
         # 初始化Swan实例
         self.swan = Swan('./swan.config.toml')
@@ -152,7 +152,7 @@ class MainWindow(QMainWindow):
         QApplication.instance().quit()  # 彻底关闭
 
     def closeEvent(self, event):
-        if self.force_quit:  # 如果是强制退出
+        if not self.settings.value('is_system_tray', type=bool):  # 如果是强制退出
             event.accept()
         else:  # 如果是普通关闭，最小化到托盘
             if self.tray_icon.isVisible():

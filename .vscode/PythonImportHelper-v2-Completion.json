@@ -154,6 +154,14 @@
         "documentation": {}
     },
     {
+        "label": "Qt",
+        "importPath": "PyQt6.QtCore",
+        "description": "PyQt6.QtCore",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtCore",
+        "documentation": {}
+    },
+    {
         "label": "QTimer",
         "importPath": "PyQt6.QtCore",
         "description": "PyQt6.QtCore",
@@ -259,6 +267,14 @@
         "documentation": {}
     },
     {
+        "label": "logger",
+        "importPath": "loguru",
+        "description": "loguru",
+        "isExtraImport": true,
+        "detail": "loguru",
+        "documentation": {}
+    },
+    {
         "label": "pathlib",
         "kind": 6,
         "isExtraImport": true,
@@ -308,108 +324,20 @@
         "documentation": {}
     },
     {
-        "label": "Enum",
-        "importPath": "enum",
-        "description": "enum",
-        "isExtraImport": true,
-        "detail": "enum",
-        "documentation": {}
-    },
-    {
-        "label": "unique",
-        "importPath": "enum",
-        "description": "enum",
-        "isExtraImport": true,
-        "detail": "enum",
-        "documentation": {}
-    },
-    {
-        "label": "Recorder",
-        "importPath": "DataRecorder",
-        "description": "DataRecorder",
-        "isExtraImport": true,
-        "detail": "DataRecorder",
-        "documentation": {}
-    },
-    {
-        "label": "Chromium",
-        "importPath": "DrissionPage",
-        "description": "DrissionPage",
-        "isExtraImport": true,
-        "detail": "DrissionPage",
-        "documentation": {}
-    },
-    {
-        "label": "ChromiumOptions",
-        "importPath": "DrissionPage",
-        "description": "DrissionPage",
-        "isExtraImport": true,
-        "detail": "DrissionPage",
-        "documentation": {}
-    },
-    {
-        "label": "*",
-        "importPath": "DrissionPage.errors",
-        "description": "DrissionPage.errors",
-        "isExtraImport": true,
-        "detail": "DrissionPage.errors",
-        "documentation": {}
-    },
-    {
-        "label": "Location",
-        "importPath": "src.core.location",
-        "description": "src.core.location",
-        "isExtraImport": true,
-        "detail": "src.core.location",
-        "documentation": {}
-    },
-    {
-        "label": "Config",
-        "importPath": "src.utils.config",
-        "description": "src.utils.config",
-        "isExtraImport": true,
-        "detail": "src.utils.config",
-        "documentation": {}
-    },
-    {
-        "label": "Config",
-        "importPath": "src.utils.config",
-        "description": "src.utils.config",
-        "isExtraImport": true,
-        "detail": "src.utils.config",
-        "documentation": {}
-    },
-    {
-        "label": "extract_and_convert_score",
-        "importPath": "src.utils.text",
-        "description": "src.utils.text",
-        "isExtraImport": true,
-        "detail": "src.utils.text",
-        "documentation": {}
-    },
-    {
-        "label": "extract_update_date",
-        "importPath": "src.utils.text",
-        "description": "src.utils.text",
-        "isExtraImport": true,
-        "detail": "src.utils.text",
-        "documentation": {}
-    },
-    {
-        "label": "sanitize_text",
-        "importPath": "src.utils.text",
-        "description": "src.utils.text",
-        "isExtraImport": true,
-        "detail": "src.utils.text",
-        "documentation": {}
-    },
-    {
-        "label": "platform",
+        "label": "traceback",
         "kind": 6,
         "isExtraImport": true,
-        "importPath": "platform",
-        "description": "platform",
-        "detail": "platform",
+        "importPath": "traceback",
+        "description": "traceback",
+        "detail": "traceback",
+        "documentation": {}
+    },
+    {
+        "label": "QApplication",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
         "documentation": {}
     },
     {
@@ -582,6 +510,78 @@
     },
     {
         "label": "QHeaderView",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QApplication",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QMainWindow",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QPushButton",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QMessageBox",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QDialog",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QTextEdit",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QVBoxLayout",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QHBoxLayout",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QLabel",
         "importPath": "PyQt6.QtWidgets",
         "description": "PyQt6.QtWidgets",
         "isExtraImport": true,
@@ -813,6 +813,119 @@
         "documentation": {}
     },
     {
+        "label": "ErrorDialog",
+        "importPath": "src.gui.dialogs.error_dialog",
+        "description": "src.gui.dialogs.error_dialog",
+        "isExtraImport": true,
+        "detail": "src.gui.dialogs.error_dialog",
+        "documentation": {}
+    },
+    {
+        "label": "Enum",
+        "importPath": "enum",
+        "description": "enum",
+        "isExtraImport": true,
+        "detail": "enum",
+        "documentation": {}
+    },
+    {
+        "label": "unique",
+        "importPath": "enum",
+        "description": "enum",
+        "isExtraImport": true,
+        "detail": "enum",
+        "documentation": {}
+    },
+    {
+        "label": "Recorder",
+        "importPath": "DataRecorder",
+        "description": "DataRecorder",
+        "isExtraImport": true,
+        "detail": "DataRecorder",
+        "documentation": {}
+    },
+    {
+        "label": "Chromium",
+        "importPath": "DrissionPage",
+        "description": "DrissionPage",
+        "isExtraImport": true,
+        "detail": "DrissionPage",
+        "documentation": {}
+    },
+    {
+        "label": "ChromiumOptions",
+        "importPath": "DrissionPage",
+        "description": "DrissionPage",
+        "isExtraImport": true,
+        "detail": "DrissionPage",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "DrissionPage.errors",
+        "description": "DrissionPage.errors",
+        "isExtraImport": true,
+        "detail": "DrissionPage.errors",
+        "documentation": {}
+    },
+    {
+        "label": "Location",
+        "importPath": "src.core.location",
+        "description": "src.core.location",
+        "isExtraImport": true,
+        "detail": "src.core.location",
+        "documentation": {}
+    },
+    {
+        "label": "Config",
+        "importPath": "src.utils.config",
+        "description": "src.utils.config",
+        "isExtraImport": true,
+        "detail": "src.utils.config",
+        "documentation": {}
+    },
+    {
+        "label": "Config",
+        "importPath": "src.utils.config",
+        "description": "src.utils.config",
+        "isExtraImport": true,
+        "detail": "src.utils.config",
+        "documentation": {}
+    },
+    {
+        "label": "extract_and_convert_score",
+        "importPath": "src.utils.text",
+        "description": "src.utils.text",
+        "isExtraImport": true,
+        "detail": "src.utils.text",
+        "documentation": {}
+    },
+    {
+        "label": "extract_update_date",
+        "importPath": "src.utils.text",
+        "description": "src.utils.text",
+        "isExtraImport": true,
+        "detail": "src.utils.text",
+        "documentation": {}
+    },
+    {
+        "label": "sanitize_text",
+        "importPath": "src.utils.text",
+        "description": "src.utils.text",
+        "isExtraImport": true,
+        "detail": "src.utils.text",
+        "documentation": {}
+    },
+    {
+        "label": "platform",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "platform",
+        "description": "platform",
+        "detail": "platform",
+        "documentation": {}
+    },
+    {
         "label": "QFont",
         "importPath": "PyQt6.QtGui",
         "description": "PyQt6.QtGui",
@@ -838,6 +951,14 @@
     },
     {
         "label": "QKeySequence",
+        "importPath": "PyQt6.QtGui",
+        "description": "PyQt6.QtGui",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtGui",
+        "documentation": {}
+    },
+    {
+        "label": "QPixmap",
         "importPath": "PyQt6.QtGui",
         "description": "PyQt6.QtGui",
         "isExtraImport": true,
@@ -959,11 +1080,36 @@
         "documentation": {}
     },
     {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "src.gui.resources.resources",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "src.gui.resources.resources",
+        "description": "src.gui.resources.resources",
+        "detail": "src.gui.resources.resources",
+        "documentation": {}
+    },
+    {
         "label": "text",
         "importPath": "tests.test_date",
         "description": "tests.test_date",
         "isExtraImport": true,
         "detail": "tests.test_date",
+        "documentation": {}
+    },
+    {
+        "label": "QtCore",
+        "importPath": "PyQt6",
+        "description": "PyQt6",
+        "isExtraImport": true,
+        "detail": "PyQt6",
         "documentation": {}
     },
     {
@@ -1064,6 +1210,14 @@
         "importPath": "tkinter.messagebox",
         "description": "tkinter.messagebox",
         "detail": "tkinter.messagebox",
+        "documentation": {}
+    },
+    {
+        "label": "GlobalErrorHandler",
+        "importPath": "src.core.global_error_handler",
+        "description": "src.core.global_error_handler",
+        "isExtraImport": true,
+        "detail": "src.core.global_error_handler",
         "documentation": {}
     },
     {
@@ -1336,6 +1490,15 @@
         "documentation": {}
     },
     {
+        "label": "GlobalErrorHandler",
+        "kind": 6,
+        "importPath": "src.core.global_error_handler",
+        "description": "src.core.global_error_handler",
+        "peekOfCode": "class GlobalErrorHandler:\n    @staticmethod\n    def handle_exception(exc_type, exc_value, exc_traceback):\n        \"\"\"处理未捕获的异常\"\"\"\n        # 获取错误信息\n        error_info = ''.join(\n            traceback.format_exception(exc_type, exc_value, exc_traceback))\n        # 如果是在Qt应用程序中\n        app = QApplication.instance()\n        if app is not None:",
+        "detail": "src.core.global_error_handler",
+        "documentation": {}
+    },
+    {
         "label": "Location",
         "kind": 6,
         "importPath": "src.core.location",
@@ -1399,6 +1562,15 @@
         "documentation": {}
     },
     {
+        "label": "ErrorDialog",
+        "kind": 6,
+        "importPath": "src.gui.dialogs.error_dialog",
+        "description": "src.gui.dialogs.error_dialog",
+        "peekOfCode": "class ErrorDialog(QDialog):\n    def __init__(self, error_info, parent=None):\n        super().__init__(parent)\n        self.setWindowTitle(\"Oops, Swan崩溃了!\")\n        self.setMinimumWidth(600)\n        self.setMinimumHeight(300)\n        # 创建主布局\n        main_layout = QVBoxLayout()\n        # 创建水平布局来放置图片和文本\n        content_layout = QHBoxLayout()",
+        "detail": "src.gui.dialogs.error_dialog",
+        "documentation": {}
+    },
+    {
         "label": "LogViewerDialog",
         "kind": 6,
         "importPath": "src.gui.dialogs.log_viewer_dialog",
@@ -1414,6 +1586,51 @@
         "description": "src.gui.dialogs.program_settings_dialog",
         "peekOfCode": "class ProgramSettingsDialog(QDialog):\n    def __init__(self, settings: QSettings, parent=None):\n        super().__init__(parent)\n        self.settings = settings\n        # 从QSettings中加载设置或使用默认值\n        self.config_path = QLineEdit(\n            self.settings.value('config_path', './swan.config.toml'))\n        self.log_path = QLineEdit(\n            self.settings.value('log_path', './logs/swan.log'))\n        self.chrome_executable_path = QLineEdit(",
         "detail": "src.gui.dialogs.program_settings_dialog",
+        "documentation": {}
+    },
+    {
+        "label": "qInitResources",
+        "kind": 2,
+        "importPath": "src.gui.resources.resources",
+        "description": "src.gui.resources.resources",
+        "peekOfCode": "def qInitResources():\n    QtCore.qRegisterResourceData(0x03, qt_resource_struct, qt_resource_name, qt_resource_data)\ndef qCleanupResources():\n    QtCore.qUnregisterResourceData(0x03, qt_resource_struct, qt_resource_name, qt_resource_data)\nqInitResources()",
+        "detail": "src.gui.resources.resources",
+        "documentation": {}
+    },
+    {
+        "label": "qCleanupResources",
+        "kind": 2,
+        "importPath": "src.gui.resources.resources",
+        "description": "src.gui.resources.resources",
+        "peekOfCode": "def qCleanupResources():\n    QtCore.qUnregisterResourceData(0x03, qt_resource_struct, qt_resource_name, qt_resource_data)\nqInitResources()",
+        "detail": "src.gui.resources.resources",
+        "documentation": {}
+    },
+    {
+        "label": "qt_resource_data",
+        "kind": 5,
+        "importPath": "src.gui.resources.resources",
+        "description": "src.gui.resources.resources",
+        "peekOfCode": "qt_resource_data = b\"\\\n\\x00\\x05\\xd3\\xff\\\n\\x89\\\nPNG\\x0d\\x0a\\x1a\\x0a\\x00\\x00\\x00\\x0dIHDR\\x00\\\n\\x00\\x02\\x00\\x00\\x00\\x02\\x00\\x08\\x06\\x00\\x00\\x00\\xf4x\\xd4\\xfa\\\n\\x00\\x00\\x00\\x01sRGB\\x00\\xae\\xce\\x1c\\xe9\\x00\\x00\\x00\\\n\\x04gAMA\\x00\\x00\\xb1\\x8f\\x0b\\xfca\\x05\\x00\\x00\\x00\\\n\\x09pHYs\\x00\\x00\\x0e\\xc3\\x00\\x00\\x0e\\xc3\\x01\\xc7o\\\n\\xa8d\\x00\\x00\\xff\\xa5IDATx^\\xec\\xfd\\x07\\xbc\\\ne\\xe9U\\x1f\\x88\\xae\\x1d\\xcf>9\\xde\\x9c\\xf3\\xad\\xd4\\xd5\\",
+        "detail": "src.gui.resources.resources",
+        "documentation": {}
+    },
+    {
+        "label": "qt_resource_name",
+        "kind": 5,
+        "importPath": "src.gui.resources.resources",
+        "description": "src.gui.resources.resources",
+        "peekOfCode": "qt_resource_name = b\"\\\n\\x00\\x06\\\n\\x07\\x03}\\xc3\\\n\\x00i\\\n\\x00m\\x00a\\x00g\\x00e\\x00s\\\n\\x00\\x0f\\\n\\x05\\x09EG\\\n\\x00e\\\n\\x00r\\x00r\\x00o\\x00r\\x00_\\x00i\\x00m\\x00a\\x00g\\x00e\\x00.\\x00p\\x00n\\x00g\\\n\"",
+        "detail": "src.gui.resources.resources",
+        "documentation": {}
+    },
+    {
+        "label": "qt_resource_struct",
+        "kind": 5,
+        "importPath": "src.gui.resources.resources",
+        "description": "src.gui.resources.resources",
+        "peekOfCode": "qt_resource_struct = b\"\\\n\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x01\\x00\\x00\\x00\\x01\\\n\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\\n\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x01\\x00\\x00\\x00\\x02\\\n\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\\n\\x00\\x00\\x00\\x12\\x00\\x00\\x00\\x00\\x00\\x01\\x00\\x00\\x00\\x00\\\n\\x00\\x00\\x01\\x93?\\xe1.#\\\n\"\ndef qInitResources():\n    QtCore.qRegisterResourceData(0x03, qt_resource_struct, qt_resource_name, qt_resource_data)",
+        "detail": "src.gui.resources.resources",
         "documentation": {}
     },
     {
@@ -1570,11 +1787,20 @@
         "documentation": {}
     },
     {
+        "label": "exception_hook",
+        "kind": 2,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "def exception_hook(exc_type, exc_value, exc_traceback):\n    \"\"\"Qt异常钩子\"\"\"\n    # 不处理键盘中断异常\n    if issubclass(exc_type, KeyboardInterrupt):\n        sys.__excepthook__(exc_type, exc_value, exc_traceback)\n        return\n    GlobalErrorHandler.handle_exception(exc_type, exc_value, exc_traceback)\ndef main():\n    # 设置全局异常处理\n    sys.excepthook = exception_hook",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
         "label": "main",
         "kind": 2,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "def main():\n    app = QApplication(sys.argv)\n    window = MainWindow()\n    window.show()\n    sys.exit(app.exec())\nif __name__ == '__main__':\n    main()",
+        "peekOfCode": "def main():\n    # 设置全局异常处理\n    sys.excepthook = exception_hook\n    app = QApplication(sys.argv)\n    # 设置Qt的异常处理\n    window = MainWindow()\n    window.show()\n    sys.exit(app.exec())\nif __name__ == '__main__':\n    main()",
         "detail": "main",
         "documentation": {}
     }

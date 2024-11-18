@@ -12,6 +12,7 @@ from src.core.swan import Swan
 from PyQt6.QtWidgets import QApplication
 import os
 
+
 class MainWindow(QMainWindow):
 
     def __init__(self):
@@ -184,16 +185,19 @@ class MainWindow(QMainWindow):
             logger.debug("Opening CSV viewer...")  # 调试信息
             self.csv_viewer = CSVViewer(self.settings.value('data_directory'))
             logger.debug("CSV viewer instance created")  # 调试信息
-            self.csv_viewer.setWindowModality(Qt.WindowModality.NonModal)  # 确保窗口非模态
-            self.csv_viewer.setAttribute(Qt.WidgetAttribute.WA_DeleteOnClose, False)  # 防止关闭时被删除
+            self.csv_viewer.setWindowModality(
+                Qt.WindowModality.NonModal)  # 确保窗口非模态
+            self.csv_viewer.setAttribute(Qt.WidgetAttribute.WA_DeleteOnClose,
+                                         False)  # 防止关闭时被删除
             self.csv_viewer.show()
             logger.debug("CSV viewer shown")  # 调试信息
         except Exception as e:
             logger.error(f"Error showing CSV viewer: {str(e)}")  # 错误信息
             import traceback
             traceback.print_exc()  # 打印完整的错误堆栈
-            
+
     def _show_about_dialog(self):
+        raise Exception('Test')
         dialog = AboutDialog(self)
         dialog.exec()
 
@@ -210,7 +214,8 @@ class MainWindow(QMainWindow):
     def closeEvent(self, event):
         if not self.settings.value('is_system_tray', type=bool):  # 如果是强制退出
             event.accept()
-            self.csv_viewer.close()
+            if hasattr(self, 'csv_viewer'):
+                self.csv_viewer.close()
         else:  # 如果是普通关闭，最小化到托盘
             if self.tray_icon.isVisible():
                 self.hide()

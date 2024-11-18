@@ -122,6 +122,38 @@
         "documentation": {}
     },
     {
+        "label": "QFileSystemWatcher",
+        "importPath": "PyQt6.QtCore",
+        "description": "PyQt6.QtCore",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtCore",
+        "documentation": {}
+    },
+    {
+        "label": "QTimer",
+        "importPath": "PyQt6.QtCore",
+        "description": "PyQt6.QtCore",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtCore",
+        "documentation": {}
+    },
+    {
+        "label": "QAbstractTableModel",
+        "importPath": "PyQt6.QtCore",
+        "description": "PyQt6.QtCore",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtCore",
+        "documentation": {}
+    },
+    {
+        "label": "Qt",
+        "importPath": "PyQt6.QtCore",
+        "description": "PyQt6.QtCore",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtCore",
+        "documentation": {}
+    },
+    {
         "label": "QTimer",
         "importPath": "PyQt6.QtCore",
         "description": "PyQt6.QtCore",
@@ -192,6 +224,22 @@
         "description": "cryptography.fernet",
         "isExtraImport": true,
         "detail": "cryptography.fernet",
+        "documentation": {}
+    },
+    {
+        "label": "logger",
+        "importPath": "loguru",
+        "description": "loguru",
+        "isExtraImport": true,
+        "detail": "loguru",
+        "documentation": {}
+    },
+    {
+        "label": "logger",
+        "importPath": "loguru",
+        "description": "loguru",
+        "isExtraImport": true,
+        "detail": "loguru",
         "documentation": {}
     },
     {
@@ -461,6 +509,86 @@
         "documentation": {}
     },
     {
+        "label": "QMainWindow",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QWidget",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QVBoxLayout",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QTableView",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QPushButton",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QFileDialog",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QStatusBar",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QMenuBar",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QApplication",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QHeaderView",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
         "label": "QDialog",
         "importPath": "PyQt6.QtWidgets",
         "description": "PyQt6.QtWidgets",
@@ -693,6 +821,30 @@
         "documentation": {}
     },
     {
+        "label": "QStandardItemModel",
+        "importPath": "PyQt6.QtGui",
+        "description": "PyQt6.QtGui",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtGui",
+        "documentation": {}
+    },
+    {
+        "label": "QAction",
+        "importPath": "PyQt6.QtGui",
+        "description": "PyQt6.QtGui",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtGui",
+        "documentation": {}
+    },
+    {
+        "label": "QKeySequence",
+        "importPath": "PyQt6.QtGui",
+        "description": "PyQt6.QtGui",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtGui",
+        "documentation": {}
+    },
+    {
         "label": "QClipboard",
         "importPath": "PyQt6.QtGui",
         "description": "PyQt6.QtGui",
@@ -757,11 +909,21 @@
         "documentation": {}
     },
     {
-        "label": "text",
-        "importPath": "tests.test_date",
-        "description": "tests.test_date",
+        "label": "sys,",
+        "kind": 6,
         "isExtraImport": true,
-        "detail": "tests.test_date",
+        "importPath": "sys.",
+        "description": "sys.",
+        "detail": "sys.",
+        "documentation": {}
+    },
+    {
+        "label": "pandas",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pandas",
+        "description": "pandas",
+        "detail": "pandas",
         "documentation": {}
     },
     {
@@ -781,11 +943,43 @@
         "documentation": {}
     },
     {
+        "label": "Toast",
+        "importPath": "pyqttoast",
+        "description": "pyqttoast",
+        "isExtraImport": true,
+        "detail": "pyqttoast",
+        "documentation": {}
+    },
+    {
+        "label": "ToastPreset",
+        "importPath": "pyqttoast",
+        "description": "pyqttoast",
+        "isExtraImport": true,
+        "detail": "pyqttoast",
+        "documentation": {}
+    },
+    {
+        "label": "text",
+        "importPath": "tests.test_date",
+        "description": "tests.test_date",
+        "isExtraImport": true,
+        "detail": "tests.test_date",
+        "documentation": {}
+    },
+    {
         "label": "AboutDialog",
         "importPath": "src.gui.dialogs.about_dialog",
         "description": "src.gui.dialogs.about_dialog",
         "isExtraImport": true,
         "detail": "src.gui.dialogs.about_dialog",
+        "documentation": {}
+    },
+    {
+        "label": "CSVViewer",
+        "importPath": "src.gui.dialogs.csv_table_viewer",
+        "description": "src.gui.dialogs.csv_table_viewer",
+        "isExtraImport": true,
+        "detail": "src.gui.dialogs.csv_table_viewer",
         "documentation": {}
     },
     {
@@ -1187,6 +1381,24 @@
         "documentation": {}
     },
     {
+        "label": "CSVTableModel",
+        "kind": 6,
+        "importPath": "src.gui.dialogs.csv_table_viewer",
+        "description": "src.gui.dialogs.csv_table_viewer",
+        "peekOfCode": "class CSVTableModel(QAbstractTableModel):\n    def __init__(self, data):\n        super().__init__()\n        self._data = data\n    def rowCount(self, index):\n        return len(self._data)\n    def columnCount(self, index):\n        return len(self._data.columns)\n    def data(self, index, role=Qt.ItemDataRole.DisplayRole):\n        if role == Qt.ItemDataRole.DisplayRole:",
+        "detail": "src.gui.dialogs.csv_table_viewer",
+        "documentation": {}
+    },
+    {
+        "label": "CSVViewer",
+        "kind": 6,
+        "importPath": "src.gui.dialogs.csv_table_viewer",
+        "description": "src.gui.dialogs.csv_table_viewer",
+        "peekOfCode": "class CSVViewer(QMainWindow):\n    def __init__(self, default_dir=None):\n        super().__init__()\n        self.default_dir = default_dir or os.path.expanduser(\"~\")\n        self.current_file = None\n        self.watcher = QFileSystemWatcher()\n        self.watcher.fileChanged.connect(self.handle_file_changed)\n        self.scroll_positions = {'vertical': 0, 'horizontal': 0}\n        self.setup_ui()\n    def setup_ui(self):",
+        "detail": "src.gui.dialogs.csv_table_viewer",
+        "documentation": {}
+    },
+    {
         "label": "LogViewerDialog",
         "kind": 6,
         "importPath": "src.gui.dialogs.log_viewer_dialog",
@@ -1205,20 +1417,11 @@
         "documentation": {}
     },
     {
-        "label": "EventFilter",
-        "kind": 6,
-        "importPath": "src.gui.main_window",
-        "description": "src.gui.main_window",
-        "peekOfCode": "class EventFilter(QObject):\n    def __init__(self, status_bar):\n        super().__init__()\n        self.status_bar = status_bar\n    def eventFilter(self, obj, event):\n        if event.type() == QEvent.Type.Enter and isinstance(obj, QMenu):\n            print('HHH')\n            self.status_bar.showMessage(f\"You are hovering over the {obj.title()} menu.\")\n        elif event.type() == QEvent.Type.Leave and isinstance(obj, QMenu):\n            self.status_bar.clearMessage()",
-        "detail": "src.gui.main_window",
-        "documentation": {}
-    },
-    {
         "label": "MainWindow",
         "kind": 6,
         "importPath": "src.gui.main_window",
         "description": "src.gui.main_window",
-        "peekOfCode": "class MainWindow(QMainWindow):\n    def __init__(self):\n        super().__init__()\n        self.setWindowTitle(\"Swan - Default\")\n        self.resize(800, 600)\n        # 设置状态栏\n        self.statusBar : QStatusBar  = QStatusBar()\n        self.setStatusBar(self.statusBar)\n        # 设置菜单栏样式\n        self.setStyleSheet(\"\"\"",
+        "peekOfCode": "class MainWindow(QMainWindow):\n    def __init__(self):\n        super().__init__()\n        self.setWindowTitle(\"Swan - Default\")\n        self.resize(800, 600)\n        # 设置状态栏\n        self.statusBar: QStatusBar = QStatusBar()\n        self.setStatusBar(self.statusBar)\n        # 设置菜单栏样式\n        self.setStyleSheet(\"\"\"",
         "detail": "src.gui.main_window",
         "documentation": {}
     },

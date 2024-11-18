@@ -2,7 +2,9 @@ from PyQt6.QtWidgets import (QMainWindow, QMenuBar, QMenu, QSystemTrayIcon,
                              QStyle, QGraphicsDropShadowEffect, QStatusBar)
 from PyQt6.QtCore import Qt, QSettings, QObject, QEvent
 from PyQt6.QtGui import QAction, QKeySequence, QIcon, QColor
+from loguru import logger
 from src.gui.dialogs.about_dialog import AboutDialog
+from src.gui.dialogs.csv_table_viewer import CSVViewer
 from src.gui.dialogs.program_settings_dialog import ProgramSettingsDialog
 from src.gui.dialogs.account_settings_dialog import AccountSettingsDialog
 from src.gui.dialogs.log_viewer_dialog import LogViewerDialog
@@ -10,19 +12,6 @@ from src.core.swan import Swan
 from PyQt6.QtWidgets import QApplication
 import os
 
-class EventFilter(QObject):
-    def __init__(self, status_bar):
-        super().__init__()
-        self.status_bar = status_bar
-
-    def eventFilter(self, obj, event):
-        if event.type() == QEvent.Type.Enter and isinstance(obj, QMenu):
-            print('HHH')
-            self.status_bar.showMessage(f"You are hovering over the {obj.title()} menu.")
-        elif event.type() == QEvent.Type.Leave and isinstance(obj, QMenu):
-            self.status_bar.clearMessage()
-        return super().eventFilter(obj, event)
-    
 class MainWindow(QMainWindow):
 
     def __init__(self):
@@ -30,7 +19,7 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("Swan - Default")
         self.resize(800, 600)
         # 设置状态栏
-        self.statusBar : QStatusBar  = QStatusBar()
+        self.statusBar: QStatusBar = QStatusBar()
         self.setStatusBar(self.statusBar)
         # 设置菜单栏样式
         self.setStyleSheet("""
@@ -109,25 +98,25 @@ class MainWindow(QMainWindow):
         account_settings_action.triggered.connect(self._show_account_settings)
         settings_menu.addAction(account_settings_action)
 
-        # 日志菜单
-        log_menu = menubar.addMenu('日志')
+        # 查看菜单
+        view_menu = menubar.addMenu('查看')
         view_log_action = QAction('查看日志', self)
         view_log_action.setShortcut(QKeySequence("Ctrl+L"))
         view_log_action.triggered.connect(self._show_log_viewer)
-        log_menu.addAction(view_log_action)
-        log_menu.enterEvent = lambda e : self._create_status_bar
+        view_menu.addAction(view_log_action)
+        # view_menu.enterEvent = lambda e : self._create_status_bar
+
+        # CSV阅读器
+        csv_viewer_action = QAction('CSV阅读器', self)
+        csv_viewer_action.setShortcut(QKeySequence("Ctrl+P"))
+        csv_viewer_action.triggered.connect(self._show_csv_viewer_dialog)
+        view_menu.addAction(csv_viewer_action)
 
         # 关于菜单
         about_menu = menubar.addMenu('关于')
         about_action = QAction('关于 Swan', self)
         about_action.triggered.connect(self._show_about_dialog)
         about_menu.addAction(about_action)
-        # about_menu.enterEvent.co
-        about_menu.enterEvent = lambda e: print('bbbb')
-
-        event_filter = EventFilter(self.statusBar)
-        about_menu.installEventFilter(event_filter)
-
 
     def _create_status_bar(self):
         self.statusBar.showMessage('Swan已就绪 - 晚风吹起你群间的白发~')
@@ -190,14 +179,27 @@ class MainWindow(QMainWindow):
         dialog = AccountSettingsDialog(self.settings, self)
         dialog.exec()
 
+    def _show_csv_viewer_dialog(self):
+        try:
+            logger.debug("Opening CSV viewer...")  # 调试信息
+            self.csv_viewer = CSVViewer(self.settings.value('data_directory'))
+            logger.debug("CSV viewer instance created")  # 调试信息
+            self.csv_viewer.setWindowModality(Qt.WindowModality.NonModal)  # 确保窗口非模态
+            self.csv_viewer.setAttribute(Qt.WidgetAttribute.WA_DeleteOnClose, False)  # 防止关闭时被删除
+            self.csv_viewer.show()
+            logger.debug("CSV viewer shown")  # 调试信息
+        except Exception as e:
+            logger.error(f"Error showing CSV viewer: {str(e)}")  # 错误信息
+            import traceback
+            traceback.print_exc()  # 打印完整的错误堆栈
+            
     def _show_about_dialog(self):
         dialog = AboutDialog(self)
         dialog.exec()
 
     def _show_log_viewer(self):
         dialog = LogViewerDialog(self.settings)
-        # 使用show 而不是 exec
-        dialog.show()
+        dialog.exec()
 
     def _handle_quit(self):
         self.force_quit = True
@@ -208,6 +210,7 @@ class MainWindow(QMainWindow):
     def closeEvent(self, event):
         if not self.settings.value('is_system_tray', type=bool):  # 如果是强制退出
             event.accept()
+            self.csv_viewer.close()
         else:  # 如果是普通关闭，最小化到托盘
             if self.tray_icon.isVisible():
                 self.hide()

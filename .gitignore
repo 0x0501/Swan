@@ -1,6 +1,7 @@
 # Swan config
 swan.config.toml
 data/
+bin/
 .vscode
 
 # Byte-compiled / optimized / DLL files

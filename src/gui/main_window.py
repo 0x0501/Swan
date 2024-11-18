@@ -1,6 +1,6 @@
 from PyQt6.QtWidgets import (QMainWindow, QMenuBar, QMenu, QSystemTrayIcon,
-                             QStyle, QGraphicsDropShadowEffect)
-from PyQt6.QtCore import Qt, QSettings
+                             QStyle, QGraphicsDropShadowEffect, QStatusBar)
+from PyQt6.QtCore import Qt, QSettings, QObject, QEvent
 from PyQt6.QtGui import QAction, QKeySequence, QIcon, QColor
 from src.gui.dialogs.about_dialog import AboutDialog
 from src.gui.dialogs.program_settings_dialog import ProgramSettingsDialog
@@ -10,14 +10,28 @@ from src.core.swan import Swan
 from PyQt6.QtWidgets import QApplication
 import os
 
+class EventFilter(QObject):
+    def __init__(self, status_bar):
+        super().__init__()
+        self.status_bar = status_bar
 
+    def eventFilter(self, obj, event):
+        if event.type() == QEvent.Type.Enter and isinstance(obj, QMenu):
+            print('HHH')
+            self.status_bar.showMessage(f"You are hovering over the {obj.title()} menu.")
+        elif event.type() == QEvent.Type.Leave and isinstance(obj, QMenu):
+            self.status_bar.clearMessage()
+        return super().eventFilter(obj, event)
+    
 class MainWindow(QMainWindow):
 
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Swan - Default")
         self.resize(800, 600)
-
+        # 设置状态栏
+        self.statusBar : QStatusBar  = QStatusBar()
+        self.setStatusBar(self.statusBar)
         # 设置菜单栏样式
         self.setStyleSheet("""
             QMenuBar {
@@ -101,15 +115,22 @@ class MainWindow(QMainWindow):
         view_log_action.setShortcut(QKeySequence("Ctrl+L"))
         view_log_action.triggered.connect(self._show_log_viewer)
         log_menu.addAction(view_log_action)
+        log_menu.enterEvent = lambda e : self._create_status_bar
 
         # 关于菜单
         about_menu = menubar.addMenu('关于')
         about_action = QAction('关于 Swan', self)
         about_action.triggered.connect(self._show_about_dialog)
         about_menu.addAction(about_action)
+        # about_menu.enterEvent.co
+        about_menu.enterEvent = lambda e: print('bbbb')
+
+        event_filter = EventFilter(self.statusBar)
+        about_menu.installEventFilter(event_filter)
+
 
     def _create_status_bar(self):
-        self.statusBar().showMessage('就绪 - 晚风')
+        self.statusBar.showMessage('Swan已就绪 - 晚风吹起你群间的白发~')
 
     def _setup_tray_icon(self):
         # 获取系统主题的应用程序图标
@@ -174,8 +195,9 @@ class MainWindow(QMainWindow):
         dialog.exec()
 
     def _show_log_viewer(self):
-        dialog = LogViewerDialog(self.settings, self)
-        dialog.exec()
+        dialog = LogViewerDialog(self.settings)
+        # 使用show 而不是 exec
+        dialog.show()
 
     def _handle_quit(self):
         self.force_quit = True

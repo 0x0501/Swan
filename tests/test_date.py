@@ -21,11 +21,11 @@ text = """
 """
 
 # 提取更新日期
-update_date = extract_update_date(text)
-if update_date:
-    print(f"提取的更新日期: {update_date}")
-else:
-    print("未找到更新日期")
+# update_date = extract_update_date(text)
+# if update_date:
+#     print(f"提取的更新日期: {update_date}")
+# else:
+#     print("未找到更新日期")
     
-u2 = extract_update_date('2024-10-14\n  更新于2024-10-15 17:07')
-print(u2)
+# u2 = extract_update_date('2024-10-14\n  更新于2024-10-15 17:07')
+# print(u2)

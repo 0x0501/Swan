@@ -90,6 +90,176 @@
         "documentation": {}
     },
     {
+        "label": "QSettings",
+        "importPath": "PyQt6.QtCore",
+        "description": "PyQt6.QtCore",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtCore",
+        "documentation": {}
+    },
+    {
+        "label": "Qt",
+        "importPath": "PyQt6.QtCore",
+        "description": "PyQt6.QtCore",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtCore",
+        "documentation": {}
+    },
+    {
+        "label": "QSettings",
+        "importPath": "PyQt6.QtCore",
+        "description": "PyQt6.QtCore",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtCore",
+        "documentation": {}
+    },
+    {
+        "label": "Qt",
+        "importPath": "PyQt6.QtCore",
+        "description": "PyQt6.QtCore",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtCore",
+        "documentation": {}
+    },
+    {
+        "label": "QTimer",
+        "importPath": "PyQt6.QtCore",
+        "description": "PyQt6.QtCore",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtCore",
+        "documentation": {}
+    },
+    {
+        "label": "QSettings",
+        "importPath": "PyQt6.QtCore",
+        "description": "PyQt6.QtCore",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtCore",
+        "documentation": {}
+    },
+    {
+        "label": "QSettings",
+        "importPath": "PyQt6.QtCore",
+        "description": "PyQt6.QtCore",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtCore",
+        "documentation": {}
+    },
+    {
+        "label": "Qt",
+        "importPath": "PyQt6.QtCore",
+        "description": "PyQt6.QtCore",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtCore",
+        "documentation": {}
+    },
+    {
+        "label": "QSettings",
+        "importPath": "PyQt6.QtCore",
+        "description": "PyQt6.QtCore",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtCore",
+        "documentation": {}
+    },
+    {
+        "label": "QObject",
+        "importPath": "PyQt6.QtCore",
+        "description": "PyQt6.QtCore",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtCore",
+        "documentation": {}
+    },
+    {
+        "label": "QEvent",
+        "importPath": "PyQt6.QtCore",
+        "description": "PyQt6.QtCore",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtCore",
+        "documentation": {}
+    },
+    {
+        "label": "base64",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "base64",
+        "description": "base64",
+        "detail": "base64",
+        "documentation": {}
+    },
+    {
+        "label": "Fernet",
+        "importPath": "cryptography.fernet",
+        "description": "cryptography.fernet",
+        "isExtraImport": true,
+        "detail": "cryptography.fernet",
+        "documentation": {}
+    },
+    {
+        "label": "logger",
+        "importPath": "loguru",
+        "description": "loguru",
+        "isExtraImport": true,
+        "detail": "loguru",
+        "documentation": {}
+    },
+    {
+        "label": "logger",
+        "importPath": "loguru",
+        "description": "loguru",
+        "isExtraImport": true,
+        "detail": "loguru",
+        "documentation": {}
+    },
+    {
+        "label": "pathlib",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Set",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
         "label": "Enum",
         "importPath": "enum",
         "description": "enum",
@@ -130,44 +300,11 @@
         "documentation": {}
     },
     {
-        "label": "logger",
-        "importPath": "loguru",
-        "description": "loguru",
-        "isExtraImport": true,
-        "detail": "loguru",
-        "documentation": {}
-    },
-    {
         "label": "*",
         "importPath": "DrissionPage.errors",
         "description": "DrissionPage.errors",
         "isExtraImport": true,
         "detail": "DrissionPage.errors",
-        "documentation": {}
-    },
-    {
-        "label": "pathlib",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
         "documentation": {}
     },
     {
@@ -524,7 +661,7 @@
         "documentation": {}
     },
     {
-        "label": "QApplication",
+        "label": "QStatusBar",
         "importPath": "PyQt6.QtWidgets",
         "description": "PyQt6.QtWidgets",
         "isExtraImport": true,
@@ -540,67 +677,11 @@
         "documentation": {}
     },
     {
-        "label": "Qt",
-        "importPath": "PyQt6.QtCore",
-        "description": "PyQt6.QtCore",
+        "label": "QApplication",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
         "isExtraImport": true,
-        "detail": "PyQt6.QtCore",
-        "documentation": {}
-    },
-    {
-        "label": "QSettings",
-        "importPath": "PyQt6.QtCore",
-        "description": "PyQt6.QtCore",
-        "isExtraImport": true,
-        "detail": "PyQt6.QtCore",
-        "documentation": {}
-    },
-    {
-        "label": "Qt",
-        "importPath": "PyQt6.QtCore",
-        "description": "PyQt6.QtCore",
-        "isExtraImport": true,
-        "detail": "PyQt6.QtCore",
-        "documentation": {}
-    },
-    {
-        "label": "QTimer",
-        "importPath": "PyQt6.QtCore",
-        "description": "PyQt6.QtCore",
-        "isExtraImport": true,
-        "detail": "PyQt6.QtCore",
-        "documentation": {}
-    },
-    {
-        "label": "QSettings",
-        "importPath": "PyQt6.QtCore",
-        "description": "PyQt6.QtCore",
-        "isExtraImport": true,
-        "detail": "PyQt6.QtCore",
-        "documentation": {}
-    },
-    {
-        "label": "QSettings",
-        "importPath": "PyQt6.QtCore",
-        "description": "PyQt6.QtCore",
-        "isExtraImport": true,
-        "detail": "PyQt6.QtCore",
-        "documentation": {}
-    },
-    {
-        "label": "Qt",
-        "importPath": "PyQt6.QtCore",
-        "description": "PyQt6.QtCore",
-        "isExtraImport": true,
-        "detail": "PyQt6.QtCore",
-        "documentation": {}
-    },
-    {
-        "label": "QSettings",
-        "importPath": "PyQt6.QtCore",
-        "description": "PyQt6.QtCore",
-        "isExtraImport": true,
-        "detail": "PyQt6.QtCore",
+        "detail": "PyQt6.QtWidgets",
         "documentation": {}
     },
     {
@@ -657,6 +738,46 @@
         "description": "PyQt6.QtGui",
         "isExtraImport": true,
         "detail": "PyQt6.QtGui",
+        "documentation": {}
+    },
+    {
+        "label": "Encryption",
+        "importPath": "src.core.encryption",
+        "description": "src.core.encryption",
+        "isExtraImport": true,
+        "detail": "src.core.encryption",
+        "documentation": {}
+    },
+    {
+        "label": "Encryption",
+        "importPath": "src.core.encryption",
+        "description": "src.core.encryption",
+        "isExtraImport": true,
+        "detail": "src.core.encryption",
+        "documentation": {}
+    },
+    {
+        "label": "text",
+        "importPath": "tests.test_date",
+        "description": "tests.test_date",
+        "isExtraImport": true,
+        "detail": "tests.test_date",
+        "documentation": {}
+    },
+    {
+        "label": "Toast",
+        "importPath": "pyqttoast",
+        "description": "pyqttoast",
+        "isExtraImport": true,
+        "detail": "pyqttoast",
+        "documentation": {}
+    },
+    {
+        "label": "ToastPreset",
+        "importPath": "pyqttoast",
+        "description": "pyqttoast",
+        "isExtraImport": true,
+        "detail": "pyqttoast",
         "documentation": {}
     },
     {
@@ -1012,6 +1133,15 @@
         "documentation": {}
     },
     {
+        "label": "Encryption",
+        "kind": 6,
+        "importPath": "src.core.encryption",
+        "description": "src.core.encryption",
+        "peekOfCode": "class Encryption:\n    def __init__(self, key_file_dir_path: str, settings: QSettings,\n                 encrypted_keys: Optional[Set[str]]) -> None:\n        self.key_file = Path.joinpath(\n            Path(key_file_dir_path), 'SWAN_MEGA_KEY.bin')\n        logger.debug('key_file_dir_path: %s' % key_file_dir_path)\n        logger.debug('Encryption Key path: %s' % self.key_file)\n        self._ensure_encryption_key()\n        self.settings = settings\n        # 默认加密",
+        "detail": "src.core.encryption",
+        "documentation": {}
+    },
+    {
         "label": "Location",
         "kind": 6,
         "importPath": "src.core.location",
@@ -1052,7 +1182,7 @@
         "kind": 6,
         "importPath": "src.gui.dialogs.account_settings_dialog",
         "description": "src.gui.dialogs.account_settings_dialog",
-        "peekOfCode": "class AccountSettingsDialog(QDialog):\n    def __init__(self, settings: QSettings, parent=None):\n        super().__init__(parent)\n        self.settings = settings\n        self.setWindowTitle(\"账号设置\")\n        self.setFixedSize(300, 500)\n        # 账号密码项\n        layout = QVBoxLayout()\n        # 字体加粗\n        font = QFont()",
+        "peekOfCode": "class AccountSettingsDialog(QDialog):\n    def __init__(self, settings: QSettings, parent=None):\n        super().__init__(parent)\n        self.settings = settings\n        self.setWindowTitle(\"账号设置\")\n        self.setFixedSize(300, 500)\n        # 账号密码项\n        self.encryption = Encryption(\n            self.settings.value('encryption_dir_path', './bin'), self.settings,\n            None)",
         "detail": "src.gui.dialogs.account_settings_dialog",
         "documentation": {}
     },
@@ -1070,8 +1200,17 @@
         "kind": 6,
         "importPath": "src.gui.dialogs.program_settings_dialog",
         "description": "src.gui.dialogs.program_settings_dialog",
-        "peekOfCode": "class ProgramSettingsDialog(QDialog):\n    def __init__(self, settings: QSettings, parent=None):\n        super().__init__(parent)\n        self.settings = settings\n        self.setWindowTitle('程序设置')\n        self.setFixedSize(500, 300)\n        self.is_system_tray_state = False\n        layout = QVBoxLayout()\n        h_layout = QHBoxLayout()\n        # 创建表单布局",
+        "peekOfCode": "class ProgramSettingsDialog(QDialog):\n    def __init__(self, settings: QSettings, parent=None):\n        super().__init__(parent)\n        self.settings = settings\n        # 从QSettings中加载设置或使用默认值\n        self.config_path = QLineEdit(\n            self.settings.value('config_path', './swan.config.toml'))\n        self.log_path = QLineEdit(\n            self.settings.value('log_path', './logs/swan.log'))\n        self.chrome_executable_path = QLineEdit(",
         "detail": "src.gui.dialogs.program_settings_dialog",
+        "documentation": {}
+    },
+    {
+        "label": "EventFilter",
+        "kind": 6,
+        "importPath": "src.gui.main_window",
+        "description": "src.gui.main_window",
+        "peekOfCode": "class EventFilter(QObject):\n    def __init__(self, status_bar):\n        super().__init__()\n        self.status_bar = status_bar\n    def eventFilter(self, obj, event):\n        if event.type() == QEvent.Type.Enter and isinstance(obj, QMenu):\n            print('HHH')\n            self.status_bar.showMessage(f\"You are hovering over the {obj.title()} menu.\")\n        elif event.type() == QEvent.Type.Leave and isinstance(obj, QMenu):\n            self.status_bar.clearMessage()",
+        "detail": "src.gui.main_window",
         "documentation": {}
     },
     {
@@ -1079,7 +1218,7 @@
         "kind": 6,
         "importPath": "src.gui.main_window",
         "description": "src.gui.main_window",
-        "peekOfCode": "class MainWindow(QMainWindow):\n    def __init__(self):\n        super().__init__()\n        self.setWindowTitle(\"Swan - Default\")\n        self.resize(800, 600)\n        # 设置菜单栏样式\n        self.setStyleSheet(\"\"\"\n            QMenuBar {\n                border-bottom:1px solid #d9d9d9;\n                font-size: 10pt;",
+        "peekOfCode": "class MainWindow(QMainWindow):\n    def __init__(self):\n        super().__init__()\n        self.setWindowTitle(\"Swan - Default\")\n        self.resize(800, 600)\n        # 设置状态栏\n        self.statusBar : QStatusBar  = QStatusBar()\n        self.setStatusBar(self.statusBar)\n        # 设置菜单栏样式\n        self.setStyleSheet(\"\"\"",
         "detail": "src.gui.main_window",
         "documentation": {}
     },
@@ -1169,25 +1308,7 @@
         "kind": 5,
         "importPath": "tests.test_date",
         "description": "tests.test_date",
-        "peekOfCode": "text = \"\"\"\n                                2024-10-10\n  更新于2024-10-12 09:12                            \n\"\"\"\n# 提取更新日期\nupdate_date = extract_update_date(text)\nif update_date:\n    print(f\"提取的更新日期: {update_date}\")\nelse:\n    print(\"未找到更新日期\")",
-        "detail": "tests.test_date",
-        "documentation": {}
-    },
-    {
-        "label": "update_date",
-        "kind": 5,
-        "importPath": "tests.test_date",
-        "description": "tests.test_date",
-        "peekOfCode": "update_date = extract_update_date(text)\nif update_date:\n    print(f\"提取的更新日期: {update_date}\")\nelse:\n    print(\"未找到更新日期\")\nu2 = extract_update_date('2024-10-14\\n  更新于2024-10-15 17:07')\nprint(u2)",
-        "detail": "tests.test_date",
-        "documentation": {}
-    },
-    {
-        "label": "u2",
-        "kind": 5,
-        "importPath": "tests.test_date",
-        "description": "tests.test_date",
-        "peekOfCode": "u2 = extract_update_date('2024-10-14\\n  更新于2024-10-15 17:07')\nprint(u2)",
+        "peekOfCode": "text = \"\"\"\n                                2024-10-10\n  更新于2024-10-12 09:12                            \n\"\"\"\n# 提取更新日期\n# update_date = extract_update_date(text)\n# if update_date:\n#     print(f\"提取的更新日期: {update_date}\")\n# else:\n#     print(\"未找到更新日期\")",
         "detail": "tests.test_date",
         "documentation": {}
     },

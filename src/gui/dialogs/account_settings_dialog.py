@@ -2,6 +2,7 @@ from PyQt6.QtWidgets import (QDialog, QVBoxLayout, QHBoxLayout, QLabel,
                              QLineEdit, QPushButton, QFormLayout, QFrame)
 from PyQt6.QtCore import QSettings
 from PyQt6.QtGui import QFont
+from src.core.encryption import Encryption
 
 
 class AccountSettingsDialog(QDialog):
@@ -13,7 +14,10 @@ class AccountSettingsDialog(QDialog):
         self.setFixedSize(300, 500)
 
         # 账号密码项
-        
+        self.encryption = Encryption(
+            self.settings.value('encryption_dir_path', './bin'), self.settings,
+            None)
+
         layout = QVBoxLayout()
 
         # 字体加粗
@@ -26,8 +30,10 @@ class AccountSettingsDialog(QDialog):
         dzdp_label.setFont(font)
 
         # 从QSettings中加载设置或使用默认值
-        self.dzdp_username = QLineEdit(self.settings.value("dzdp_username", ""))
-        self.dzdp_password = QLineEdit(self.settings.value("dzdp_password", ""))
+        self.dzdp_username = QLineEdit(self.settings.value(
+            "dzdp_username", ""))
+        self.dzdp_password = QLineEdit(
+            self.encryption.get_encrypted("dzdp_password", ""))
         self.dzdp_password.setEchoMode(QLineEdit.EchoMode.Password)
 
         # 添加表单项
@@ -41,8 +47,10 @@ class AccountSettingsDialog(QDialog):
         xiecheng_label.setFont(font)
 
         # 从QSettings中加载设置或使用默认值
-        self.xiecheng_username = QLineEdit(self.settings.value("xiecheng_username", ""))
-        self.xiecheng_password = QLineEdit(self.settings.value("xiecheng_password", ""))
+        self.xiecheng_username = QLineEdit(
+            self.settings.value("xiecheng_username", ""))
+        self.xiecheng_password = QLineEdit(
+            self.encryption.get_encrypted("xiecheng_password", ""))
         self.xiecheng_password.setEchoMode(QLineEdit.EchoMode.Password)
 
         # 添加表单项
@@ -57,7 +65,8 @@ class AccountSettingsDialog(QDialog):
 
         # 从QSettings中加载设置或使用默认值
         self.red_username = QLineEdit(self.settings.value("red_username", ""))
-        self.red_password = QLineEdit(self.settings.value("red_password", ""))
+        self.red_password = QLineEdit(
+            self.encryption.get_encrypted("red_password", ""))
         self.red_password.setEchoMode(QLineEdit.EchoMode.Password)
 
         # 添加表单项
@@ -114,12 +123,26 @@ class AccountSettingsDialog(QDialog):
     def save_settings(self):
         # 保存设置到QSettings
         # 大众点评
-        self.settings.setValue("username", self.dzdp_username.text())
-        self.settings.setValue("password", self.dzdp_password.text())
+        self.settings.setValue("dzdp_username", self.dzdp_username.text())
+        self.encryption.set_encrypted("dzdp_password",
+                                      self.dzdp_password.text())
+
         # 携程
-        self.settings.setValue("username", self.xiecheng_username.text())
-        self.settings.setValue("password", self.xiecheng_password.text())
-        #小红书
-        self.settings.setValue("username", self.red_username.text())
-        self.settings.setValue("password", self.red_password.text())
+        self.settings.setValue("xiecheng_username",
+                               self.xiecheng_username.text())
+        self.encryption.set_encrypted("xiecheng_password",
+                                      self.xiecheng_password.text())
+
+        # 小红书
+        self.settings.setValue("red_username", self.red_username.text())
+        self.encryption.set_encrypted("red_password", self.red_password.text())
+
+        print('所有Key: %s' % self.settings.allKeys())
+        print('大众点评用户名: %s' % self.settings.value('dzdp_username'))
+        print('大众点评密码（加密）: %s' % self.settings.value('dzdp_password'))
+        print('携程密码 (加密): %s' % self.settings.value('xiecheng_password'))
+        print('小红书密码 (加密): %s' % self.settings.value('red_password'))
+        print('大众点评密码（解密）: %s' % self.encryption.get_encrypted('dzdp_password'))
+        print('小红书密码 (解密): %s ' % self.encryption.get_encrypted('red_password'))
+        # 关闭事件
         self.accept()

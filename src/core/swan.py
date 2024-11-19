@@ -1,5 +1,7 @@
 import os
+from random import randint
 import sys
+import time
 from DataRecorder import Recorder
 from DrissionPage import Chromium
 from DrissionPage import ChromiumOptions
@@ -15,6 +17,7 @@ class Swan():
 
     config_file_path = ''
     data_directory = ''
+    start_time = 0.0
     __config: Config = None
     config = None
     location: Location = None
@@ -26,13 +29,44 @@ class Swan():
         self.config_file_path = config_file_path
         self.__config = Config(config_file_path=config_file_path)
         self.config = self.__config.load()
-
         # log initialization
         logger.add(self.config['application']['log_file_path'])
-        pass
+
+    def calculate_sleep_time(self, start_time) -> int:
+        """
+        计算休眠时间和处理休息时间的函数。
+
+        :param start_time: 程序开始运行的时间（以秒为单位）
+        :return: 本次循环的休眠时间（秒）
+        """
+        current_time = time.time()
+        runtime_minutes = (current_time - start_time) // 60
+
+        # 每运行一个小时休息10分钟
+        if runtime_minutes % 60 == 0 and runtime_minutes > 0:
+            logger.debug(
+                f"Running for {runtime_minutes} minutes, taking a 10-minute break..."
+            )
+            return randint(600, 700)  # 返回10分钟的休眠时间，以便重置开始时间
+
+        # 每运行三个小时休息15分钟
+        if runtime_minutes % 180 == 0 and runtime_minutes > 0:
+            logger.debug(
+                f"Running for {runtime_minutes} minutes, taking a 15-minute break..."
+            )
+            return randint(900, 1100)  # 返回15分钟的休眠时间，以便重置开始时间
+
+        # 动态调整休眠时间
+        if runtime_minutes < 30:
+            sleep_time = randint(10, 15)
+        elif runtime_minutes < 60:
+            sleep_time = randint(18, 20)
+        else:
+            sleep_time = randint(23, 30)
+            
+        return sleep_time
 
     def launch(self):
-
         logger.info("Comment Swan started!")
         chrome_executable_path = Path(
             self.config['application']['chrome_executable_path'])
@@ -45,7 +79,6 @@ class Swan():
             logger.info("chrome_executable_path: %s" % chrome_executable_path)
             self.chromium_options = ChromiumOptions().set_browser_path(
                 path=chrome_executable_path)
-
         return self
 
     def set_location(self, location: Location) -> Location:
@@ -61,7 +94,8 @@ class Swan():
 
     def grace_shutdown(self):
         # flush the cache
-        self.recorder.record()
+        if self.recorder != None:
+            self.recorder.record()
         if len(self.chromium_tabs) == 0:
             logger.warning('No tab was opened, shut down Swan right now.')
             return
@@ -86,13 +120,42 @@ class Swan():
             self.config['account']['dzdp']['password'])
         user_agreement = tab.ele('@class=pc-agreement').ele(
             '@id=pc-check').check()
-        login_button = tab.ele('@class=login-box').ele(
-            '@class=button-pc').click()
-        
+        login_button = tab.ele('@class=login-box').ele('@class=button-pc')
+
+        # try to directly log in
+        login_button.click()
+
         # check whether CAPTCHA was displayed
-        
-        pass
-    
+        try:
+            login_captcha = tab.ele('@class=login-box').ele('css:.pc-mask')
+            logger.warning(
+                'CAPTCHA required. Please input them in 30 seconds.')
+            # wait 10 seconds
+            tab.wait(30)
+        except ElementNotFoundError:
+            logger.debug('No CAPTCHA was detected.')
+
+        # check whether the account is restricted
+        try:
+            login_warning: list[str] = tab.ele('@class=login-box').ele(
+                'css:.warning').texts()
+            if login_warning[0] == '你的账号存在安全隐患，为保障您的账号安全，请使用扫码登录':
+                logger.warning(
+                    'This account has been restricted, please scan the QRCode to log within 60 seconds.'
+                )
+                # wait 10 seconds
+                tab.wait(60)
+            else:
+                logger.error('Unexpected logging error: %s' % login_warning)
+        except ElementNotFoundError:
+            logger.debug('This account doesn\'t trigger restricted policy.')
+            
+        # check whether verification code was required
+        if 'meituan' in tab.url:
+            logger.warning('Verification code was required, please get it and fill out in the box, Swan will wait 60 seconds.')
+            tab.wait(60)
+
+
     def task_dzdp(self, loc: Location = Location.SHUHE_TOWN):
         # launch a new tab
         tab = Chromium(self.chromium_options).latest_tab
@@ -104,8 +167,8 @@ class Swan():
         tab.get(
             'https://account.dianping.com/pclogin?redir=https://m.dianping.com/dphome',
             True)
-        # switch_manual_login, if already logged in, skip this
 
+        # switch_manual_login, if already logged in, skip this
         logged_in_cookie = dict(
             filter(lambda i: i[0] == 'logan_session_token',
                    tab.cookies().as_dict().items()))
@@ -178,6 +241,8 @@ class Swan():
         page_maximum: int = self.config['account']['dzdp']['page_maximum']
         # current_page = 0
 
+        # set the start time from here
+        start_time = time.time()
         for current_page in range(1, page_maximum):
             logger.info("Task `dzdp` current page %d" % current_page)
 
@@ -249,7 +314,12 @@ class Swan():
                     recorder.add_data(review_content)
 
                 # sleep for 3 ~ 10 secs
-                tab.wait(5, 10)
+                sleep_time = self.calculate_sleep_time(start_time)
+                if sleep_time in [600, 1100]:
+                    start_time = time.time()
+                
+                logger.info("Sleep %s seconds before the next move. Take your time master >_=" % sleep_time)
+                tab.wait(sleep_time)
 
             except ElementNotFoundError:
                 logger.error(

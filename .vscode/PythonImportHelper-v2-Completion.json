@@ -837,6 +837,23 @@
         "documentation": {}
     },
     {
+        "label": "randint",
+        "importPath": "random",
+        "description": "random",
+        "isExtraImport": true,
+        "detail": "random",
+        "documentation": {}
+    },
+    {
+        "label": "time",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "time",
+        "description": "time",
+        "detail": "time",
+        "documentation": {}
+    },
+    {
         "label": "Recorder",
         "importPath": "DataRecorder",
         "description": "DataRecorder",
@@ -1512,7 +1529,7 @@
         "kind": 6,
         "importPath": "src.core.swan",
         "description": "src.core.swan",
-        "peekOfCode": "class Swan():\n    config_file_path = ''\n    data_directory = ''\n    __config: Config = None\n    config = None\n    location: Location = None\n    chromium_tabs: list = []\n    chromium_options = ChromiumOptions\n    recorder: Recorder = None\n    def __init__(self, config_file_path: str) -> None:",
+        "peekOfCode": "class Swan():\n    config_file_path = ''\n    data_directory = ''\n    start_time = 0.0\n    __config: Config = None\n    config = None\n    location: Location = None\n    chromium_tabs: list = []\n    chromium_options = ChromiumOptions\n    recorder: Recorder = None",
         "detail": "src.core.swan",
         "documentation": {}
     },

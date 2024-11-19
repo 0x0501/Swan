@@ -218,6 +218,62 @@
         "documentation": {}
     },
     {
+        "label": "pyqtSignal",
+        "importPath": "PyQt6.QtCore",
+        "description": "PyQt6.QtCore",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtCore",
+        "documentation": {}
+    },
+    {
+        "label": "QThread",
+        "importPath": "PyQt6.QtCore",
+        "description": "PyQt6.QtCore",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtCore",
+        "documentation": {}
+    },
+    {
+        "label": "pyqtSignal",
+        "importPath": "PyQt6.QtCore",
+        "description": "PyQt6.QtCore",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtCore",
+        "documentation": {}
+    },
+    {
+        "label": "Qt",
+        "importPath": "PyQt6.QtCore",
+        "description": "PyQt6.QtCore",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtCore",
+        "documentation": {}
+    },
+    {
+        "label": "QSettings",
+        "importPath": "PyQt6.QtCore",
+        "description": "PyQt6.QtCore",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtCore",
+        "documentation": {}
+    },
+    {
+        "label": "QObject",
+        "importPath": "PyQt6.QtCore",
+        "description": "PyQt6.QtCore",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtCore",
+        "documentation": {}
+    },
+    {
+        "label": "QEvent",
+        "importPath": "PyQt6.QtCore",
+        "description": "PyQt6.QtCore",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtCore",
+        "documentation": {}
+    },
+    {
         "label": "base64",
         "kind": 6,
         "isExtraImport": true,
@@ -805,6 +861,70 @@
         "documentation": {}
     },
     {
+        "label": "QDialog",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QVBoxLayout",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QLabel",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QPushButton",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QProgressBar",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QWidget",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QHBoxLayout",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QComboBox",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
         "label": "QApplication",
         "importPath": "PyQt6.QtWidgets",
         "description": "PyQt6.QtWidgets",
@@ -894,6 +1014,22 @@
         "documentation": {}
     },
     {
+        "label": "Location",
+        "importPath": "src.core.location",
+        "description": "src.core.location",
+        "isExtraImport": true,
+        "detail": "src.core.location",
+        "documentation": {}
+    },
+    {
+        "label": "Location",
+        "importPath": "src.core.location",
+        "description": "src.core.location",
+        "isExtraImport": true,
+        "detail": "src.core.location",
+        "documentation": {}
+    },
+    {
         "label": "Config",
         "importPath": "src.utils.config",
         "description": "src.utils.config",
@@ -931,6 +1067,22 @@
         "description": "src.utils.text",
         "isExtraImport": true,
         "detail": "src.utils.text",
+        "documentation": {}
+    },
+    {
+        "label": "TaskProgressTracker",
+        "importPath": "src.gui.event.task_progress_tracker",
+        "description": "src.gui.event.task_progress_tracker",
+        "isExtraImport": true,
+        "detail": "src.gui.event.task_progress_tracker",
+        "documentation": {}
+    },
+    {
+        "label": "TaskProgressTracker",
+        "importPath": "src.gui.event.task_progress_tracker",
+        "description": "src.gui.event.task_progress_tracker",
+        "isExtraImport": true,
+        "detail": "src.gui.event.task_progress_tracker",
         "documentation": {}
     },
     {
@@ -1031,6 +1183,14 @@
         "documentation": {}
     },
     {
+        "label": "QPixmap",
+        "importPath": "PyQt6.QtGui",
+        "description": "PyQt6.QtGui",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtGui",
+        "documentation": {}
+    },
+    {
         "label": "Encryption",
         "importPath": "src.core.encryption",
         "description": "src.core.encryption",
@@ -1122,6 +1282,54 @@
         "documentation": {}
     },
     {
+        "label": "EventEmitter",
+        "importPath": "src.gui.event.event_emitter",
+        "description": "src.gui.event.event_emitter",
+        "isExtraImport": true,
+        "detail": "src.gui.event.event_emitter",
+        "documentation": {}
+    },
+    {
+        "label": "EventEmitter",
+        "importPath": "src.gui.event.event_emitter",
+        "description": "src.gui.event.event_emitter",
+        "isExtraImport": true,
+        "detail": "src.gui.event.event_emitter",
+        "documentation": {}
+    },
+    {
+        "label": "Swan",
+        "importPath": "src.core.swan",
+        "description": "src.core.swan",
+        "isExtraImport": true,
+        "detail": "src.core.swan",
+        "documentation": {}
+    },
+    {
+        "label": "Swan",
+        "importPath": "src.core.swan",
+        "description": "src.core.swan",
+        "isExtraImport": true,
+        "detail": "src.core.swan",
+        "documentation": {}
+    },
+    {
+        "label": "comment_swan_main",
+        "importPath": "src.core.swan",
+        "description": "src.core.swan",
+        "isExtraImport": true,
+        "detail": "src.core.swan",
+        "documentation": {}
+    },
+    {
+        "label": "Swan",
+        "importPath": "src.core.swan",
+        "description": "src.core.swan",
+        "isExtraImport": true,
+        "detail": "src.core.swan",
+        "documentation": {}
+    },
+    {
         "label": "QtCore",
         "importPath": "PyQt6",
         "description": "PyQt6",
@@ -1170,27 +1378,11 @@
         "documentation": {}
     },
     {
-        "label": "Swan",
-        "importPath": "src.core.swan",
-        "description": "src.core.swan",
+        "label": "TaskWorker",
+        "importPath": "src.gui.event.task_worker",
+        "description": "src.gui.event.task_worker",
         "isExtraImport": true,
-        "detail": "src.core.swan",
-        "documentation": {}
-    },
-    {
-        "label": "comment_swan_main",
-        "importPath": "src.core.swan",
-        "description": "src.core.swan",
-        "isExtraImport": true,
-        "detail": "src.core.swan",
-        "documentation": {}
-    },
-    {
-        "label": "Swan",
-        "importPath": "src.core.swan",
-        "description": "src.core.swan",
-        "isExtraImport": true,
-        "detail": "src.core.swan",
+        "detail": "src.gui.event.task_worker",
         "documentation": {}
     },
     {
@@ -1529,7 +1721,7 @@
         "kind": 6,
         "importPath": "src.core.swan",
         "description": "src.core.swan",
-        "peekOfCode": "class Swan():\n    config_file_path = ''\n    data_directory = ''\n    start_time = 0.0\n    __config: Config = None\n    config = None\n    location: Location = None\n    chromium_tabs: list = []\n    chromium_options = ChromiumOptions\n    recorder: Recorder = None",
+        "peekOfCode": "class Swan():\n    config_file_path = ''\n    data_directory = ''\n    start_time = 0.0\n    _config: Config = None\n    config = None\n    location: Location = None\n    chromium_tabs: list = []\n    chromium_options = ChromiumOptions\n    recorder: Recorder = None",
         "detail": "src.core.swan",
         "documentation": {}
     },
@@ -1603,6 +1795,33 @@
         "description": "src.gui.dialogs.program_settings_dialog",
         "peekOfCode": "class ProgramSettingsDialog(QDialog):\n    def __init__(self, settings: QSettings, parent=None):\n        super().__init__(parent)\n        self.settings = settings\n        # 从QSettings中加载设置或使用默认值\n        self.config_path = QLineEdit(\n            self.settings.value('config_path', './swan.config.toml'))\n        self.log_path = QLineEdit(\n            self.settings.value('log_path', './logs/swan.log'))\n        self.chrome_executable_path = QLineEdit(",
         "detail": "src.gui.dialogs.program_settings_dialog",
+        "documentation": {}
+    },
+    {
+        "label": "EventEmitter",
+        "kind": 6,
+        "importPath": "src.gui.event.event_emitter",
+        "description": "src.gui.event.event_emitter",
+        "peekOfCode": "class EventEmitter(QObject):\n    progress_updated = pyqtSignal(int, int)  # current_page, total_pages\n    def emit_progress(self, current: int, total: int):\n        self.progress_updated.emit(current, total)",
+        "detail": "src.gui.event.event_emitter",
+        "documentation": {}
+    },
+    {
+        "label": "TaskProgressTracker",
+        "kind": 6,
+        "importPath": "src.gui.event.task_progress_tracker",
+        "description": "src.gui.event.task_progress_tracker",
+        "peekOfCode": "class TaskProgressTracker:\n    def __init__(self, emitter: EventEmitter):\n        self.emitter = emitter\n        self._current_page = 0\n        self._total_pages = 0\n    @property\n    def current_page(self) -> int:\n        return self._current_page\n    @current_page.setter\n    def current_page(self, value: int):",
+        "detail": "src.gui.event.task_progress_tracker",
+        "documentation": {}
+    },
+    {
+        "label": "TaskWorker",
+        "kind": 6,
+        "importPath": "src.gui.event.task_worker",
+        "description": "src.gui.event.task_worker",
+        "peekOfCode": "class TaskWorker(QThread):\n    finished = pyqtSignal()\n    error = pyqtSignal(str)\n    def __init__(self, swan: Swan, location: Location):\n        super().__init__()\n        self.swan = swan\n        self.location = location\n        self._is_running = True\n    def run(self):\n        print('Swan Status: %s' % self.swan)",
+        "detail": "src.gui.event.task_worker",
         "documentation": {}
     },
     {

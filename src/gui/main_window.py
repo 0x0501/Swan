@@ -1,16 +1,20 @@
 from PyQt6.QtWidgets import (QMainWindow, QMenuBar, QMenu, QSystemTrayIcon,
                              QStyle, QGraphicsDropShadowEffect, QStatusBar)
 from PyQt6.QtCore import Qt, QSettings, QObject, QEvent
-from PyQt6.QtGui import QAction, QKeySequence, QIcon, QColor
+from PyQt6.QtGui import QAction, QKeySequence, QIcon, QColor, QPixmap
 from loguru import logger
+from src.core.location import Location
 from src.gui.dialogs.about_dialog import AboutDialog
 from src.gui.dialogs.csv_table_viewer import CSVViewer
 from src.gui.dialogs.program_settings_dialog import ProgramSettingsDialog
 from src.gui.dialogs.account_settings_dialog import AccountSettingsDialog
 from src.gui.dialogs.log_viewer_dialog import LogViewerDialog
 from src.core.swan import Swan
-from PyQt6.QtWidgets import QApplication
+from PyQt6.QtWidgets import QApplication, QDialog, QVBoxLayout, QLabel, QPushButton, QProgressBar, QWidget, QHBoxLayout, QComboBox
 import os
+from src.gui.event.task_progress_tracker import TaskProgressTracker
+from src.gui.event.event_emitter import EventEmitter
+from src.gui.event.task_worker import TaskWorker
 
 
 class MainWindow(QMainWindow):
@@ -74,12 +78,109 @@ class MainWindow(QMainWindow):
         self.settings = QSettings('swan_gui', 'settings')
         self.force_quit = not self.settings.value('is_system_tray', type=bool)
         self.is_first_time_hide_tray = False
-        # 初始化Swan实例
-        self.swan = Swan('./swan.config.toml')
+        # 初始化Swan实例, 在Launch中再赋值
+        self.swan = None
 
         self._create_menu_bar()
         self._create_status_bar()
         self._setup_tray_icon()
+
+        # setting up progress tracker
+        self.emitter = EventEmitter()
+        self.progress_tracker = TaskProgressTracker(self.emitter)
+
+        # Create central widget and main layout
+        central_widget = QWidget()
+        self.setCentralWidget(central_widget)
+        main_layout = QVBoxLayout(central_widget)
+
+        # Top row with comboboxes
+        top_row = QHBoxLayout()
+
+        # Left combobox (Locations)
+        self.location_combo = QComboBox()
+        self.location_combo.addItems(['束河古镇', '白沙古镇'])
+        self.location_combo.setMinimumWidth(200)  # 设置最小宽度
+        top_row.addWidget(self.location_combo)
+
+        # Add spacing between comboboxes
+        top_row.addStretch()
+
+        # Right combobox (可以根据需要添加其他选项)
+        self.settings_combo = QComboBox()
+        self.settings_combo.addItems(['设置项1', '设置项2'])
+        self.settings_combo.setMinimumWidth(200)  # 设置最小宽度
+        top_row.addWidget(self.settings_combo)
+
+        main_layout.addLayout(top_row)
+
+        # Middle row with image and button
+        middle_row = QHBoxLayout()
+
+        # Image container
+        image_container = QWidget()
+        image_layout = QVBoxLayout(image_container)
+
+        # Image
+        image_label = QLabel()
+        pixmap = QPixmap(
+            'path_to_your_image.png')  # Replace with your image path
+        scaled_pixmap = pixmap.scaled(300, 300,
+                                      Qt.AspectRatioMode.KeepAspectRatio)
+        image_label.setPixmap(scaled_pixmap)
+        image_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        image_layout.addWidget(image_label)
+
+        middle_row.addWidget(image_container)
+
+        # Button container
+        button_container = QWidget()
+        button_layout = QVBoxLayout(button_container)
+
+        # Start button
+        self.start_button = QPushButton('启动')
+        self.start_button.setMinimumHeight(50)  # 设置按钮高度
+        self.start_button.clicked.connect(self._start_swan)
+        button_layout.addWidget(self.start_button)
+        button_layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+        # Cancel button
+        self.cancel_button = QPushButton('取消')
+        self.cancel_button.setMinimumHeight(50)
+        self.cancel_button.clicked.connect(self._cancel_swan)
+        self.cancel_button.setEnabled(False)  # Initially disabled
+        button_layout.addWidget(self.cancel_button)
+
+        middle_row.addWidget(button_container)
+        main_layout.addLayout(middle_row)
+
+        # Add spacing before progress bar
+        main_layout.addSpacing(20)
+
+        # Progress bar
+        self.progress_bar = QProgressBar()
+        self.progress_bar.setMinimum(0)
+        self.progress_bar.setMaximum(100)
+        self.progress_bar.setFixedHeight(20)  # 设置进度条高度
+        self.progress_bar.setStyleSheet("""
+            QProgressBar {
+                border: 1px solid grey;
+                border-radius: 5px;
+                text-align: right;
+                padding-right: 10px;
+            }
+            QProgressBar::chunk {
+                background-color: #05B8CC;
+                width: 100%;
+            }
+        """)
+        
+        ########### insert layout ###########
+        main_layout.addWidget(self.progress_bar)
+        self.emitter.progress_updated.connect(self._update_progress)
+        
+        # Add bottom spacing
+        main_layout.addSpacing(20)
 
     def _create_menu_bar(self):
         menubar = self.menuBar()
@@ -121,6 +222,62 @@ class MainWindow(QMainWindow):
 
     def _create_status_bar(self):
         self.statusBar.showMessage('Swan已就绪 - 晚风吹起你群间的白发~')
+
+    def _start_swan(self):
+        if not self.swan:
+            self.swan = Swan('./swan.config.toml',
+                             self.progress_tracker).launch()
+
+        # Get selected location
+        location = Location.SHUHE_TOWN if self.location_combo.currentText(
+        ) == '束河古镇' else Location.BAISHA_TOWN
+
+        # Create and start the worker thread
+        self.task_worker = TaskWorker(self.swan, location)
+        self.task_worker.finished.connect(self._on_task_finished)
+        self.task_worker.error.connect(self._on_task_error)
+        self.task_worker.start()
+
+        # Update UI
+        self.start_button.setEnabled(False)
+        self.cancel_button.setEnabled(True)
+        
+        # reset progress bar
+        self.progress_bar.setValue(0)
+        self.statusBar.showMessage('正在运行任务...')
+
+    def _cancel_swan(self):
+        if self.task_worker and self.task_worker.isRunning():
+            self.statusBar.showMessage('正在停止任务...')
+            self.cancel_button.setEnabled(False)
+            self.task_worker.stop()
+
+    def _on_task_finished(self):
+        self.start_button.setEnabled(True)
+        self.cancel_button.setEnabled(False)
+        self.statusBar.showMessage('任务已完成')
+        self.progress_bar.setValue(0)
+
+    def _on_task_error(self, error_message):
+        self.start_button.setEnabled(True)
+        self.cancel_button.setEnabled(False)
+        self.statusBar.showMessage(f'任务出错: {error_message}')
+        self.progress_bar.setValue(0)
+
+    def _update_progress(self, current_page, max_page):
+        progress = int((current_page / max_page) * 100)
+        self.progress_bar.setValue(progress)
+        
+        self.progress_bar.setValue(50)
+        
+        # change the text
+        self.progress_bar.setFormat(f'{progress}% [{current_page}/{max_page}]')
+        logger.error(progress)
+        logger.error(current_page)
+        logger.error(max_page)
+        # Re-enable start button when complete
+        if current_page >= max_page:
+            self.start_button.setEnabled(True)
 
     def _setup_tray_icon(self):
         # 获取系统主题的应用程序图标

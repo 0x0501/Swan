@@ -12,6 +12,7 @@ from src.core.location import Location
 from src.utils.config import Config
 from src.utils.text import extract_and_convert_score, extract_update_date, sanitize_text
 from src.gui.event.task_progress_tracker import TaskProgressTracker
+from typing import Optional, Callable
 
 
 class Swan():
@@ -24,7 +25,6 @@ class Swan():
     location: Location = None
     chromium_tabs: list = []
     chromium_options = ChromiumOptions
-    recorder: Recorder = None
 
     def __init__(self,
                  config_file_path: str,
@@ -85,7 +85,7 @@ class Swan():
             self.chromium_options = ChromiumOptions().set_browser_path(
                 path=chrome_executable_path)
         # setting running state
-        self._running = True
+        # self._running = True
         return self
 
     def set_location(self, location: Location) -> Location:
@@ -98,29 +98,32 @@ class Swan():
                 location.literal = '白沙古镇'
         self.location = location
         return location
-    
-    def safe_wait(self, tab, sec : int):
+
+    def safe_wait(self, tab, sec: int):
         if self._running == False:
             return
         else:
             tab.wait(sec)
 
-    def grace_shutdown(self):
-        
-        logger.debug('Recorder state (in grace_shutdown): %s' % self.recorder)
+    def grace_shutdown(
+        self,
+        recorder: Optional[Recorder] = None,
+    ):
         # change running state
+        logger.warning('Swan inner _running: %s' % self._running)
         self._running = False
-
         # flush the cache first (这个操作应该很快)
-        if self.recorder is not None:
-            logger.debug('FLush the data (in grace_shutdown)! Way to go!')
-            self.recorder.record()
-            
+        if recorder is not None:
+            logger.debug('Flush the data (in grace_shutdown)! Way to go!')
+            recorder.record()
+            logger.debug('Auto save file at: %s' % recorder.path)
+            logger.debug('Date in Recorder: %s' % recorder.data)
+
         # 移除长时间等待的操作，改用非阻塞方式
         if len(self.chromium_tabs) == 0:
             logger.warning('No tab was opened, shut down Swan right now.')
             return
-            
+
         # 只是发送关闭信号，不等待
         for tab in self.chromium_tabs:
             try:
@@ -129,6 +132,7 @@ class Swan():
             except Exception as e:
                 logger.error(f'Error closing tab: {e}')
         logger.warning('Grace shutdown Swan, closing all the tabs.')
+        return
 
     def task_dzdp_login(self, tab):
         tab.get(
@@ -182,9 +186,14 @@ class Swan():
             )
             tab.wait(60)
 
-    def task_dzdp(self, loc: Location = Location.SHUHE_TOWN):
+    def task_dzdp(self, loc: Location = Location.SHUHE_TOWN) -> Recorder:
         # change running state
         self._running = True
+        # store the data as CSV file
+        data_file_path = Path.joinpath(
+            Path(self.config['application']['data_directory']),
+            'dazhongdianping.csv')
+        recorder = Recorder(path=data_file_path, cache_size=75)
         logger.debug('Swan (in) _running state: %s' % self._running)
         try:
             # launch a new tab
@@ -201,7 +210,7 @@ class Swan():
             # switch_manual_login, if already logged in, skip this
             logged_in_cookie = dict(
                 filter(lambda i: i[0] == 'logan_session_token',
-                    tab.cookies().as_dict().items()))
+                       tab.cookies().as_dict().items()))
 
             if len(logged_in_cookie) == 0:
                 self.task_dzdp_login()
@@ -231,7 +240,7 @@ class Swan():
             else:
                 # TODO! 2024-11-16 how to handle location fixing failed
                 logger.error('Location fixing failed. [%s]' %
-                            self.config['account']['dzdp']['location'])
+                             self.config['account']['dzdp']['location'])
 
             # navigate to shuhe/baisha town
             self.set_location(loc)
@@ -243,13 +252,13 @@ class Swan():
             try:
                 shop_name = tab.ele('@@tag()=h1@@class=shop-name')
                 logger.debug('Shop name value: %s' %
-                            shop_name.texts(text_node_only=True)[0])
+                             shop_name.texts(text_node_only=True)[0])
                 logger.debug('desired_location: %s ' % self.location.literal)
                 if tab.ele('@@tag()=h1@@class=shop-name').texts(
                         text_node_only=True)[0] == self.location.literal:
                     logger.info(
-                        'Successfully Navigated to %s. Preparing data collector.' %
-                        self.location.name)
+                        'Successfully Navigated to %s. Preparing data collector.'
+                        % self.location.name)
             except ElementNotFoundError as e:
                 # if the ip has been banned, clear all the cookies, and re-login
                 logger.warning(
@@ -280,8 +289,11 @@ class Swan():
 
                 # check the running state
                 if self._running == False:
-                    logger.warning('Swan received `stop` command on the first layer.')
-                    return
+                    logger.warning(
+                        'Swan received `stop` command on the first layer.')
+                    # flush the data first, and return `recorder` for convenient
+                    recorder.record()
+                    return recorder
 
                 if self.progress_tracker:
                     self.progress_tracker.current_page = current_page
@@ -306,8 +318,12 @@ class Swan():
 
                         # check the running state for the second time
                         if self._running == False:
-                            logger.error('Swan received `stop` command on the second layer.')
-                            return
+                            logger.error(
+                                'Swan received `stop` command on the second layer.'
+                            )
+                            # flush the data first, and return `recorder` for convenient
+                            recorder.record()
+                            return recorder
 
                         raw_review_content: list[str] = review_item.ele(
                             '@@tag()=div@@class=main-review').ele(
@@ -325,8 +341,9 @@ class Swan():
 
                         # review date
                         review_date = sanitize_text(
-                            review_item.ele('@@tag()=div@@class=main-review').ele(
-                                'css:div.misc-info > span.time').texts()[0], False)
+                            review_item.ele('@@tag()=div@@class=main-review').
+                            ele('css:div.misc-info > span.time').texts()[0],
+                            False)
 
                         if "更新于" in review_date:
                             review_date = extract_update_date(review_date)
@@ -336,8 +353,8 @@ class Swan():
 
                         # review score
                         review_score = extract_and_convert_score(
-                            review_item.ele('@@tag()=div@@class=main-review').ele(
-                                'css:div.review-rank > span').attr('class'))
+                            review_item.ele('@@tag()=div@@class=main-review').
+                            ele('css:div.review-rank > span').attr('class'))
                         # joint them together
                         review_content.append(review_date)
                         review_content.append(review_score)
@@ -346,17 +363,13 @@ class Swan():
                         logger.info(review_content)
                         # TODO! write comment data to file
 
-                        # store the data as CSV file
-                        data_file_path = Path.joinpath(
-                            Path(self.config['application']['data_directory']),
-                            'dazhongdianping.csv')
-
-                        recorder = Recorder(path=data_file_path, cache_size=75)
+                        # write the data
                         recorder.set.delimiter('|')
                         recorder.set.encoding('utf-8')
                         # set header and backup
-                        recorder.set.head(
-                            ['Comment', 'Comment Date', 'Score', 'Page', 'Index'])
+                        recorder.set.head([
+                            'Comment', 'Comment Date', 'Score', 'Page', 'Index'
+                        ])
                         recorder.set.auto_backup(60)
                         recorder.add_data(review_content)
 
@@ -375,16 +388,18 @@ class Swan():
                         'Cannot find review elements, by: css:div[class=reviews-items] > ul > li'
                     )
                     # flush the cache
-                    self.recorder.record()
+                    recorder.record()
             logger.warning('The task `dzdp` has finished.')
         except Exception as e:
             logger.error(f"Error in task_dzdp: {e}")
         finally:
-             # 确保资源被清理 (问题！！！！！)
+            # 确保资源被清理
             logger.debug('Swan state in Finally Statement: %s' % self._running)
             if not self._running:
                 logger.debug('Finally statement revoke grace shutdown!')
-                self.grace_shutdown()
+                self.grace_shutdown(recorder)
+                return recorder
+
 
 def comment_swan_main():
     swan = Swan('./swan.config.toml').launch()

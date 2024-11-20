@@ -331,6 +331,14 @@
         "documentation": {}
     },
     {
+        "label": "logger",
+        "importPath": "loguru",
+        "description": "loguru",
+        "isExtraImport": true,
+        "detail": "loguru",
+        "documentation": {}
+    },
+    {
         "label": "pathlib",
         "kind": 6,
         "isExtraImport": true,
@@ -373,6 +381,22 @@
     },
     {
         "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Callable",
         "importPath": "typing",
         "description": "typing",
         "isExtraImport": true,
@@ -1721,7 +1745,7 @@
         "kind": 6,
         "importPath": "src.core.swan",
         "description": "src.core.swan",
-        "peekOfCode": "class Swan():\n    config_file_path = ''\n    data_directory = ''\n    start_time = 0.0\n    _config: Config = None\n    config = None\n    location: Location = None\n    chromium_tabs: list = []\n    chromium_options = ChromiumOptions\n    recorder: Recorder = None",
+        "peekOfCode": "class Swan():\n    config_file_path = ''\n    data_directory = ''\n    start_time = 0.0\n    _config: Config = None\n    config = None\n    location: Location = None\n    chromium_tabs: list = []\n    chromium_options = ChromiumOptions\n    def __init__(self,",
         "detail": "src.core.swan",
         "documentation": {}
     },
@@ -1820,7 +1844,7 @@
         "kind": 6,
         "importPath": "src.gui.event.task_worker",
         "description": "src.gui.event.task_worker",
-        "peekOfCode": "class TaskWorker(QThread):\n    finished = pyqtSignal()\n    error = pyqtSignal(str)\n    def __init__(self, swan: Swan, location: Location):\n        super().__init__()\n        self.swan = swan\n        self.location = location\n        self._is_running = True\n    def run(self):\n        print('Swan Status: %s' % self.swan)",
+        "peekOfCode": "class TaskWorker(QThread):\n    finished = pyqtSignal()\n    error = pyqtSignal(str)\n    def __init__(self, swan: Swan, location: Location):\n        super().__init__()\n        self.swan = swan\n        self.location = location\n        self._is_running = True\n    def run(self):\n        logger.debug('Swan Status (in task_worker): %s' % self.swan)",
         "detail": "src.gui.event.task_worker",
         "documentation": {}
     },

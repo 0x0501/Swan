@@ -1,0 +1,6 @@
+{
+  "python.analysis.extraPaths": ["./src", "./tests"],
+  "terminal.integrated.env.windows": {
+    "PYTHONPATH": "${workspaceFolder};${env:PYTHONPATH}"
+  }
+}

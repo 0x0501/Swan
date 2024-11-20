@@ -12,6 +12,7 @@ from src.gui.dialogs.log_viewer_dialog import LogViewerDialog
 from src.core.swan import Swan
 from PyQt6.QtWidgets import QApplication, QDialog, QVBoxLayout, QLabel, QPushButton, QProgressBar, QWidget, QHBoxLayout, QComboBox
 import os
+import sys
 from src.gui.event.task_progress_tracker import TaskProgressTracker
 from src.gui.event.event_emitter import EventEmitter
 from src.gui.event.task_worker import TaskWorker
@@ -80,7 +81,8 @@ class MainWindow(QMainWindow):
         self.is_first_time_hide_tray = False
         # 初始化Swan实例, 在Launch中再赋值
         self.swan = None
-
+        self.task_worker = None
+        
         self._create_menu_bar()
         self._create_status_bar()
         self._setup_tray_icon()
@@ -226,16 +228,17 @@ class MainWindow(QMainWindow):
     def _start_swan(self):
         if not self.swan:
             self.swan = Swan('./swan.config.toml',
-                             self.progress_tracker).launch()
+                             self.progress_tracker).launch() #
 
         # Get selected location
         location = Location.SHUHE_TOWN if self.location_combo.currentText(
         ) == '束河古镇' else Location.BAISHA_TOWN
 
         # Create and start the worker thread
-        self.task_worker = TaskWorker(self.swan, location)
-        self.task_worker.finished.connect(self._on_task_finished)
-        self.task_worker.error.connect(self._on_task_error)
+        if self.task_worker == None:     
+            self.task_worker = TaskWorker(self.swan, location)
+            self.task_worker.finished.connect(self._on_task_finished)
+            self.task_worker.error.connect(self._on_task_error)
         self.task_worker.start()
 
         # Update UI
@@ -272,9 +275,9 @@ class MainWindow(QMainWindow):
         
         # change the text
         self.progress_bar.setFormat(f'{progress}% [{current_page}/{max_page}]')
-        logger.error(progress)
-        logger.error(current_page)
-        logger.error(max_page)
+        logger.debug('Current progress: %s' % progress)
+        logger.debug('Current page: %s' % current_page)
+        logger.debug('Current maximum page: %s' % max_page)
         # Re-enable start button when complete
         if current_page >= max_page:
             self.start_button.setEnabled(True)
@@ -363,12 +366,24 @@ class MainWindow(QMainWindow):
         dialog.exec()
 
     def _handle_quit(self):
+        logger.debug('Clean up Swan (_handle_quit), ready to dive off to water!')
         self.force_quit = True
-        self.swan.grace_shutdown()
+        
+        # 如果Swan正在运行，显示弹窗
+        if self.task_worker and self.task_worker.isRunning():
+            self.task_worker.stop()
+            self.swan.grace_shutdown()
+            
         self.close()  # 调用继承的方法 `closeEvent`, 但不会彻底关闭
         QApplication.instance().quit()  # 彻底关闭
+        
 
     def closeEvent(self, event):
+        # 如果Swan正在运行，先停止
+        if self.task_worker and self.task_worker.isRunning():
+            self.task_worker.stop()
+            self.swan.grace_shutdown(after_grace_shut_down=lambda: logger.error('Closure'))
+        
         if not self.settings.value('is_system_tray', type=bool):  # 如果是强制退出
             event.accept()
             if hasattr(self, 'csv_viewer'):

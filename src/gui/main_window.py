@@ -357,7 +357,7 @@ class MainWindow(QMainWindow):
             traceback.print_exc()  # 打印完整的错误堆栈
 
     def _show_about_dialog(self):
-        raise Exception('Test')
+        # raise Exception('Test')
         dialog = AboutDialog(self)
         dialog.exec()
 

@@ -2,5 +2,6 @@
 <RCC>
     <qresource>
         <file>images/error_image.png</file>
+        <file>images/starter_image.png</file>
     </qresource>
 </RCC>

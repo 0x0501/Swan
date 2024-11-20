@@ -1281,6 +1281,30 @@
         "documentation": {}
     },
     {
+        "label": "Toast",
+        "importPath": "pyqttoast",
+        "description": "pyqttoast",
+        "isExtraImport": true,
+        "detail": "pyqttoast",
+        "documentation": {}
+    },
+    {
+        "label": "ToastPreset",
+        "importPath": "pyqttoast",
+        "description": "pyqttoast",
+        "isExtraImport": true,
+        "detail": "pyqttoast",
+        "documentation": {}
+    },
+    {
+        "label": "ToastPosition",
+        "importPath": "pyqttoast",
+        "description": "pyqttoast",
+        "isExtraImport": true,
+        "detail": "pyqttoast",
+        "documentation": {}
+    },
+    {
         "label": "datetime",
         "importPath": "datetime",
         "description": "datetime",
@@ -1880,7 +1904,7 @@
         "kind": 5,
         "importPath": "src.gui.resources.resources",
         "description": "src.gui.resources.resources",
-        "peekOfCode": "qt_resource_name = b\"\\\n\\x00\\x06\\\n\\x07\\x03}\\xc3\\\n\\x00i\\\n\\x00m\\x00a\\x00g\\x00e\\x00s\\\n\\x00\\x0f\\\n\\x05\\x09EG\\\n\\x00e\\\n\\x00r\\x00r\\x00o\\x00r\\x00_\\x00i\\x00m\\x00a\\x00g\\x00e\\x00.\\x00p\\x00n\\x00g\\\n\"",
+        "peekOfCode": "qt_resource_name = b\"\\\n\\x00\\x06\\\n\\x07\\x03}\\xc3\\\n\\x00i\\\n\\x00m\\x00a\\x00g\\x00e\\x00s\\\n\\x00\\x0f\\\n\\x05\\x09EG\\\n\\x00e\\\n\\x00r\\x00r\\x00o\\x00r\\x00_\\x00i\\x00m\\x00a\\x00g\\x00e\\x00.\\x00p\\x00n\\x00g\\\n\\x00\\x11\\",
         "detail": "src.gui.resources.resources",
         "documentation": {}
     },
@@ -1889,7 +1913,7 @@
         "kind": 5,
         "importPath": "src.gui.resources.resources",
         "description": "src.gui.resources.resources",
-        "peekOfCode": "qt_resource_struct = b\"\\\n\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x01\\x00\\x00\\x00\\x01\\\n\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\\n\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x01\\x00\\x00\\x00\\x02\\\n\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\\n\\x00\\x00\\x00\\x12\\x00\\x00\\x00\\x00\\x00\\x01\\x00\\x00\\x00\\x00\\\n\\x00\\x00\\x01\\x93?\\xe1.#\\\n\"\ndef qInitResources():\n    QtCore.qRegisterResourceData(0x03, qt_resource_struct, qt_resource_name, qt_resource_data)",
+        "peekOfCode": "qt_resource_struct = b\"\\\n\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x01\\x00\\x00\\x00\\x01\\\n\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\\n\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x02\\\n\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\\n\\x00\\x00\\x006\\x00\\x00\\x00\\x00\\x00\\x01\\x00\\x05\\xd4\\x03\\\n\\x00\\x00\\x01\\x93C]:\\x93\\\n\\x00\\x00\\x00\\x12\\x00\\x00\\x00\\x00\\x00\\x01\\x00\\x00\\x00\\x00\\\n\\x00\\x00\\x01\\x93?\\xe1.#\\\n\"",
         "detail": "src.gui.resources.resources",
         "documentation": {}
     },

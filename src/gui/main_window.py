@@ -16,6 +16,7 @@ import sys
 from src.gui.event.task_progress_tracker import TaskProgressTracker
 from src.gui.event.event_emitter import EventEmitter
 from src.gui.event.task_worker import TaskWorker
+from pyqttoast import Toast, ToastPreset, ToastPosition
 
 
 class MainWindow(QMainWindow):
@@ -82,7 +83,7 @@ class MainWindow(QMainWindow):
         # 初始化Swan实例, 在Launch中再赋值
         self.swan = None
         self.task_worker = None
-        
+
         self._create_menu_bar()
         self._create_status_bar()
         self._setup_tray_icon()
@@ -125,10 +126,22 @@ class MainWindow(QMainWindow):
 
         # Image
         image_label = QLabel()
-        pixmap = QPixmap(
-            'path_to_your_image.png')  # Replace with your image path
-        scaled_pixmap = pixmap.scaled(300, 300,
-                                      Qt.AspectRatioMode.KeepAspectRatio)
+        original_pixmap = QPixmap(":/images/starter_image.png")
+
+        # 计算合适的显示大小
+        # 获取设备像素比
+        device_pixel_ratio = self.devicePixelRatio()
+        # 设置期望的显示大小（逻辑像素）
+        desired_size = 256
+        # 计算实际需要的像素大小
+        actual_size = int(desired_size * device_pixel_ratio)
+
+        # 使用高质量的缩放方法
+        scaled_pixmap = original_pixmap.scaled(
+            actual_size, actual_size, Qt.AspectRatioMode.KeepAspectRatio,
+            Qt.TransformationMode.SmoothTransformation)
+        # 设置设备像素比，确保在高DPI显示器上清晰显示
+        scaled_pixmap.setDevicePixelRatio(device_pixel_ratio)
         image_label.setPixmap(scaled_pixmap)
         image_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         image_layout.addWidget(image_label)
@@ -142,15 +155,19 @@ class MainWindow(QMainWindow):
         # Start button
         self.start_button = QPushButton('启动')
         self.start_button.setMinimumHeight(50)  # 设置按钮高度
+        self.start_button.setMinimumWidth(150)
         self.start_button.clicked.connect(self._start_swan)
+        # self.start_button.clicked.connect(self._test_update_progress)
         button_layout.addWidget(self.start_button)
         button_layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         # Cancel button
         self.cancel_button = QPushButton('取消')
         self.cancel_button.setMinimumHeight(50)
+        self.start_button.setMinimumWidth(150)
         self.cancel_button.clicked.connect(self._cancel_swan)
         self.cancel_button.setEnabled(False)  # Initially disabled
+
         button_layout.addWidget(self.cancel_button)
 
         middle_row.addWidget(button_container)
@@ -162,6 +179,7 @@ class MainWindow(QMainWindow):
         # Progress bar
         self.progress_bar = QProgressBar()
         self.progress_bar.setMinimum(0)
+        self.progress_bar.setOrientation(Qt.Orientation.Horizontal)
         self.progress_bar.setMaximum(100)
         self.progress_bar.setFixedHeight(20)  # 设置进度条高度
         self.progress_bar.setStyleSheet("""
@@ -169,18 +187,19 @@ class MainWindow(QMainWindow):
                 border: 1px solid grey;
                 border-radius: 5px;
                 text-align: right;
-                padding-right: 10px;
             }
             QProgressBar::chunk {
-                background-color: #05B8CC;
-                width: 100%;
+                background-color: #4096ff;
+                border-radius-top-left: 3px;
+                border-radius-bottom: 3px;
             }
         """)
-        
+        # Hide progress bar
+        self.progress_bar.setVisible(False)
         ########### insert layout ###########
         main_layout.addWidget(self.progress_bar)
         self.emitter.progress_updated.connect(self._update_progress)
-        
+
         # Add bottom spacing
         main_layout.addSpacing(20)
 
@@ -228,23 +247,32 @@ class MainWindow(QMainWindow):
     def _start_swan(self):
         if not self.swan:
             self.swan = Swan('./swan.config.toml',
-                             self.progress_tracker).launch() #
-
+                             self.progress_tracker).launch()
         # Get selected location
         location = Location.SHUHE_TOWN if self.location_combo.currentText(
         ) == '束河古镇' else Location.BAISHA_TOWN
 
         # Create and start the worker thread
-        if self.task_worker == None:     
+        if self.task_worker == None:
             self.task_worker = TaskWorker(self.swan, location)
             self.task_worker.finished.connect(self._on_task_finished)
             self.task_worker.error.connect(self._on_task_error)
         self.task_worker.start()
 
         # Update UI
+        self.progress_bar.setVisible(True)
         self.start_button.setEnabled(False)
         self.cancel_button.setEnabled(True)
-        
+
+        toast = Toast()
+        toast.setDuration(3000)
+        toast.setPositionRelativeToWidget(self)
+        toast.setPosition(ToastPosition.TOP_RIGHT)
+        toast.setOffset(10, 35)
+        toast.setTitle('Swan通知')
+        toast.setText('Swan已开始搜集数据...耐心等待喵(●\'◡\'●)')
+        toast.applyPreset(ToastPreset.INFORMATION)
+        toast.show()
         # reset progress bar
         self.progress_bar.setValue(0)
         self.statusBar.showMessage('正在运行任务...')
@@ -252,6 +280,15 @@ class MainWindow(QMainWindow):
     def _cancel_swan(self):
         if self.task_worker and self.task_worker.isRunning():
             self.statusBar.showMessage('正在停止任务...')
+            toast = Toast()
+            toast.setDuration(3000)
+            toast.setPositionRelativeToWidget(self)
+            toast.setPosition(ToastPosition.TOP_RIGHT)
+            toast.setOffset(10, 35)
+            toast.setTitle('Swan通知')
+            toast.setText('Swan准备上岸啦~ 正在保存数据中...')
+            toast.applyPreset(ToastPreset.INFORMATION)
+            toast.show()
             self.cancel_button.setEnabled(False)
             self.task_worker.stop()
 
@@ -260,6 +297,16 @@ class MainWindow(QMainWindow):
         self.cancel_button.setEnabled(False)
         self.statusBar.showMessage('任务已完成')
         self.progress_bar.setValue(0)
+        
+        toast = Toast()
+        toast.setDuration(3500)
+        toast.setPositionRelativeToWidget(self)
+        toast.setPosition(ToastPosition.TOP_RIGHT)
+        toast.setOffset(10, 35)
+        toast.setTitle('Swan通知')
+        toast.setText('Swan已游上岸边, 数据已保存~')
+        toast.applyPreset(ToastPreset.WARNING)
+        toast.show()
 
     def _on_task_error(self, error_message):
         self.start_button.setEnabled(True)
@@ -267,14 +314,33 @@ class MainWindow(QMainWindow):
         self.statusBar.showMessage(f'任务出错: {error_message}')
         self.progress_bar.setValue(0)
 
+    def _test_update_progress(self):
+        # 模拟进度更新
+        self.progress_bar.setVisible(True)
+        current_value = self.progress_bar.value()
+        max_value = self.progress_bar.maximum()
+        new_value = min(current_value + 10, max_value)
+        self.progress_bar.setValue(new_value)
+        self._update_progress(new_value, max_value)
+
+        toast = Toast()
+        toast.setDuration(3000)
+        toast.setPositionRelativeToWidget(self)
+        toast.setPosition(ToastPosition.TOP_RIGHT)
+        toast.setOffset(10, 35)
+        toast.setTitle('Swan通知')
+        toast.setText('Swan已开始搜集数据...耐心等待喵(●\'◡\'●)')
+        toast.applyPreset(ToastPreset.INFORMATION)
+        toast.show()
+
     def _update_progress(self, current_page, max_page):
         progress = int((current_page / max_page) * 100)
         self.progress_bar.setValue(progress)
-        
-        self.progress_bar.setValue(50)
-        
+
         # change the text
-        self.progress_bar.setFormat(f'{progress}% [{current_page}/{max_page}]')
+        self.progress_bar.setFormat(
+            f'{round((current_page / max_page) * 100, 2)}% [{current_page}/{max_page}]'
+        )
         logger.debug('Current progress: %s' % progress)
         logger.debug('Current page: %s' % current_page)
         logger.debug('Current maximum page: %s' % max_page)
@@ -366,24 +432,25 @@ class MainWindow(QMainWindow):
         dialog.exec()
 
     def _handle_quit(self):
-        logger.debug('Clean up Swan (_handle_quit), ready to dive off to water!')
+        logger.debug(
+            'Clean up Swan (_handle_quit), ready to dive off to water!')
         self.force_quit = True
-        
+
         # 如果Swan正在运行，显示弹窗
         if self.task_worker and self.task_worker.isRunning():
             self.task_worker.stop()
             self.swan.grace_shutdown()
-            
+
         self.close()  # 调用继承的方法 `closeEvent`, 但不会彻底关闭
         QApplication.instance().quit()  # 彻底关闭
-        
 
     def closeEvent(self, event):
         # 如果Swan正在运行，先停止
         if self.task_worker and self.task_worker.isRunning():
             self.task_worker.stop()
-            self.swan.grace_shutdown(after_grace_shut_down=lambda: logger.error('Closure'))
-        
+            self.swan.grace_shutdown(
+                after_grace_shut_down=lambda: logger.error('Closure'))
+
         if not self.settings.value('is_system_tray', type=bool):  # 如果是强制退出
             event.accept()
             if hasattr(self, 'csv_viewer'):

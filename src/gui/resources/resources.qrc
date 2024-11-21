@@ -3,5 +3,6 @@
     <qresource>
         <file>images/error_image.png</file>
         <file>images/starter_image.png</file>
+        <file>strings/sayings.json</file>
     </qresource>
 </RCC>

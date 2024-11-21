@@ -1,5 +1,22 @@
+from pathlib import Path
 import re
+from PyQt6.QtCore import QFile, QTextStream
+from loguru import logger
+import json
 
+def load_json(qt_resource_path : str) -> dict:
+    json_file = QFile(qt_resource_path)
+    if not json_file.open(QFile.OpenModeFlag.ReadOnly | QFile.OpenModeFlag.Text):
+        logger.error(f"Cannot open file {qt_resource_path} for reading.")
+        return
+    stream = QTextStream(json_file)
+    json_data = stream.readAll()
+    json_file.close()
+    
+    try:
+        return json.loads(json_data)
+    except json.JSONDecodeError:
+        logger.error(f"Error decoding JSON from file {qt_resource_path}.")
 
 def extract_update_date(text):
     # 使用正则表达式匹配“更新于”后面的日期

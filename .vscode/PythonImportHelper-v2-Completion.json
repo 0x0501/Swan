@@ -274,6 +274,30 @@
         "documentation": {}
     },
     {
+        "label": "QTimer",
+        "importPath": "PyQt6.QtCore",
+        "description": "PyQt6.QtCore",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtCore",
+        "documentation": {}
+    },
+    {
+        "label": "QFile",
+        "importPath": "PyQt6.QtCore",
+        "description": "PyQt6.QtCore",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtCore",
+        "documentation": {}
+    },
+    {
+        "label": "QTextStream",
+        "importPath": "PyQt6.QtCore",
+        "description": "PyQt6.QtCore",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtCore",
+        "documentation": {}
+    },
+    {
         "label": "base64",
         "kind": 6,
         "isExtraImport": true,
@@ -339,11 +363,27 @@
         "documentation": {}
     },
     {
+        "label": "logger",
+        "importPath": "loguru",
+        "description": "loguru",
+        "isExtraImport": true,
+        "detail": "loguru",
+        "documentation": {}
+    },
+    {
         "label": "pathlib",
         "kind": 6,
         "isExtraImport": true,
         "importPath": "pathlib",
         "description": "pathlib",
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
         "detail": "pathlib",
         "documentation": {}
     },
@@ -989,6 +1029,23 @@
         "documentation": {}
     },
     {
+        "label": "random",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "random",
+        "description": "random",
+        "detail": "random",
+        "documentation": {}
+    },
+    {
+        "label": "randint",
+        "importPath": "random",
+        "description": "random",
+        "isExtraImport": true,
+        "detail": "random",
+        "documentation": {}
+    },
+    {
         "label": "randint",
         "importPath": "random",
         "description": "random",
@@ -1095,6 +1152,14 @@
     },
     {
         "label": "sanitize_text",
+        "importPath": "src.utils.text",
+        "description": "src.utils.text",
+        "isExtraImport": true,
+        "detail": "src.utils.text",
+        "documentation": {}
+    },
+    {
+        "label": "load_json",
         "importPath": "src.utils.text",
         "description": "src.utils.text",
         "isExtraImport": true,
@@ -1442,6 +1507,14 @@
         "documentation": {}
     },
     {
+        "label": "RandomUniqueSelector",
+        "importPath": "src.utils.random_selector",
+        "description": "src.utils.random_selector",
+        "isExtraImport": true,
+        "detail": "src.utils.random_selector",
+        "documentation": {}
+    },
+    {
         "label": "toml",
         "kind": 6,
         "isExtraImport": true,
@@ -1457,6 +1530,15 @@
         "importPath": "re",
         "description": "re",
         "detail": "re",
+        "documentation": {}
+    },
+    {
+        "label": "json",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "json",
+        "description": "json",
+        "detail": "json",
         "documentation": {}
     },
     {
@@ -1903,7 +1985,7 @@
         "kind": 5,
         "importPath": "src.gui.resources.resources",
         "description": "src.gui.resources.resources",
-        "peekOfCode": "qt_resource_data = b\"\\\n\\x00\\x05\\xd3\\xff\\\n\\x89\\\nPNG\\x0d\\x0a\\x1a\\x0a\\x00\\x00\\x00\\x0dIHDR\\x00\\\n\\x00\\x02\\x00\\x00\\x00\\x02\\x00\\x08\\x06\\x00\\x00\\x00\\xf4x\\xd4\\xfa\\\n\\x00\\x00\\x00\\x01sRGB\\x00\\xae\\xce\\x1c\\xe9\\x00\\x00\\x00\\\n\\x04gAMA\\x00\\x00\\xb1\\x8f\\x0b\\xfca\\x05\\x00\\x00\\x00\\\n\\x09pHYs\\x00\\x00\\x0e\\xc3\\x00\\x00\\x0e\\xc3\\x01\\xc7o\\\n\\xa8d\\x00\\x00\\xff\\xa5IDATx^\\xec\\xfd\\x07\\xbc\\\ne\\xe9U\\x1f\\x88\\xae\\x1d\\xcf>9\\xde\\x9c\\xf3\\xad\\xd4\\xd5\\",
+        "peekOfCode": "qt_resource_data = b\"\\\n\\x00\\x00\\x0dJ\\\n{\\\n\\x0d\\x0a  \\x22sayings\\x22: [\\\n\\x0d\\x0a    \\x22\\xe8\\xaf\\xb4\\xe7\\x9a\\x84\\xe8\\xaf\\x9d\\\n\\xe4\\xb8\\xba\\xe4\\xbb\\x80\\xe4\\xb9\\x88\\xe4\\xb8\\x8d\\xe8\\xae\\xb0\\xe5\\\n\\xbe\\x97, \\xe4\\xb8\\xba\\xe4\\xbb\\x80\\xe4\\xb9\\x88\\xe4\\xb8\\x8d\\\n\\xe8\\xae\\xb0\\xe5\\xbe\\x97\\x22,\\x0d\\x0a    \\x22\\xe6\\\n\\x98\\xaf\\xe7\\x8e\\xb0\\xe5\\x9c\\xa8\\xe6\\x88\\x91\\xe6\\x89\\x80\\xe6\\x9c\\\n\\x89\\xe6\\x9c\\x9f\\xe5\\xbe\\x85, \\xe6\\x89\\x80\\xe6\\x9c\\x89\\xe7\\",
         "detail": "src.gui.resources.resources",
         "documentation": {}
     },
@@ -1912,7 +1994,7 @@
         "kind": 5,
         "importPath": "src.gui.resources.resources",
         "description": "src.gui.resources.resources",
-        "peekOfCode": "qt_resource_name = b\"\\\n\\x00\\x06\\\n\\x07\\x03}\\xc3\\\n\\x00i\\\n\\x00m\\x00a\\x00g\\x00e\\x00s\\\n\\x00\\x0f\\\n\\x05\\x09EG\\\n\\x00e\\\n\\x00r\\x00r\\x00o\\x00r\\x00_\\x00i\\x00m\\x00a\\x00g\\x00e\\x00.\\x00p\\x00n\\x00g\\\n\\x00\\x11\\",
+        "peekOfCode": "qt_resource_name = b\"\\\n\\x00\\x06\\\n\\x07\\x03}\\xc3\\\n\\x00i\\\n\\x00m\\x00a\\x00g\\x00e\\x00s\\\n\\x00\\x07\\\n\\x0a\\xb9\\x04\\x03\\\n\\x00s\\\n\\x00t\\x00r\\x00i\\x00n\\x00g\\x00s\\\n\\x00\\x0c\\",
         "detail": "src.gui.resources.resources",
         "documentation": {}
     },
@@ -1921,7 +2003,7 @@
         "kind": 5,
         "importPath": "src.gui.resources.resources",
         "description": "src.gui.resources.resources",
-        "peekOfCode": "qt_resource_struct = b\"\\\n\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x01\\x00\\x00\\x00\\x01\\\n\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\\n\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x02\\\n\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\\n\\x00\\x00\\x006\\x00\\x00\\x00\\x00\\x00\\x01\\x00\\x05\\xd4\\x03\\\n\\x00\\x00\\x01\\x93C]:\\x93\\\n\\x00\\x00\\x00\\x12\\x00\\x00\\x00\\x00\\x00\\x01\\x00\\x00\\x00\\x00\\\n\\x00\\x00\\x01\\x93?\\xe1.#\\\n\"",
+        "peekOfCode": "qt_resource_struct = b\"\\\n\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x01\\\n\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\\n\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x04\\\n\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\\n\\x00\\x00\\x00\\x12\\x00\\x02\\x00\\x00\\x00\\x01\\x00\\x00\\x00\\x03\\\n\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\\n\\x00\\x00\\x00&\\x00\\x00\\x00\\x00\\x00\\x01\\x00\\x00\\x00\\x00\\\n\\x00\\x00\\x01\\x93M\\x8e!\\x8b\\\n\\x00\\x00\\x00h\\x00\\x00\\x00\\x00\\x00\\x01\\x00\\x05\\xe1Q\\",
         "detail": "src.gui.resources.resources",
         "documentation": {}
     },
@@ -1930,7 +2012,7 @@
         "kind": 6,
         "importPath": "src.gui.main_window",
         "description": "src.gui.main_window",
-        "peekOfCode": "class MainWindow(QMainWindow):\n    def __init__(self):\n        super().__init__()\n        self.setWindowTitle(\"Swan - Default\")\n        self.resize(800, 600)\n        # 设置状态栏\n        self.statusBar: QStatusBar = QStatusBar()\n        self.setStatusBar(self.statusBar)\n        # 设置菜单栏样式\n        self.setStyleSheet(\"\"\"",
+        "peekOfCode": "class MainWindow(QMainWindow):\n    def __init__(self):\n        super().__init__()\n        self.setWindowTitle(\"Swan - Default\")\n        self.resize(800, 600)\n        self.next_saying = ''\n        # 设置状态栏\n        self.statusBar: QStatusBar = QStatusBar()\n        # 新增分别的状态栏，一个用于显示状态，一个用于通知\n        self.statusBar_info = QLabel()",
         "detail": "src.gui.main_window",
         "documentation": {}
     },
@@ -1941,6 +2023,24 @@
         "description": "src.utils.config",
         "peekOfCode": "class Config:\n    __config_obj = None\n    __config_file_path = ''\n    def __init__(self, config_file_path) -> None:\n        if not os.path.exists(config_file_path):\n            raise FileNotFoundError('Cannot find the config file at %s' %\n                                    config_file_path)\n        config = toml.load(config_file_path)\n        self.__config_file_path = config_file_path\n        self.__config_obj = config",
         "detail": "src.utils.config",
+        "documentation": {}
+    },
+    {
+        "label": "RandomUniqueSelector",
+        "kind": 6,
+        "importPath": "src.utils.random_selector",
+        "description": "src.utils.random_selector",
+        "peekOfCode": "class RandomUniqueSelector:\n    def __init__(self, items):\n        self.items = items[:]  # 原始列表的副本\n        self.reset()\n    def reset(self):\n        self.current_items = self.items[:]\n        random.shuffle(self.current_items)  # 打乱顺序以确保随机性\n        self.index = 0\n    def get_next(self):\n        if self.index >= len(self.current_items):",
+        "detail": "src.utils.random_selector",
+        "documentation": {}
+    },
+    {
+        "label": "load_json",
+        "kind": 2,
+        "importPath": "src.utils.text",
+        "description": "src.utils.text",
+        "peekOfCode": "def load_json(qt_resource_path : str) -> dict:\n    json_file = QFile(qt_resource_path)\n    if not json_file.open(QFile.OpenModeFlag.ReadOnly | QFile.OpenModeFlag.Text):\n        logger.error(f\"Cannot open file {qt_resource_path} for reading.\")\n        return\n    stream = QTextStream(json_file)\n    json_data = stream.readAll()\n    json_file.close()\n    try:\n        return json.loads(json_data)",
+        "detail": "src.utils.text",
         "documentation": {}
     },
     {

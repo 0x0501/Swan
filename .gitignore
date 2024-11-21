@@ -3,6 +3,7 @@ swan.config.toml
 data/
 bin/**
 .vscode/PythonImportHelper-v2-Completion.json
+.VSCodeCounter
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

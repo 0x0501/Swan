@@ -1,8 +1,10 @@
 from PyQt6.QtWidgets import (QMainWindow, QMenuBar, QMenu, QSystemTrayIcon,
-                             QStyle, QGraphicsDropShadowEffect, QStatusBar, QListView)
-from PyQt6.QtCore import Qt, QSettings, QObject, QEvent
+                             QStyle, QGraphicsDropShadowEffect, QStatusBar,
+                             QListView)
+from PyQt6.QtCore import Qt, QSettings, QObject, QEvent, QTimer
 from PyQt6.QtGui import QAction, QKeySequence, QIcon, QColor, QPixmap
 from loguru import logger
+from random import randint
 from src.core.location import Location
 from src.gui.dialogs.about_dialog import AboutDialog
 from src.gui.dialogs.csv_table_viewer import CSVViewer
@@ -17,6 +19,8 @@ from src.gui.event.task_progress_tracker import TaskProgressTracker
 from src.gui.event.event_emitter import EventEmitter
 from src.gui.event.task_worker import TaskWorker
 from pyqttoast import Toast, ToastPreset, ToastPosition
+from src.utils.text import load_json
+from src.utils.random_selector import RandomUniqueSelector
 
 
 class MainWindow(QMainWindow):
@@ -25,8 +29,35 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.setWindowTitle("Swan - Default")
         self.resize(800, 600)
+        
+        self.next_saying = ''
         # 设置状态栏
         self.statusBar: QStatusBar = QStatusBar()
+
+        # 新增分别的状态栏，一个用于显示状态，一个用于通知
+        self.statusBar_info = QLabel()
+        self.statusBar_info.setStyleSheet("""
+            QLabel {
+                font-size: 10pt;
+                margin-top: 0px;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        """)
+        self.statusBar_info.setAlignment(Qt.AlignmentFlag.AlignLeft)
+        self.statusBar_extra = QLabel()
+        self.statusBar_extra.setStyleSheet("""
+            QLabel {
+                font-size: 10pt;
+                margin-top: 0px;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        """)
+        self.statusBar_extra.setVisible(False)
+        self.statusBar.addWidget(self.statusBar_info)
+        self.statusBar.addWidget(self.statusBar_extra)
+
         self.setStatusBar(self.statusBar)
         # 设置菜单栏样式
         self.setStyleSheet("""
@@ -87,7 +118,7 @@ class MainWindow(QMainWindow):
         self._create_menu_bar()
         self._create_status_bar()
         self._setup_tray_icon()
-
+        self._update_status_bar_extra()
         # setting up progress tracker
         self.emitter = EventEmitter()
         self.progress_tracker = TaskProgressTracker(self.emitter)
@@ -263,7 +294,58 @@ class MainWindow(QMainWindow):
         about_menu.addAction(about_action)
 
     def _create_status_bar(self):
-        self.statusBar.showMessage('Swan已就绪 - 晚风吹起你群间的白发~')
+        self._update_status_bar_info('Swan已就绪 - 晚风吹起你鬓间的白发，抚平回忆留下的疤~',
+                                     stick_to=False)
+
+    def _update_status_bar_info(self,
+                                text: str,
+                                million_sec: int = 3000,
+                                stick_to: bool = False):
+        self.statusBar_info.setText(text)
+
+        def clear_content(status_bar_label: QLabel):
+            status_bar_label.setText('')
+            status_bar_label.setVisible(False)
+
+        if stick_to == False:
+            # 单次触发
+            self.status_bar_info_timer = QTimer(self)
+            self.status_bar_info_timer.setSingleShot(True)
+            self.status_bar_info_timer.timeout.connect(
+                lambda: clear_content(self.statusBar_info))
+            # 默认三秒消失
+            self.status_bar_info_timer.start(million_sec)
+
+    # 自更新status bar
+    def _update_status_bar_extra(self, million_sec: int = 5000):
+
+        if hasattr(self, 'saying') == False and hasattr(
+                self, 'random_saying') == False:
+            saying = load_json(':/strings/sayings.json')['sayings']
+            self.random_saying = RandomUniqueSelector(saying)
+
+        def change_saying(status_bar_label: QLabel):
+            self.next_saying = self.random_saying.get_next()
+            status_bar_label.setText(self.next_saying)
+            self.statusBar_extra.setVisible(True)
+            # 根据字符长度决定显示时间
+            # 3个字符看1秒
+            display_time = round((len(self.next_saying) / 3) * 1000)
+            self.status_bar_extra_timer.setInterval(display_time)
+
+        # if the first time, delay 5sec to display
+        if hasattr(self, 'status_bar_extra_timer') == False:
+            first_timer = QTimer()
+            first_timer.setSingleShot(True)
+            first_timer.timeout.connect(
+                lambda: change_saying(self.statusBar_extra))
+            first_timer.start(5000)
+
+        self.status_bar_extra_timer = QTimer(self)
+        self.status_bar_extra_timer.timeout.connect(
+            lambda: change_saying(self.statusBar_extra))
+        
+        self.status_bar_extra_timer.start(million_sec)
 
     def _start_swan(self):
         if not self.swan:

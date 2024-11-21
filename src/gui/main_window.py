@@ -1,5 +1,5 @@
 from PyQt6.QtWidgets import (QMainWindow, QMenuBar, QMenu, QSystemTrayIcon,
-                             QStyle, QGraphicsDropShadowEffect, QStatusBar)
+                             QStyle, QGraphicsDropShadowEffect, QStatusBar, QListView)
 from PyQt6.QtCore import Qt, QSettings, QObject, QEvent
 from PyQt6.QtGui import QAction, QKeySequence, QIcon, QColor, QPixmap
 from loguru import logger
@@ -103,6 +103,18 @@ class MainWindow(QMainWindow):
         # Left combobox (Locations)
         self.location_combo = QComboBox()
         self.location_combo.addItems(['束河古镇', '白沙古镇'])
+        self.location_combo.setStyleSheet("""
+            QComboBox {
+                min-height: 30px;
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+            QComboBox QAbstractItemView::item {
+                min-height: 30px;
+                min-width: 60px;
+            }
+            """)
+        self.location_combo.setView(QListView())
         self.location_combo.setMinimumWidth(200)  # 设置最小宽度
         top_row.addWidget(self.location_combo)
 
@@ -110,10 +122,19 @@ class MainWindow(QMainWindow):
         top_row.addStretch()
 
         # Right combobox (可以根据需要添加其他选项)
-        self.settings_combo = QComboBox()
-        self.settings_combo.addItems(['设置项1', '设置项2'])
-        self.settings_combo.setMinimumWidth(200)  # 设置最小宽度
-        top_row.addWidget(self.settings_combo)
+        self.platform_combo = QComboBox()
+        self.platform_combo.addItems(['大众点评（美团）'])
+        self.platform_combo.setStyleSheet("""
+            QComboBox {
+                min-height: 30px;
+            }
+            QComboBox QAbstractItemView::item {
+                min-height: 30px;
+                min-width: 60px;
+            }
+            """)
+        self.platform_combo.setMinimumWidth(200)  # 设置最小宽度
+        top_row.addWidget(self.platform_combo)
 
         main_layout.addLayout(top_row)
 
@@ -297,7 +318,7 @@ class MainWindow(QMainWindow):
         self.cancel_button.setEnabled(False)
         self.statusBar.showMessage('任务已完成')
         self.progress_bar.setValue(0)
-        
+
         toast = Toast()
         toast.setDuration(3500)
         toast.setPositionRelativeToWidget(self)

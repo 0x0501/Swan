@@ -31,7 +31,7 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.setWindowTitle("Swan - Default")
         self.resize(800, 600)
-        
+
         self.next_saying = ''
         # 设置状态栏
         self.statusBar: QStatusBar = QStatusBar()
@@ -196,7 +196,7 @@ class MainWindow(QMainWindow):
         # 设置设备像素比，确保在高DPI显示器上清晰显示
         scaled_pixmap.setDevicePixelRatio(device_pixel_ratio)
         csv_shortcut_icon = QIcon(scaled_pixmap)
-        
+
         # 创建开始按钮
         starter_button = StarterButton(scaled_pixmap)
         starter_button.setIcon(csv_shortcut_icon)
@@ -291,7 +291,8 @@ class MainWindow(QMainWindow):
         # CSV阅读器
         csv_viewer_action = QAction('CSV阅读器', self)
         csv_viewer_action.setShortcut(QKeySequence("Ctrl+P"))
-        csv_viewer_action.triggered.connect(self._show_csv_viewer_dialog)
+        csv_viewer_action.triggered.connect(
+            lambda: self._show_csv_viewer_dialog())
         view_menu.addAction(csv_viewer_action)
 
         # 关于菜单
@@ -299,11 +300,12 @@ class MainWindow(QMainWindow):
         about_action = QAction('关于 Swan', self)
         about_action.triggered.connect(self._show_about_dialog)
         about_menu.addAction(about_action)
-        
+
     def _csv_shortcut(self):
         # Swan正在运行
         if self.swan != None and self.swan.is_running():
-            data_file = Path(self.settings.value('data_directory', './data')).joinpath('dazhongdianping.csv')
+            data_file = Path(self.settings.value(
+                'data_directory', './data')).joinpath('dazhongdianping.csv')
             print(data_file)
             self._show_csv_viewer_dialog(data_file)
         else:
@@ -362,7 +364,7 @@ class MainWindow(QMainWindow):
         self.status_bar_extra_timer = QTimer(self)
         self.status_bar_extra_timer.timeout.connect(
             lambda: change_saying(self.statusBar_extra))
-        
+
         self.status_bar_extra_timer.start(million_sec)
 
     def _start_swan(self):
@@ -376,7 +378,7 @@ class MainWindow(QMainWindow):
 
         # Create and start the worker thread
         if self.task_worker == None:
-            self.task_worker = TaskWorker(self.swan, location) # TODO: bug fix
+            self.task_worker = TaskWorker(self.swan, location)  # TODO: bug fix
             self.task_worker.finished.connect(self._on_task_finished)
             self.task_worker.error.connect(self._on_task_error)
         self.task_worker.set_location(location)
@@ -540,13 +542,18 @@ class MainWindow(QMainWindow):
         dialog = AccountSettingsDialog(self.settings, self)
         dialog.exec()
 
-    def _show_csv_viewer_dialog(self, specific_file_path : str = ''):
+    def _show_csv_viewer_dialog(self, specific_file_path: str = ''):
+        print(specific_file_path)
         try:
             logger.debug("Opening CSV viewer...")  # 调试信息
             self.csv_viewer = CSVViewer(self.settings.value('data_directory'))
-            if specific_file_path != '' and Path(specific_file_path).exists():
-                self.csv_viewer.load_csv(Path(specific_file_path).as_posix())
-                logger.debug('Instant CSV file path: %s' % Path(specific_file_path).as_posix())
+            if specific_file_path != '':
+                print(specific_file_path)
+                if Path(specific_file_path).exists():
+                    self.csv_viewer.load_csv(
+                        Path(specific_file_path).as_posix())
+                    logger.debug('Instant CSV file path: %s' %
+                                 Path(specific_file_path).as_posix())
             logger.debug("CSV viewer instance created")  # 调试信息
             self.csv_viewer.setWindowModality(
                 Qt.WindowModality.NonModal)  # 确保窗口非模态

@@ -335,6 +335,15 @@ class MainWindow(QMainWindow):
         self.cancel_button.setEnabled(False)
         self.statusBar.showMessage(f'任务出错: {error_message}')
         self.progress_bar.setValue(0)
+        toast = Toast()
+        toast.setDuration(3000)
+        toast.setPositionRelativeToWidget(self)
+        toast.setPosition(ToastPosition.TOP_RIGHT)
+        toast.setOffset(10, 35)
+        toast.setTitle('Swan通知')
+        toast.setText('Swan运行出错: %s' % error_message)
+        toast.applyPreset(ToastPreset.ERROR)
+        toast.show()
         # throw an error for global error handler
         # raise Exception(error_message)
 

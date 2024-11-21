@@ -250,6 +250,14 @@
         "documentation": {}
     },
     {
+        "label": "Qt",
+        "importPath": "PyQt6.QtCore",
+        "description": "PyQt6.QtCore",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtCore",
+        "documentation": {}
+    },
+    {
         "label": "QSettings",
         "importPath": "PyQt6.QtCore",
         "description": "PyQt6.QtCore",
@@ -275,6 +283,14 @@
     },
     {
         "label": "QTimer",
+        "importPath": "PyQt6.QtCore",
+        "description": "PyQt6.QtCore",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtCore",
+        "documentation": {}
+    },
+    {
+        "label": "QSize",
         "importPath": "PyQt6.QtCore",
         "description": "PyQt6.QtCore",
         "isExtraImport": true,
@@ -376,6 +392,14 @@
         "isExtraImport": true,
         "importPath": "pathlib",
         "description": "pathlib",
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
         "detail": "pathlib",
         "documentation": {}
     },
@@ -861,6 +885,38 @@
         "documentation": {}
     },
     {
+        "label": "QApplication",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QPushButton",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QVBoxLayout",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QWidget",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
         "label": "QMainWindow",
         "importPath": "PyQt6.QtWidgets",
         "description": "PyQt6.QtWidgets",
@@ -1248,6 +1304,30 @@
         "documentation": {}
     },
     {
+        "label": "QPixmap",
+        "importPath": "PyQt6.QtGui",
+        "description": "PyQt6.QtGui",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtGui",
+        "documentation": {}
+    },
+    {
+        "label": "QIcon",
+        "importPath": "PyQt6.QtGui",
+        "description": "PyQt6.QtGui",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtGui",
+        "documentation": {}
+    },
+    {
+        "label": "QCursor",
+        "importPath": "PyQt6.QtGui",
+        "description": "PyQt6.QtGui",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtGui",
+        "documentation": {}
+    },
+    {
         "label": "QAction",
         "importPath": "PyQt6.QtGui",
         "description": "PyQt6.QtGui",
@@ -1512,6 +1592,14 @@
         "description": "src.utils.random_selector",
         "isExtraImport": true,
         "detail": "src.utils.random_selector",
+        "documentation": {}
+    },
+    {
+        "label": "StarterButton",
+        "importPath": "src.gui.widgets.starter_button",
+        "description": "src.gui.widgets.starter_button",
+        "isExtraImport": true,
+        "detail": "src.gui.widgets.starter_button",
         "documentation": {}
     },
     {
@@ -2005,6 +2093,15 @@
         "description": "src.gui.resources.resources",
         "peekOfCode": "qt_resource_struct = b\"\\\n\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x01\\\n\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\\n\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x04\\\n\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\\n\\x00\\x00\\x00\\x12\\x00\\x02\\x00\\x00\\x00\\x01\\x00\\x00\\x00\\x03\\\n\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\\n\\x00\\x00\\x00&\\x00\\x00\\x00\\x00\\x00\\x01\\x00\\x00\\x00\\x00\\\n\\x00\\x00\\x01\\x93M\\x8e!\\x8b\\\n\\x00\\x00\\x00h\\x00\\x00\\x00\\x00\\x00\\x01\\x00\\x05\\xe1Q\\",
         "detail": "src.gui.resources.resources",
+        "documentation": {}
+    },
+    {
+        "label": "StarterButton",
+        "kind": 6,
+        "importPath": "src.gui.widgets.starter_button",
+        "description": "src.gui.widgets.starter_button",
+        "peekOfCode": "class StarterButton(QPushButton):\n    def __init__(self, pixmap, parent=None):\n        super().__init__(parent)\n        # 使用 QPixmap 加载图片\n        self.pixmap = pixmap\n        # 将 QPixmap 转换为 QIcon\n        icon = QIcon(pixmap)\n        # 设置按钮的图标\n        self.setIcon(icon)\n        # 设置图标大小",
+        "detail": "src.gui.widgets.starter_button",
         "documentation": {}
     },
     {

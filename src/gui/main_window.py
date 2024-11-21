@@ -1,9 +1,10 @@
 from PyQt6.QtWidgets import (QMainWindow, QMenuBar, QMenu, QSystemTrayIcon,
                              QStyle, QGraphicsDropShadowEffect, QStatusBar,
                              QListView)
-from PyQt6.QtCore import Qt, QSettings, QObject, QEvent, QTimer
+from PyQt6.QtCore import Qt, QSettings, QObject, QEvent, QTimer, QSize
 from PyQt6.QtGui import QAction, QKeySequence, QIcon, QColor, QPixmap
 from loguru import logger
+from pathlib import Path
 from random import randint
 from src.core.location import Location
 from src.gui.dialogs.about_dialog import AboutDialog
@@ -21,6 +22,7 @@ from src.gui.event.task_worker import TaskWorker
 from pyqttoast import Toast, ToastPreset, ToastPosition
 from src.utils.text import load_json
 from src.utils.random_selector import RandomUniqueSelector
+from src.gui.widgets.starter_button import StarterButton
 
 
 class MainWindow(QMainWindow):
@@ -177,7 +179,6 @@ class MainWindow(QMainWindow):
         image_layout = QVBoxLayout(image_container)
 
         # Image
-        image_label = QLabel()
         original_pixmap = QPixmap(":/images/starter_image.png")
 
         # 计算合适的显示大小
@@ -194,10 +195,16 @@ class MainWindow(QMainWindow):
             Qt.TransformationMode.SmoothTransformation)
         # 设置设备像素比，确保在高DPI显示器上清晰显示
         scaled_pixmap.setDevicePixelRatio(device_pixel_ratio)
-        image_label.setPixmap(scaled_pixmap)
-        image_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        image_layout.addWidget(image_label)
-
+        csv_shortcut_icon = QIcon(scaled_pixmap)
+        
+        # 创建开始按钮
+        starter_button = StarterButton(scaled_pixmap)
+        starter_button.setIcon(csv_shortcut_icon)
+        # image_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        starter_button.setIconSize(QSize(256, 256))
+        starter_button.clicked.connect(self._csv_shortcut)
+        # image_label.setFixedHeight(desired_size)
+        image_layout.addWidget(starter_button)
         middle_row.addWidget(image_container)
 
         # Button container
@@ -292,6 +299,16 @@ class MainWindow(QMainWindow):
         about_action = QAction('关于 Swan', self)
         about_action.triggered.connect(self._show_about_dialog)
         about_menu.addAction(about_action)
+        
+    def _csv_shortcut(self):
+        # Swan正在运行
+        if self.swan != None and self.swan.is_running():
+            data_file = Path(self.settings.value('data_directory', './data')).joinpath('dazhongdianping.csv')
+            print(data_file)
+            self._show_csv_viewer_dialog(data_file)
+        else:
+            # Swan没有运行
+            print('PP')
 
     def _create_status_bar(self):
         self._update_status_bar_info('Swan已就绪 - 晚风吹起你鬓间的白发，抚平回忆留下的疤~',
@@ -521,10 +538,13 @@ class MainWindow(QMainWindow):
         dialog = AccountSettingsDialog(self.settings, self)
         dialog.exec()
 
-    def _show_csv_viewer_dialog(self):
+    def _show_csv_viewer_dialog(self, specific_file_path : str = ''):
         try:
             logger.debug("Opening CSV viewer...")  # 调试信息
             self.csv_viewer = CSVViewer(self.settings.value('data_directory'))
+            if specific_file_path != '' and Path(specific_file_path).exists():
+                self.csv_viewer.load_csv(Path(specific_file_path).as_posix())
+                logger.debug('Instant CSV file path: %s' % Path(specific_file_path).as_posix())
             logger.debug("CSV viewer instance created")  # 调试信息
             self.csv_viewer.setWindowModality(
                 Qt.WindowModality.NonModal)  # 确保窗口非模态

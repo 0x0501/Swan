@@ -36,6 +36,9 @@ class Swan():
         # log initialization
         logger.add(self.config['application']['log_file_path'])
         self.progress_tracker = progress_tracker
+        
+    def is_running(self) -> bool:
+        return self._running
 
     def calculate_sleep_time(self, start_time) -> int:
         """

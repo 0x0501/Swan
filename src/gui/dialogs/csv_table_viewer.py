@@ -203,6 +203,8 @@ class CSVViewer(QMainWindow):
             except Exception as e:
                 self.status_bar.showMessage(f"Error loading file: {str(e)}")
                 logger.error(f"Error loading file: {str(e)}")
+                import traceback
+                traceback.print_exc()
                 return False
         return False
 

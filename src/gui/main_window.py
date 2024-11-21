@@ -376,9 +376,10 @@ class MainWindow(QMainWindow):
 
         # Create and start the worker thread
         if self.task_worker == None:
-            self.task_worker = TaskWorker(self.swan, location)
+            self.task_worker = TaskWorker(self.swan, location) # TODO: bug fix
             self.task_worker.finished.connect(self._on_task_finished)
             self.task_worker.error.connect(self._on_task_error)
+        self.task_worker.set_location(location)
         self.task_worker.start()
 
         # Update UI

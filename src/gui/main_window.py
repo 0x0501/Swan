@@ -308,7 +308,7 @@ class MainWindow(QMainWindow):
             self._show_csv_viewer_dialog(data_file)
         else:
             # Swan没有运行
-            print('PP')
+            self._show_csv_viewer_dialog()
 
     def _create_status_bar(self):
         self._update_status_bar_info('Swan已就绪 - 晚风吹起你鬓间的白发，抚平回忆留下的疤~',

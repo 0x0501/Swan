@@ -316,9 +316,10 @@ class MainWindow(QMainWindow):
 
     def _update_status_bar_info(self,
                                 text: str,
-                                million_sec: int = 3000,
+                                million_sec: int = 5000,
                                 stick_to: bool = False):
         self.statusBar_info.setText(text)
+        self.statusBar_info.setVisible(True)
 
         def clear_content(status_bar_label: QLabel):
             status_bar_label.setText('')
@@ -396,11 +397,11 @@ class MainWindow(QMainWindow):
         toast.show()
         # reset progress bar
         self.progress_bar.setValue(0)
-        self.statusBar.showMessage('正在运行任务...')
+        self._update_status_bar_info('正在运行任务...', stick_to=True)
 
     def _cancel_swan(self):
         if self.task_worker and self.task_worker.isRunning():
-            self.statusBar.showMessage('正在停止任务...')
+            self._update_status_bar_info('正在停止任务...')
             toast = Toast()
             toast.setDuration(3000)
             toast.setPositionRelativeToWidget(self)
@@ -416,7 +417,7 @@ class MainWindow(QMainWindow):
     def _on_task_finished(self):
         self.start_button.setEnabled(True)
         self.cancel_button.setEnabled(False)
-        self.statusBar.showMessage('任务已完成')
+        self._update_status_bar_info('任务已完成')
         self.progress_bar.setValue(0)
 
         toast = Toast()
@@ -432,7 +433,7 @@ class MainWindow(QMainWindow):
     def _on_task_error(self, error_message):
         self.start_button.setEnabled(True)
         self.cancel_button.setEnabled(False)
-        self.statusBar.showMessage(f'任务出错: {error_message}')
+        self._update_status_bar_info(f'任务出错: {error_message}')
         self.progress_bar.setValue(0)
         toast = Toast()
         toast.setDuration(3000)

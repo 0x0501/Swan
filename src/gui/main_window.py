@@ -211,8 +211,8 @@ class MainWindow(QMainWindow):
             }
             QProgressBar::chunk {
                 background-color: #4096ff;
-                border-radius-top-left: 3px;
-                border-radius-bottom: 3px;
+                border-top-left-radius: 3px;
+                border-bottom-left-radius: 3px;
             }
         """)
         # Hide progress bar
@@ -272,6 +272,7 @@ class MainWindow(QMainWindow):
         # Get selected location
         location = Location.SHUHE_TOWN if self.location_combo.currentText(
         ) == '束河古镇' else Location.BAISHA_TOWN
+        logger.info('Current chosen location: %s' % location)
 
         # Create and start the worker thread
         if self.task_worker == None:
@@ -334,6 +335,8 @@ class MainWindow(QMainWindow):
         self.cancel_button.setEnabled(False)
         self.statusBar.showMessage(f'任务出错: {error_message}')
         self.progress_bar.setValue(0)
+        # throw an error for global error handler
+        # raise Exception(error_message)
 
     def _test_update_progress(self):
         # 模拟进度更新

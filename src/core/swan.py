@@ -13,7 +13,7 @@ from src.utils.config import Config
 from src.utils.text import extract_and_convert_score, extract_update_date, sanitize_text
 from src.gui.event.task_progress_tracker import TaskProgressTracker
 from typing import Optional, Callable
-
+import traceback
 
 class Swan():
 
@@ -186,7 +186,7 @@ class Swan():
             )
             tab.wait(60)
 
-    def task_dzdp(self, loc: Location = Location.SHUHE_TOWN) -> Recorder:
+    def task_dzdp(self) -> Recorder:
         # change running state
         self._running = True
         # store the data as CSV file
@@ -242,10 +242,11 @@ class Swan():
                 logger.error('Location fixing failed. [%s]' %
                              self.config['account']['dzdp']['location'])
 
-            # navigate to shuhe/baisha town
-            self.set_location(loc)
-
-            tab.get(self.location.value[0])
+            # navigate to shuhe/baisha town, given them the literal name
+            self.set_location(self.location)
+            logger.debug('Swan location (inner): %s' % self.location)
+            logger.debug("Swan location URL (inner): %s" % self.location.value)
+            tab.get(self.location.value)
             logger.info('Navigate to %s.' % self.location.name)
 
             # check whether the shop name match the intended one
@@ -302,7 +303,7 @@ class Swan():
                 # if the page number >= 2, we need to change the url
                 # https://www.dianping.com/shop/iDYbcrjcbQJyvJyu/review_all/p2
                 if current_page >= 2:
-                    updated_url = self.location.value[0] + '/p%d' % current_page
+                    updated_url = self.location.value + '/p%d' % current_page
                     tab.get(updated_url)
                     logger.info('Update the url to %s' % updated_url)
 
@@ -392,6 +393,7 @@ class Swan():
             logger.warning('The task `dzdp` has finished.')
         except Exception as e:
             logger.error(f"Error in task_dzdp: {e}")
+            traceback.print_exc()
         finally:
             # 确保资源被清理
             logger.debug('Swan state in Finally Statement: %s' % self._running)

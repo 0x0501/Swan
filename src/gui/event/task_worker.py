@@ -11,7 +11,9 @@ class TaskWorker(QThread):
     def __init__(self, swan: Swan, location: Location):
         super().__init__()
         self.swan = swan
-        self.location = location
+        # self.location = location
+        self.swan.set_location(location)
+        logger.error('Current Location (in task_worker): %s' % self.swan.location)
         self._is_running = True
         
     def run(self):

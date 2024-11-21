@@ -1768,7 +1768,7 @@
         "kind": 6,
         "importPath": "src.core.location",
         "description": "src.core.location",
-        "peekOfCode": "class Location(Enum):\n    SHUHE_TOWN = 'https://www.dianping.com/shop/iDYbcrjcbQJyvJyu/review_all',\n    BAISHA_TOWN = 'https://www.dianping.com/shop/k6ttY31GVwu40nbW/review_all'",
+        "peekOfCode": "class Location(Enum):\n    SHUHE_TOWN = 'https://www.dianping.com/shop/iDYbcrjcbQJyvJyu/review_all'\n    BAISHA_TOWN = 'https://www.dianping.com/shop/k6ttY31GVwu40nbW/review_all'",
         "detail": "src.core.location",
         "documentation": {}
     },
@@ -1876,7 +1876,7 @@
         "kind": 6,
         "importPath": "src.gui.event.task_worker",
         "description": "src.gui.event.task_worker",
-        "peekOfCode": "class TaskWorker(QThread):\n    finished = pyqtSignal()\n    error = pyqtSignal(str)\n    def __init__(self, swan: Swan, location: Location):\n        super().__init__()\n        self.swan = swan\n        self.location = location\n        self._is_running = True\n    def run(self):\n        logger.debug('Swan Status (in task_worker): %s' % self.swan)",
+        "peekOfCode": "class TaskWorker(QThread):\n    finished = pyqtSignal()\n    error = pyqtSignal(str)\n    def __init__(self, swan: Swan, location: Location):\n        super().__init__()\n        self.swan = swan\n        # self.location = location\n        self.swan.set_location(location)\n        logger.error('Current Location (in task_worker): %s' % self.swan.location)\n        self._is_running = True",
         "detail": "src.gui.event.task_worker",
         "documentation": {}
     },

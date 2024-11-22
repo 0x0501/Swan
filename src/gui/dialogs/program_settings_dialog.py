@@ -5,6 +5,7 @@ from PyQt6.QtCore import QSettings
 from tests.test_date import text
 from src.core.encryption import Encryption
 from pyqttoast import Toast, ToastPreset
+from PyQt6.QtGui import QIntValidator
 
 
 class ProgramSettingsDialog(QDialog):
@@ -24,6 +25,11 @@ class ProgramSettingsDialog(QDialog):
             self.settings.value('data_directory', './data'))
         self.encryption_dir_path = QLineEdit(
             self.settings.value('encryption_dir_path', './bin'))
+        self.page_maximum = QLineEdit(
+            str(self.settings.value('page_maximum', 600, type=int)))
+        self.page_maximum.setValidator(QIntValidator())
+        self.page_maximum.setPlaceholderText('请输入最大抓取的页数（数字）')
+
         self.setWindowTitle('程序设置')
         self.setFixedSize(500, 300)
         self.is_system_tray_state = False
@@ -69,6 +75,7 @@ class ProgramSettingsDialog(QDialog):
         # 添加表单项
         form_layout.addRow('配置文件路径:', self.config_path)
         form_layout.addRow('日志文件路径:', self.log_path)
+        form_layout.addRow('最大抓取页数:', self.page_maximum)
         form_layout.addRow('数据存放路径:', self.data_directory)
         form_layout.addRow('加密密钥存放路径:', self.encryption_dir_path)
         form_layout.addRow('Chrome可执行文件路径', self.chrome_executable_path)
@@ -134,4 +141,5 @@ class ProgramSettingsDialog(QDialog):
                                self.is_system_tray.isChecked())
         self.settings.setValue('encryption_dir_path',
                                self.encryption_dir_path.text())
+        self.settings.setValue('page_maximum', self.page_maximum.text())
         self.accept()

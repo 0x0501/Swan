@@ -1368,6 +1368,46 @@
         "documentation": {}
     },
     {
+        "label": "Swan",
+        "importPath": "src.core.swan",
+        "description": "src.core.swan",
+        "isExtraImport": true,
+        "detail": "src.core.swan",
+        "documentation": {}
+    },
+    {
+        "label": "Swan",
+        "importPath": "src.core.swan",
+        "description": "src.core.swan",
+        "isExtraImport": true,
+        "detail": "src.core.swan",
+        "documentation": {}
+    },
+    {
+        "label": "Swan",
+        "importPath": "src.core.swan",
+        "description": "src.core.swan",
+        "isExtraImport": true,
+        "detail": "src.core.swan",
+        "documentation": {}
+    },
+    {
+        "label": "comment_swan_main",
+        "importPath": "src.core.swan",
+        "description": "src.core.swan",
+        "isExtraImport": true,
+        "detail": "src.core.swan",
+        "documentation": {}
+    },
+    {
+        "label": "Swan",
+        "importPath": "src.core.swan",
+        "description": "src.core.swan",
+        "isExtraImport": true,
+        "detail": "src.core.swan",
+        "documentation": {}
+    },
+    {
         "label": "QFont",
         "importPath": "PyQt6.QtGui",
         "description": "PyQt6.QtGui",
@@ -1624,38 +1664,6 @@
         "description": "src.gui.event.event_emitter",
         "isExtraImport": true,
         "detail": "src.gui.event.event_emitter",
-        "documentation": {}
-    },
-    {
-        "label": "Swan",
-        "importPath": "src.core.swan",
-        "description": "src.core.swan",
-        "isExtraImport": true,
-        "detail": "src.core.swan",
-        "documentation": {}
-    },
-    {
-        "label": "Swan",
-        "importPath": "src.core.swan",
-        "description": "src.core.swan",
-        "isExtraImport": true,
-        "detail": "src.core.swan",
-        "documentation": {}
-    },
-    {
-        "label": "comment_swan_main",
-        "importPath": "src.core.swan",
-        "description": "src.core.swan",
-        "isExtraImport": true,
-        "detail": "src.core.swan",
-        "documentation": {}
-    },
-    {
-        "label": "Swan",
-        "importPath": "src.core.swan",
-        "description": "src.core.swan",
-        "isExtraImport": true,
-        "detail": "src.core.swan",
         "documentation": {}
     },
     {
@@ -2108,7 +2116,7 @@
         "kind": 6,
         "importPath": "src.core.swan",
         "description": "src.core.swan",
-        "peekOfCode": "class Swan():\n    log_file_path = ''\n    data_directory = ''\n    land_page_location = 'Lijiang'\n    start_time = 0.0\n    settings: QSettings\n    location: Location = None\n    chromium_tabs: list = []\n    chromium_options = ChromiumOptions\n    _encryption = Encryption",
+        "peekOfCode": "class Swan():\n    _swan_version = '1.0.0'\n    log_file_path = ''\n    data_directory = ''\n    land_page_location = 'Lijiang'\n    start_time = 0.0\n    settings: QSettings\n    location: Location = None\n    chromium_tabs: list = []\n    chromium_options = ChromiumOptions",
         "detail": "src.core.swan",
         "documentation": {}
     },

@@ -19,6 +19,7 @@ from src.core.encryption import Encryption
 
 class Swan():
 
+    _swan_version = '1.0.0'
     log_file_path = ''
     data_directory = ''
     land_page_location = 'Lijiang'
@@ -43,6 +44,10 @@ class Swan():
         # log initialization
         logger.add(self.log_file_path)
         self.progress_tracker = progress_tracker
+        
+    @staticmethod
+    def swan_version() -> str:
+        return Swan._swan_version
 
     def is_running(self) -> bool:
         return self._running

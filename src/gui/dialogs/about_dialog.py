@@ -1,14 +1,13 @@
-import os
 import platform
 from PyQt6.QtWidgets import QDialog, QVBoxLayout, QLabel, QPushButton
 from PyQt6.QtCore import Qt
+from src.core.swan import Swan
 
 class AboutDialog(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setWindowTitle("关于")
         self.setFixedSize(400, 270)
-        
         layout = QVBoxLayout()
         
         # 添加软件信息
@@ -16,7 +15,7 @@ class AboutDialog(QDialog):
         title_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         title_label.setStyleSheet("font-size: 18px; font-weight: bold;")
         
-        version_label = QLabel("版本: 1.0.0")
+        version_label = QLabel(f"版本: {Swan.swan_version()}")
         version_label.setAlignment(Qt.AlignmentFlag.AlignLeft)
         
         description_label = QLabel("Swan 是为了完成这该死的论文开发的程序，能够方便的爬取网络文本。")

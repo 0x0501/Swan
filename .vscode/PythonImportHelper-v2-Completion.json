@@ -2108,7 +2108,7 @@
         "kind": 6,
         "importPath": "src.core.swan",
         "description": "src.core.swan",
-        "peekOfCode": "class Swan():\n    config_file_path = ''\n    data_directory = ''\n    land_page_location = 'Lijiang'\n    page_maximum = 600\n    start_time = 0.0\n    settings: QSettings\n    location: Location = None\n    chromium_tabs: list = []\n    chromium_options = ChromiumOptions",
+        "peekOfCode": "class Swan():\n    log_file_path = ''\n    data_directory = ''\n    land_page_location = 'Lijiang'\n    start_time = 0.0\n    settings: QSettings\n    location: Location = None\n    chromium_tabs: list = []\n    chromium_options = ChromiumOptions\n    _encryption = Encryption",
         "detail": "src.core.swan",
         "documentation": {}
     },

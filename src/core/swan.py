@@ -19,10 +19,9 @@ from src.core.encryption import Encryption
 
 class Swan():
 
-    config_file_path = ''
+    log_file_path = ''
     data_directory = ''
     land_page_location = 'Lijiang'
-    page_maximum = 600
     start_time = 0.0
     settings: QSettings
     location: Location = None
@@ -34,14 +33,15 @@ class Swan():
                  q_settings: QSettings,
                  progress_tracker: TaskProgressTracker = None) -> None:
         self.settings = q_settings
-        self.config_file_path = self.settings.value('log_path',
+        self.log_file_path = self.settings.value('log_path',
                                                     './logs/swan.log')
         self._running = False
         self._encryption = Encryption(
             self.settings.value('encryption_dir_path', './bin'), self.settings,
             None)
+        self.page_maximum = self.settings.value('page_maximum', 600, type=int)
         # log initialization
-        logger.add(self.config_file_path)
+        logger.add(self.log_file_path)
         self.progress_tracker = progress_tracker
 
     def is_running(self) -> bool:

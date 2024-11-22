@@ -1,3 +1,4 @@
+from PyQt6.QtCore import QSettings
 import os
 from random import randint
 import sys
@@ -9,34 +10,40 @@ from loguru import logger
 from DrissionPage.errors import *
 from pathlib import Path
 from src.core.location import Location
-from src.utils.config import Config
 from src.utils.text import extract_and_convert_score, extract_update_date, sanitize_text
 from src.gui.event.task_progress_tracker import TaskProgressTracker
-from typing import Optional, Callable
+from typing import Optional
 import traceback
+from src.core.encryption import Encryption
+
 
 class Swan():
 
     config_file_path = ''
     data_directory = ''
+    land_page_location = 'Lijiang'
+    page_maximum = 600
     start_time = 0.0
-    _config: Config = None
-    config = None
+    settings: QSettings
     location: Location = None
     chromium_tabs: list = []
     chromium_options = ChromiumOptions
+    _encryption = Encryption
 
     def __init__(self,
-                 config_file_path: str,
+                 q_settings: QSettings,
                  progress_tracker: TaskProgressTracker = None) -> None:
-        self.config_file_path = config_file_path
-        self._config = Config(config_file_path=config_file_path)
+        self.settings = q_settings
+        self.config_file_path = self.settings.value('log_path',
+                                                    './logs/swan.log')
         self._running = False
-        self.config = self._config.load()
+        self._encryption = Encryption(
+            self.settings.value('encryption_dir_path', './bin'), self.settings,
+            None)
         # log initialization
-        logger.add(self.config['application']['log_file_path'])
+        logger.add(self.config_file_path)
         self.progress_tracker = progress_tracker
-        
+
     def is_running(self) -> bool:
         return self._running
 
@@ -77,7 +84,7 @@ class Swan():
     def launch(self):
         logger.info("Comment Swan started!")
         chrome_executable_path = Path(
-            self.config['application']['chrome_executable_path'])
+            self.settings.value('chrome_executable_path', ''))
 
         if not os.path.exists(chrome_executable_path):
             error_msg = "Can't find chrome executable file at %s" % chrome_executable_path
@@ -138,6 +145,13 @@ class Swan():
         return
 
     def task_dzdp_login(self, tab):
+        username = self.settings.value('dzdp_username', '')
+        password = self._encryption.get_encrypted('dzdp_password', '')
+        
+        if username == '' or password == '':
+            logger.error('Username or password don\'t configure properly.')
+            raise Exception('Username or password don\'t configure properly.')
+        
         tab.get(
             'https://account.dianping.com/pclogin?redir=https://m.dianping.com/dphome',
             True)
@@ -146,10 +160,10 @@ class Swan():
         logger.info(
             "Switch to manual login, trying to input username and password.")
         # filling info
-        phone_number = tab.ele('@id=mobile-number-textbox').input(
-            self.config['account']['dzdp']['username'])
-        password = tab.ele('@id=password-textbox').input(
-            self.config['account']['dzdp']['password'])
+        tab.ele('@id=mobile-number-textbox').input(
+            self.settings.value('dzdp_username'))
+        tab.ele('@id=password-textbox').input(
+            self._encryption.get_encrypted('dzdp_password'))
         user_agreement = tab.ele('@class=pc-agreement').ele(
             '@id=pc-check').check()
         login_button = tab.ele('@class=login-box').ele('@class=button-pc')
@@ -194,7 +208,7 @@ class Swan():
         self._running = True
         # store the data as CSV file
         data_file_path = Path.joinpath(
-            Path(self.config['application']['data_directory']),
+            Path(self.settings.value('data_directory', './data')),
             'dazhongdianping.csv')
         recorder = Recorder(path=data_file_path, cache_size=75)
         logger.debug('Swan (in) _running state: %s' % self._running)
@@ -231,19 +245,18 @@ class Swan():
                 logger.info('Logging success.')
 
             # setting land-page location
-            tab.get('https://www.dianping.com/%s' %
-                    self.config['account']['dzdp']['location'])
+            tab.get('https://www.dianping.com/%s' % self.land_page_location)
             logger.info('Setting land-page location to %s.' %
-                        self.config['account']['dzdp']['location'])
+                        self.land_page_location)
 
             # check whether the search field exist
             if tab.ele('@id=J-search-input') != None:
                 logger.info('Location fixed successfully. [%s]' %
-                            self.config['account']['dzdp']['location'])
+                            self.land_page_location)
             else:
                 # TODO! 2024-11-16 how to handle location fixing failed
                 logger.error('Location fixing failed. [%s]' %
-                             self.config['account']['dzdp']['location'])
+                             self.land_page_location)
 
             # navigate to shuhe/baisha town, given them the literal name
             self.set_location(self.location)
@@ -281,7 +294,7 @@ class Swan():
             logger.info('Change browser mode to: `%s`' % tab.mode)
 
             # change page element to static element
-            page_maximum: int = self.config['account']['dzdp']['page_maximum']
+            page_maximum: int = self.page_maximum
             # current_page = 0
 
             if self.progress_tracker:

@@ -6,6 +6,7 @@ from PyQt6.QtGui import QAction, QKeySequence, QIcon, QColor, QPixmap
 from loguru import logger
 from pathlib import Path
 from random import randint
+from src.core.encryption import Encryption
 from src.core.location import Location
 from src.gui.dialogs.about_dialog import AboutDialog
 from src.gui.dialogs.csv_table_viewer import CSVViewer
@@ -23,6 +24,8 @@ from pyqttoast import Toast, ToastPreset, ToastPosition
 from src.utils.text import load_json
 from src.utils.random_selector import RandomUniqueSelector
 from src.gui.widgets.starter_button import StarterButton
+from src.core.platform import Platform
+from src.gui.dialogs.account_check_dialog import AccountCheckDialog
 
 
 class MainWindow(QMainWindow):
@@ -31,7 +34,6 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.setWindowTitle("Swan - Default")
         self.resize(800, 600)
-
         self.next_saying = ''
         # 设置状态栏
         self.statusBar: QStatusBar = QStatusBar()
@@ -111,6 +113,7 @@ class MainWindow(QMainWindow):
         """)
         # 判断是最小化还是退出
         self.settings = QSettings('swan_gui', 'settings')
+        self.encryption = Encryption(self.settings.value('encryption_dir_path', './bin'), self.settings, None)
         self.force_quit = not self.settings.value('is_system_tray', type=bool)
         self.is_first_time_hide_tray = False
         # 初始化Swan实例, 在Launch中再赋值
@@ -367,14 +370,35 @@ class MainWindow(QMainWindow):
 
         self.status_bar_extra_timer.start(million_sec)
 
+    def _account_check(self, platform: int | Platform) -> bool:
+        match platform:
+            case Platform.DAZHONGDIANPING.value:
+                username = self.settings.value('dzdp_username', '')
+                password = self.encryption.get_encrypted('dzdp_password')
+                
+                if username == '' or password == '':
+                    logger.warning('Username or password don\'t configure properly.')
+                    return False
+                logger.debug('Current select platform: %s' % '大众点评')
+            case Platform.XIECHENG.value:
+                logger.debug('Current select platform: %s' % '携程')
+            case Platform.RED.value:
+                logger.debug('Current select platform: %s' % '小红书')
+        pass
+
     def _start_swan(self):
         if not self.swan:
-            self.swan = Swan('./swan.config.toml',
-                             self.progress_tracker).launch()
+            self.swan = Swan(self.settings, self.progress_tracker).launch()
         # Get selected location
         location = Location.SHUHE_TOWN if self.location_combo.currentText(
         ) == '束河古镇' else Location.BAISHA_TOWN
         logger.info('Current chosen location: %s' % location)
+
+        # index from 0
+        platform = self.platform_combo.currentIndex()
+        if self._account_check(platform) == False:
+            self._show_account_check_dialog('大众点评账号未配置')
+            return
 
         # Create and start the worker thread
         if self.task_worker == None:
@@ -534,6 +558,10 @@ class MainWindow(QMainWindow):
                 self.show()
                 self.activateWindow()
 
+    def _show_account_check_dialog(self, message : str):
+        dialog = AccountCheckDialog(self, message)
+        dialog.exec()
+        
     def _show_program_settings(self):
         dialog = ProgramSettingsDialog(self.settings, self)
         dialog.exec()

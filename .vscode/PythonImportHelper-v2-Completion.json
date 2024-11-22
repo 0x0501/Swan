@@ -98,6 +98,30 @@
         "documentation": {}
     },
     {
+        "label": "QSettings",
+        "importPath": "PyQt6.QtCore",
+        "description": "PyQt6.QtCore",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtCore",
+        "documentation": {}
+    },
+    {
+        "label": "Qt",
+        "importPath": "PyQt6.QtCore",
+        "description": "PyQt6.QtCore",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtCore",
+        "documentation": {}
+    },
+    {
+        "label": "QSettings",
+        "importPath": "PyQt6.QtCore",
+        "description": "PyQt6.QtCore",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtCore",
+        "documentation": {}
+    },
+    {
         "label": "Qt",
         "importPath": "PyQt6.QtCore",
         "description": "PyQt6.QtCore",
@@ -460,14 +484,6 @@
         "documentation": {}
     },
     {
-        "label": "Callable",
-        "importPath": "typing",
-        "description": "typing",
-        "isExtraImport": true,
-        "detail": "typing",
-        "documentation": {}
-    },
-    {
         "label": "traceback",
         "kind": 6,
         "isExtraImport": true,
@@ -510,6 +526,78 @@
     },
     {
         "label": "QPushButton",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QDialog",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QVBoxLayout",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QHBoxLayout",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QLabel",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QLineEdit",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QPushButton",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QFormLayout",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QFrame",
+        "importPath": "PyQt6.QtWidgets",
+        "description": "PyQt6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QWidget",
         "importPath": "PyQt6.QtWidgets",
         "description": "PyQt6.QtWidgets",
         "isExtraImport": true,
@@ -1085,6 +1173,22 @@
         "documentation": {}
     },
     {
+        "label": "Enum",
+        "importPath": "enum",
+        "description": "enum",
+        "isExtraImport": true,
+        "detail": "enum",
+        "documentation": {}
+    },
+    {
+        "label": "unique",
+        "importPath": "enum",
+        "description": "enum",
+        "isExtraImport": true,
+        "detail": "enum",
+        "documentation": {}
+    },
+    {
         "label": "random",
         "kind": 6,
         "isExtraImport": true,
@@ -1175,22 +1279,6 @@
         "documentation": {}
     },
     {
-        "label": "Config",
-        "importPath": "src.utils.config",
-        "description": "src.utils.config",
-        "isExtraImport": true,
-        "detail": "src.utils.config",
-        "documentation": {}
-    },
-    {
-        "label": "Config",
-        "importPath": "src.utils.config",
-        "description": "src.utils.config",
-        "isExtraImport": true,
-        "detail": "src.utils.config",
-        "documentation": {}
-    },
-    {
         "label": "extract_and_convert_score",
         "importPath": "src.utils.text",
         "description": "src.utils.text",
@@ -1239,12 +1327,60 @@
         "documentation": {}
     },
     {
+        "label": "Encryption",
+        "importPath": "src.core.encryption",
+        "description": "src.core.encryption",
+        "isExtraImport": true,
+        "detail": "src.core.encryption",
+        "documentation": {}
+    },
+    {
+        "label": "Encryption",
+        "importPath": "src.core.encryption",
+        "description": "src.core.encryption",
+        "isExtraImport": true,
+        "detail": "src.core.encryption",
+        "documentation": {}
+    },
+    {
+        "label": "Encryption",
+        "importPath": "src.core.encryption",
+        "description": "src.core.encryption",
+        "isExtraImport": true,
+        "detail": "src.core.encryption",
+        "documentation": {}
+    },
+    {
+        "label": "Encryption",
+        "importPath": "src.core.encryption",
+        "description": "src.core.encryption",
+        "isExtraImport": true,
+        "detail": "src.core.encryption",
+        "documentation": {}
+    },
+    {
         "label": "platform",
         "kind": 6,
         "isExtraImport": true,
         "importPath": "platform",
         "description": "platform",
         "detail": "platform",
+        "documentation": {}
+    },
+    {
+        "label": "QFont",
+        "importPath": "PyQt6.QtGui",
+        "description": "PyQt6.QtGui",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtGui",
+        "documentation": {}
+    },
+    {
+        "label": "QPixmap",
+        "importPath": "PyQt6.QtGui",
+        "description": "PyQt6.QtGui",
+        "isExtraImport": true,
+        "detail": "PyQt6.QtGui",
         "documentation": {}
     },
     {
@@ -1365,22 +1501,6 @@
         "description": "PyQt6.QtGui",
         "isExtraImport": true,
         "detail": "PyQt6.QtGui",
-        "documentation": {}
-    },
-    {
-        "label": "Encryption",
-        "importPath": "src.core.encryption",
-        "description": "src.core.encryption",
-        "isExtraImport": true,
-        "detail": "src.core.encryption",
-        "documentation": {}
-    },
-    {
-        "label": "Encryption",
-        "importPath": "src.core.encryption",
-        "description": "src.core.encryption",
-        "isExtraImport": true,
-        "detail": "src.core.encryption",
         "documentation": {}
     },
     {
@@ -1603,6 +1723,22 @@
         "documentation": {}
     },
     {
+        "label": "Platform",
+        "importPath": "src.core.platform",
+        "description": "src.core.platform",
+        "isExtraImport": true,
+        "detail": "src.core.platform",
+        "documentation": {}
+    },
+    {
+        "label": "AccountCheckDialog",
+        "importPath": "src.gui.dialogs.account_check_dialog",
+        "description": "src.gui.dialogs.account_check_dialog",
+        "isExtraImport": true,
+        "detail": "src.gui.dialogs.account_check_dialog",
+        "documentation": {}
+    },
+    {
         "label": "toml",
         "kind": 6,
         "isExtraImport": true,
@@ -1627,6 +1763,14 @@
         "importPath": "json",
         "description": "json",
         "detail": "json",
+        "documentation": {}
+    },
+    {
+        "label": "Config",
+        "importPath": "src.utils.config",
+        "description": "src.utils.config",
+        "isExtraImport": true,
+        "detail": "src.utils.config",
         "documentation": {}
     },
     {
@@ -1943,11 +2087,20 @@
         "documentation": {}
     },
     {
+        "label": "Platform",
+        "kind": 6,
+        "importPath": "src.core.platform",
+        "description": "src.core.platform",
+        "peekOfCode": "class Platform(Enum):\n    DAZHONGDIANPING = 0      # 大众点评\n    XIECHENG        = 1       # 美团\n    RED             = 2       # 小红书",
+        "detail": "src.core.platform",
+        "documentation": {}
+    },
+    {
         "label": "Swan",
         "kind": 6,
         "importPath": "src.core.swan",
         "description": "src.core.swan",
-        "peekOfCode": "class Swan():\n    config_file_path = ''\n    data_directory = ''\n    start_time = 0.0\n    _config: Config = None\n    config = None\n    location: Location = None\n    chromium_tabs: list = []\n    chromium_options = ChromiumOptions\n    def __init__(self,",
+        "peekOfCode": "class Swan():\n    config_file_path = ''\n    data_directory = ''\n    land_page_location = 'Lijiang'\n    page_maximum = 600\n    start_time = 0.0\n    settings: QSettings\n    location: Location = None\n    chromium_tabs: list = []\n    chromium_options = ChromiumOptions",
         "detail": "src.core.swan",
         "documentation": {}
     },
@@ -1967,6 +2120,15 @@
         "description": "src.gui.dialogs.about_dialog",
         "peekOfCode": "class AboutDialog(QDialog):\n    def __init__(self, parent=None):\n        super().__init__(parent)\n        self.setWindowTitle(\"关于\")\n        self.setFixedSize(400, 270)\n        layout = QVBoxLayout()\n        # 添加软件信息\n        title_label = QLabel(\"Swan (天鹅)\")\n        title_label.setAlignment(Qt.AlignmentFlag.AlignCenter)\n        title_label.setStyleSheet(\"font-size: 18px; font-weight: bold;\")",
         "detail": "src.gui.dialogs.about_dialog",
+        "documentation": {}
+    },
+    {
+        "label": "AccountCheckDialog",
+        "kind": 6,
+        "importPath": "src.gui.dialogs.account_check_dialog",
+        "description": "src.gui.dialogs.account_check_dialog",
+        "peekOfCode": "class AccountCheckDialog(QDialog):\n    def __init__(self, parent: QWidget, message = str) -> None:\n        super().__init__(parent)\n        self.setWindowTitle('账号配置出错啦')\n        self.setFixedWidth(400)\n        self.assent_button = QPushButton('明白了')\n        self.assent_button.setFixedWidth(100)\n        self.assent_button.clicked.connect(self._on_assent_button_click)\n        layout = QVBoxLayout()\n        btn_layout = QHBoxLayout()",
+        "detail": "src.gui.dialogs.account_check_dialog",
         "documentation": {}
     },
     {
@@ -2046,7 +2208,7 @@
         "kind": 6,
         "importPath": "src.gui.event.task_worker",
         "description": "src.gui.event.task_worker",
-        "peekOfCode": "class TaskWorker(QThread):\n    finished = pyqtSignal()\n    error = pyqtSignal(str)\n    def __init__(self, swan: Swan, location: Location):\n        super().__init__()\n        self.swan = swan\n        # self.location = location\n        self.swan.set_location(location)\n        logger.error('Current Location (in task_worker): %s' % self.swan.location)\n        self._is_running = True",
+        "peekOfCode": "class TaskWorker(QThread):\n    finished = pyqtSignal()\n    error = pyqtSignal(str)\n    def __init__(self, swan: Swan, location: Location):\n        super().__init__()\n        self.swan = swan\n        # self.location = location\n        self.swan.set_location(location)\n        logger.debug('Current Location (in task_worker): %s' % self.swan.location)\n        self._is_running = True",
         "detail": "src.gui.event.task_worker",
         "documentation": {}
     },

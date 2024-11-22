@@ -13,7 +13,7 @@ class TaskWorker(QThread):
         self.swan = swan
         # self.location = location
         self.swan.set_location(location)
-        logger.error('Current Location (in task_worker): %s' % self.swan.location)
+        logger.debug('Current Location (in task_worker): %s' % self.swan.location)
         self._is_running = True
         
     def set_location(self, location : Location):

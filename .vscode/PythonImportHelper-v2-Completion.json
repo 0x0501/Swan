@@ -2386,7 +2386,7 @@
         "kind": 2,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "def main():\n    # 设置全局异常处理\n    sys.excepthook = exception_hook\n    app = QApplication(sys.argv)\n    # 设置Qt的异常处理\n    window = MainWindow()\n    window.show()\n    sys.exit(app.exec())\nif __name__ == '__main__':\n    main()",
+        "peekOfCode": "def main():\n    # 设置全局异常处理\n    sys.excepthook = exception_hook\n    # Windows 10/11 风格设置\n    QApplication.setStyle(\"Macintosh\")\n    app = QApplication(sys.argv)\n    # 设置Qt的异常处理\n    window = MainWindow()\n    window.show()\n    sys.exit(app.exec())",
         "detail": "main",
         "documentation": {}
     }

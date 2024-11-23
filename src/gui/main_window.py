@@ -24,13 +24,19 @@ from src.gui.widgets.starter_button import StarterButton
 from src.core.platform import Platform
 from src.gui.dialogs.account_check_dialog import AccountCheckDialog
 from src.gui.resources import resources
-
+from os import getenv
 
 class MainWindow(QMainWindow):
 
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Swan - Default")
+        
+        profile = "Ming" if getenv("APP_PROFILE") == "ming" else ""
+        if profile != '':
+            self.setWindowTitle(f"Swan - {profile}")
+        else:
+            self.setWindowTitle('Swan')
+        
         self.resize(800, 600)
         self.next_saying = ''
         # 设置状态栏

@@ -4,7 +4,8 @@ data/
 bin/**
 .vscode/PythonImportHelper-v2-Completion.json
 .VSCodeCounter
-
+nuitka-crash-report.xml
+main.dist
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

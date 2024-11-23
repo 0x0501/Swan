@@ -103,19 +103,6 @@ def build():
             lib_dir = Path(dist_dir).joinpath('lib')
             os.makedirs(lib_dir, exist_ok=True)
             
-            # 移动所有文件到 Lib 目录,除了主程序
-            for item in os.listdir(dist_dir):
-                if item != "Swan.exe" and item != "lib" and not (item in exclude_lib_file):
-                    src_path = os.path.join(dist_dir, item)
-                    dst_path = os.path.join(lib_dir, item)
-                    if os.path.exists(dst_path):
-                        if os.path.isdir(dst_path):
-                            shutil.rmtree(dst_path)
-                        else:
-                            os.remove(dst_path)
-                    shutil.move(src_path, dst_path)
-                    
-    
     return result.returncode
 
 if __name__ == "__main__":

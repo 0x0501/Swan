@@ -1,11 +1,8 @@
-import json
 import os
-import shutil
 import subprocess
 import sys
 from pathlib import Path
 import pkg_resources
-from buildConfig import configs
 
 def get_installed_packages():
     """获取已安装的包及其版本"""

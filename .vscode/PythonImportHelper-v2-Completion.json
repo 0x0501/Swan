@@ -493,6 +493,14 @@
         "documentation": {}
     },
     {
+        "label": "QHBoxLayout",
+        "importPath": "PySide6.QtWidgets",
+        "description": "PySide6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PySide6.QtWidgets",
+        "documentation": {}
+    },
+    {
         "label": "QDialog",
         "importPath": "PySide6.QtWidgets",
         "description": "PySide6.QtWidgets",
@@ -1216,43 +1224,11 @@
         "documentation": {}
     },
     {
-        "label": "Swan",
-        "importPath": "src.core.swan",
-        "description": "src.core.swan",
+        "label": "QPixmap",
+        "importPath": "PySide6.QtGui",
+        "description": "PySide6.QtGui",
         "isExtraImport": true,
-        "detail": "src.core.swan",
-        "documentation": {}
-    },
-    {
-        "label": "Swan",
-        "importPath": "src.core.swan",
-        "description": "src.core.swan",
-        "isExtraImport": true,
-        "detail": "src.core.swan",
-        "documentation": {}
-    },
-    {
-        "label": "Swan",
-        "importPath": "src.core.swan",
-        "description": "src.core.swan",
-        "isExtraImport": true,
-        "detail": "src.core.swan",
-        "documentation": {}
-    },
-    {
-        "label": "comment_swan_main",
-        "importPath": "src.core.swan",
-        "description": "src.core.swan",
-        "isExtraImport": true,
-        "detail": "src.core.swan",
-        "documentation": {}
-    },
-    {
-        "label": "Swan",
-        "importPath": "src.core.swan",
-        "description": "src.core.swan",
-        "isExtraImport": true,
-        "detail": "src.core.swan",
+        "detail": "PySide6.QtGui",
         "documentation": {}
     },
     {
@@ -1360,6 +1336,62 @@
         "documentation": {}
     },
     {
+        "label": "QPixmap",
+        "importPath": "PySide6.QtGui",
+        "description": "PySide6.QtGui",
+        "isExtraImport": true,
+        "detail": "PySide6.QtGui",
+        "documentation": {}
+    },
+    {
+        "label": "QIcon",
+        "importPath": "PySide6.QtGui",
+        "description": "PySide6.QtGui",
+        "isExtraImport": true,
+        "detail": "PySide6.QtGui",
+        "documentation": {}
+    },
+    {
+        "label": "Swan",
+        "importPath": "src.core.swan",
+        "description": "src.core.swan",
+        "isExtraImport": true,
+        "detail": "src.core.swan",
+        "documentation": {}
+    },
+    {
+        "label": "Swan",
+        "importPath": "src.core.swan",
+        "description": "src.core.swan",
+        "isExtraImport": true,
+        "detail": "src.core.swan",
+        "documentation": {}
+    },
+    {
+        "label": "Swan",
+        "importPath": "src.core.swan",
+        "description": "src.core.swan",
+        "isExtraImport": true,
+        "detail": "src.core.swan",
+        "documentation": {}
+    },
+    {
+        "label": "comment_swan_main",
+        "importPath": "src.core.swan",
+        "description": "src.core.swan",
+        "isExtraImport": true,
+        "detail": "src.core.swan",
+        "documentation": {}
+    },
+    {
+        "label": "Swan",
+        "importPath": "src.core.swan",
+        "description": "src.core.swan",
+        "isExtraImport": true,
+        "detail": "src.core.swan",
+        "documentation": {}
+    },
+    {
         "label": "sys,",
         "kind": 6,
         "isExtraImport": true,
@@ -1434,11 +1466,27 @@
         "documentation": {}
     },
     {
-        "label": "EventEmitter",
-        "importPath": "src.gui.event.event_emitter",
-        "description": "src.gui.event.event_emitter",
+        "label": "IconLoader",
+        "importPath": "src.utils.icon_loader",
+        "description": "src.utils.icon_loader",
         "isExtraImport": true,
-        "detail": "src.gui.event.event_emitter",
+        "detail": "src.utils.icon_loader",
+        "documentation": {}
+    },
+    {
+        "label": "IconLoader",
+        "importPath": "src.utils.icon_loader",
+        "description": "src.utils.icon_loader",
+        "isExtraImport": true,
+        "detail": "src.utils.icon_loader",
+        "documentation": {}
+    },
+    {
+        "label": "IconLoader",
+        "importPath": "src.utils.icon_loader",
+        "description": "src.utils.icon_loader",
+        "isExtraImport": true,
+        "detail": "src.utils.icon_loader",
         "documentation": {}
     },
     {
@@ -1450,11 +1498,11 @@
         "documentation": {}
     },
     {
-        "label": "QtCore",
-        "importPath": "PySide6",
-        "description": "PySide6",
+        "label": "EventEmitter",
+        "importPath": "src.gui.event.event_emitter",
+        "description": "src.gui.event.event_emitter",
         "isExtraImport": true,
-        "detail": "PySide6",
+        "detail": "src.gui.event.event_emitter",
         "documentation": {}
     },
     {
@@ -1546,7 +1594,7 @@
         "documentation": {}
     },
     {
-        "label": "resources",
+        "label": "resources_rc",
         "importPath": "src.gui.resources",
         "description": "src.gui.resources",
         "isExtraImport": true,
@@ -1950,7 +1998,7 @@
         "kind": 6,
         "importPath": "src.gui.dialogs.about_dialog",
         "description": "src.gui.dialogs.about_dialog",
-        "peekOfCode": "class AboutDialog(QDialog):\n    def __init__(self, parent=None):\n        super().__init__(parent)\n        self.setWindowTitle(\"关于\")\n        self.setFixedSize(400, 270)\n        layout = QVBoxLayout()\n        # 添加软件信息\n        title_label = QLabel(\"Swan (天鹅)\")\n        title_label.setAlignment(Qt.AlignmentFlag.AlignCenter)\n        title_label.setStyleSheet(\"font-size: 18px; font-weight: bold;\")",
+        "peekOfCode": "class AboutDialog(QDialog):\n    def __init__(self, parent=None):\n        super().__init__(parent)\n        self.setWindowTitle(\"关于\")\n        self.setFixedWidth(450)\n        layout = QVBoxLayout()\n        content_layout = QHBoxLayout()\n        v_layout = QVBoxLayout()\n        button_layout = QHBoxLayout()\n        image_layout = QVBoxLayout()",
         "detail": "src.gui.dialogs.about_dialog",
         "documentation": {}
     },
@@ -1986,7 +2034,7 @@
         "kind": 6,
         "importPath": "src.gui.dialogs.csv_table_viewer",
         "description": "src.gui.dialogs.csv_table_viewer",
-        "peekOfCode": "class CSVViewer(QMainWindow):\n    def __init__(self, default_dir=None):\n        super().__init__()\n        self.default_dir = default_dir or os.path.expanduser(\"~\")\n        self.current_file = None\n        self.watcher = QFileSystemWatcher()\n        self.watcher.fileChanged.connect(self.handle_file_changed)\n        self.scroll_positions = {'vertical': 0, 'horizontal': 0}\n        self.setup_ui()\n    def setup_ui(self):",
+        "peekOfCode": "class CSVViewer(QMainWindow):\n    def __init__(self, default_dir=None):\n        super().__init__()\n        self.setWindowIcon(IconLoader.load_icon())\n        self.default_dir = default_dir or os.path.expanduser(\"~\")\n        self.current_file = None\n        self.watcher = QFileSystemWatcher()\n        self.watcher.fileChanged.connect(self.handle_file_changed)\n        self.scroll_positions = {'vertical': 0, 'horizontal': 0}\n        self.setup_ui()",
         "detail": "src.gui.dialogs.csv_table_viewer",
         "documentation": {}
     },
@@ -2004,7 +2052,7 @@
         "kind": 6,
         "importPath": "src.gui.dialogs.log_viewer_dialog",
         "description": "src.gui.dialogs.log_viewer_dialog",
-        "peekOfCode": "class LogViewerDialog(QDialog):\n    def __init__(self, settings: QSettings, parent=None):\n        super().__init__(parent)\n        self.setWindowTitle(\"日志查看器\")\n        self.resize(800, 600)\n        self.settings = settings\n        # 创建主布局\n        layout = QVBoxLayout()\n        # 创建工具栏布局\n        toolbar_layout = QHBoxLayout()",
+        "peekOfCode": "class LogViewerDialog(QDialog):\n    def __init__(self, settings: QSettings, parent=None):\n        super().__init__(parent)\n        self.setWindowIcon(IconLoader.load_icon())\n        self.setWindowTitle(\"日志查看器\")\n        self.resize(800, 600)\n        self.settings = settings\n        # 创建主布局\n        layout = QVBoxLayout()\n        # 创建工具栏布局",
         "detail": "src.gui.dialogs.log_viewer_dialog",
         "documentation": {}
     },
@@ -2047,51 +2095,6 @@
     {
         "label": "qInitResources",
         "kind": 2,
-        "importPath": "src.gui.resources.resources",
-        "description": "src.gui.resources.resources",
-        "peekOfCode": "def qInitResources():\n    QtCore.qRegisterResourceData(0x03, qt_resource_struct, qt_resource_name, qt_resource_data)\ndef qCleanupResources():\n    QtCore.qUnregisterResourceData(0x03, qt_resource_struct, qt_resource_name, qt_resource_data)\nqInitResources()",
-        "detail": "src.gui.resources.resources",
-        "documentation": {}
-    },
-    {
-        "label": "qCleanupResources",
-        "kind": 2,
-        "importPath": "src.gui.resources.resources",
-        "description": "src.gui.resources.resources",
-        "peekOfCode": "def qCleanupResources():\n    QtCore.qUnregisterResourceData(0x03, qt_resource_struct, qt_resource_name, qt_resource_data)\nqInitResources()",
-        "detail": "src.gui.resources.resources",
-        "documentation": {}
-    },
-    {
-        "label": "qt_resource_data",
-        "kind": 5,
-        "importPath": "src.gui.resources.resources",
-        "description": "src.gui.resources.resources",
-        "peekOfCode": "qt_resource_data = b\"\\\n\\x00\\x00\\x12\\x9b\\\n{\\\n\\x0d\\x0a  \\x22sayings\\x22: [\\\n\\x0d\\x0a    \\x22\\xe8\\xaf\\xb4\\xe7\\x9a\\x84\\xe8\\xaf\\x9d\\\n\\xe4\\xb8\\xba\\xe4\\xbb\\x80\\xe4\\xb9\\x88\\xe4\\xb8\\x8d\\xe8\\xae\\xb0\\xe5\\\n\\xbe\\x97\\xef\\xbc\\x8c\\xe4\\xb8\\xba\\xe4\\xbb\\x80\\xe4\\xb9\\x88\\xe4\\xb8\\\n\\x8d\\xe8\\xae\\xb0\\xe5\\xbe\\x97\\x22,\\x0d\\x0a    \\x22\\\n\\xe6\\x98\\xaf\\xe7\\x8e\\xb0\\xe5\\x9c\\xa8\\xe6\\x88\\x91\\xe6\\x89\\x80\\xe6\\\n\\x9c\\x89\\xe6\\x9c\\x9f\\xe5\\xbe\\x85\\xef\\xbc\\x8c\\xe6\\x89\\x80\\xe6\\x9c\\",
-        "detail": "src.gui.resources.resources",
-        "documentation": {}
-    },
-    {
-        "label": "qt_resource_name",
-        "kind": 5,
-        "importPath": "src.gui.resources.resources",
-        "description": "src.gui.resources.resources",
-        "peekOfCode": "qt_resource_name = b\"\\\n\\x00\\x06\\\n\\x07\\x03}\\xc3\\\n\\x00i\\\n\\x00m\\x00a\\x00g\\x00e\\x00s\\\n\\x00\\x07\\\n\\x0a\\xb9\\x04\\x03\\\n\\x00s\\\n\\x00t\\x00r\\x00i\\x00n\\x00g\\x00s\\\n\\x00\\x0c\\",
-        "detail": "src.gui.resources.resources",
-        "documentation": {}
-    },
-    {
-        "label": "qt_resource_struct",
-        "kind": 5,
-        "importPath": "src.gui.resources.resources",
-        "description": "src.gui.resources.resources",
-        "peekOfCode": "qt_resource_struct = b\"\\\n\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x01\\\n\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\\n\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x04\\\n\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\\n\\x00\\x00\\x00\\x12\\x00\\x02\\x00\\x00\\x00\\x01\\x00\\x00\\x00\\x03\\\n\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\\n\\x00\\x00\\x00&\\x00\\x00\\x00\\x00\\x00\\x01\\x00\\x00\\x00\\x00\\\n\\x00\\x00\\x01\\x93Oz\\x1b\\xcb\\\n\\x00\\x00\\x00h\\x00\\x00\\x00\\x00\\x00\\x01\\x00\\x05\\xe6\\xa2\\",
-        "detail": "src.gui.resources.resources",
-        "documentation": {}
-    },
-    {
-        "label": "qInitResources",
-        "kind": 2,
         "importPath": "src.gui.resources.resources_rc",
         "description": "src.gui.resources.resources_rc",
         "peekOfCode": "def qInitResources():\n    QtCore.qRegisterResourceData(0x03, qt_resource_struct, qt_resource_name, qt_resource_data)\ndef qCleanupResources():\n    QtCore.qUnregisterResourceData(0x03, qt_resource_struct, qt_resource_name, qt_resource_data)\nqInitResources()",
@@ -2130,7 +2133,7 @@
         "kind": 5,
         "importPath": "src.gui.resources.resources_rc",
         "description": "src.gui.resources.resources_rc",
-        "peekOfCode": "qt_resource_struct = b\"\\\n\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x01\\\n\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\\n\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x04\\\n\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\\n\\x00\\x00\\x00\\x12\\x00\\x02\\x00\\x00\\x00\\x01\\x00\\x00\\x00\\x03\\\n\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\\n\\x00\\x00\\x00&\\x00\\x00\\x00\\x00\\x00\\x01\\x00\\x00\\x00\\x00\\\n\\x00\\x00\\x01\\x93Oz\\x1b\\xcb\\\n\\x00\\x00\\x00h\\x00\\x00\\x00\\x00\\x00\\x01\\x00\\x05\\xe6\\xa2\\",
+        "peekOfCode": "qt_resource_struct = b\"\\\n\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x01\\\n\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\\n\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x00\\x00\\x03\\x00\\x00\\x00\\x04\\\n\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\\n\\x00\\x00\\x00\\x12\\x00\\x02\\x00\\x00\\x00\\x01\\x00\\x00\\x00\\x03\\\n\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\\n\\x00\\x00\\x00&\\x00\\x00\\x00\\x00\\x00\\x01\\x00\\x00\\x00\\x00\\\n\\x00\\x00\\x01\\x93Oz\\x1b\\xcb\\\n\\x00\\x00\\x00h\\x00\\x00\\x00\\x00\\x00\\x01\\x00\\x05\\xe6\\xa2\\",
         "detail": "src.gui.resources.resources_rc",
         "documentation": {}
     },
@@ -2148,7 +2151,7 @@
         "kind": 6,
         "importPath": "src.gui.main_window",
         "description": "src.gui.main_window",
-        "peekOfCode": "class MainWindow(QMainWindow):\n    def __init__(self):\n        super().__init__()\n        profile = \"Ming\" if getenv(\"APP_PROFILE\") == \"ming\" else \"\"\n        if profile != '':\n            self.setWindowTitle(f\"Swan - {profile}\")\n        else:\n            self.setWindowTitle('Swan')\n        self.resize(800, 600)\n        self.next_saying = ''",
+        "peekOfCode": "class MainWindow(QMainWindow):\n    def __init__(self):\n        super().__init__()\n        profile = \"Ming\" if getenv(\"APP_PROFILE\") == \"ming\" else \"\"\n        if profile != '':\n            self.setWindowTitle(f\"Swan - {profile}\")\n        else:\n            self.setWindowTitle('Swan')\n        self.resize(800, 600)\n        # 设置应用Icon",
         "detail": "src.gui.main_window",
         "documentation": {}
     },
@@ -2159,6 +2162,24 @@
         "description": "src.utils.config",
         "peekOfCode": "class Config:\n    __config_obj = None\n    __config_file_path = ''\n    def __init__(self, config_file_path) -> None:\n        if not os.path.exists(config_file_path):\n            raise FileNotFoundError('Cannot find the config file at %s' %\n                                    config_file_path)\n        config = toml.load(config_file_path)\n        self.__config_file_path = config_file_path\n        self.__config_obj = config",
         "detail": "src.utils.config",
+        "documentation": {}
+    },
+    {
+        "label": "IconLoader",
+        "kind": 6,
+        "importPath": "src.utils.icon_loader",
+        "description": "src.utils.icon_loader",
+        "peekOfCode": "class IconLoader():\n    def __init__(self) -> None:\n        pass\n    @staticmethod\n    def load_icon():\n        global SWAN_ICON\n        if SWAN_ICON == None:\n            pixmap = QPixmap(\":/images/swan_icon.png\")\n            SWAN_ICON = QIcon(pixmap)\n        return SWAN_ICON",
+        "detail": "src.utils.icon_loader",
+        "documentation": {}
+    },
+    {
+        "label": "SWAN_ICON",
+        "kind": 5,
+        "importPath": "src.utils.icon_loader",
+        "description": "src.utils.icon_loader",
+        "peekOfCode": "SWAN_ICON = None\nclass IconLoader():\n    def __init__(self) -> None:\n        pass\n    @staticmethod\n    def load_icon():\n        global SWAN_ICON\n        if SWAN_ICON == None:\n            pixmap = QPixmap(\":/images/swan_icon.png\")\n            SWAN_ICON = QIcon(pixmap)",
+        "detail": "src.utils.icon_loader",
         "documentation": {}
     },
     {

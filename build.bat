@@ -6,7 +6,7 @@ if "%~1"=="" (
 ) else (
     :: 将APP_PROFILE环境变量设为参数1的值
     set APP_PROFILE=%~1
-    echo 已将APP_PROFILE环境变量设置为: %KK%
+    echo 已将APP_PROFILE环境变量设置为: %APP_PROFILE%
 )
 
 :: build.bat

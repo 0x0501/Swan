@@ -5,10 +5,12 @@ from PySide6.QtWidgets import (QDialog, QVBoxLayout, QHBoxLayout, QTextEdit,
 from PySide6.QtCore import QTimer, QSettings
 from PySide6.QtGui import QTextCursor
 from PySide6.QtWidgets import QApplication
+from src.utils.icon_loader import IconLoader
 
 class LogViewerDialog(QDialog):
     def __init__(self, settings: QSettings, parent=None):
         super().__init__(parent)
+        self.setWindowIcon(IconLoader.load_icon())
         self.setWindowTitle("日志查看器")
         self.resize(800, 600)
         self.settings = settings

@@ -23,8 +23,9 @@ from src.utils.random_selector import RandomUniqueSelector
 from src.gui.widgets.starter_button import StarterButton
 from src.core.platform import Platform
 from src.gui.dialogs.account_check_dialog import AccountCheckDialog
-from src.gui.resources import resources
+from src.gui.resources import resources_rc
 from os import getenv
+from src.utils.icon_loader import IconLoader
 
 class MainWindow(QMainWindow):
 
@@ -38,6 +39,8 @@ class MainWindow(QMainWindow):
             self.setWindowTitle('Swan')
         
         self.resize(800, 600)
+        # 设置应用Icon
+        self.setWindowIcon(IconLoader.load_icon())
         self.next_saying = ''
         # 设置状态栏
         self.statusBar: QStatusBar = QStatusBar()

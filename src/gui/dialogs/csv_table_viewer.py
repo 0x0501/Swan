@@ -7,6 +7,7 @@ import pandas as pd
 import subprocess
 from loguru import logger
 from pyqttoast import Toast, ToastPreset
+from src.utils.icon_loader import IconLoader
 
 
 class CSVTableModel(QAbstractTableModel):
@@ -38,6 +39,7 @@ class CSVViewer(QMainWindow):
 
     def __init__(self, default_dir=None):
         super().__init__()
+        self.setWindowIcon(IconLoader.load_icon())
         self.default_dir = default_dir or os.path.expanduser("~")
         self.current_file = None
         self.watcher = QFileSystemWatcher()

@@ -30,7 +30,6 @@ class MainWindow(QMainWindow):
 
     def __init__(self):
         super().__init__()
-        print("Resource file exists:", QFile(':/strings/sayings.json').exists())
         self.setWindowTitle("Swan - Default")
         self.resize(800, 600)
         self.next_saying = ''
@@ -260,9 +259,11 @@ class MainWindow(QMainWindow):
         ########### insert layout ###########
         main_layout.addWidget(self.progress_bar)
         self.emitter.progress_updated.connect(self._update_progress)
-
         # Add bottom spacing
         main_layout.addSpacing(20)
+        
+        # check whether sayings file exist
+        logger.debug("Resource file exists:", QFile(':/strings/sayings.json').exists())
 
     def _create_menu_bar(self):
         menubar = self.menuBar()

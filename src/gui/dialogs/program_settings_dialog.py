@@ -1,11 +1,10 @@
-from PyQt6.QtWidgets import (QDialog, QVBoxLayout, QHBoxLayout, QLabel,
+from PySide6.QtWidgets import (QDialog, QVBoxLayout, QHBoxLayout, QLabel,
                              QLineEdit, QPushButton, QFormLayout, QComboBox,
                              QCheckBox)
-from PyQt6.QtCore import QSettings
-from tests.test_date import text
+from PySide6.QtCore import QSettings
 from src.core.encryption import Encryption
 from pyqttoast import Toast, ToastPreset
-from PyQt6.QtGui import QIntValidator
+from PySide6.QtGui import QIntValidator
 
 
 class ProgramSettingsDialog(QDialog):

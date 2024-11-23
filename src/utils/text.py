@@ -1,6 +1,5 @@
-from pathlib import Path
 import re
-from PyQt6.QtCore import QFile, QTextStream
+from PySide6.QtCore import QFile, QTextStream
 from loguru import logger
 import json
 
@@ -8,7 +7,7 @@ def load_json(qt_resource_path : str) -> dict:
     json_file = QFile(qt_resource_path)
     if not json_file.open(QFile.OpenModeFlag.ReadOnly | QFile.OpenModeFlag.Text):
         logger.error(f"Cannot open file {qt_resource_path} for reading.")
-        return
+        return {}
     stream = QTextStream(json_file)
     json_data = stream.readAll()
     json_file.close()

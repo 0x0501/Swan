@@ -1,12 +1,8 @@
-import traceback
-from PyQt6.QtWidgets import (QApplication, QMainWindow, QPushButton, 
-                            QMessageBox, QDialog, QTextEdit, QVBoxLayout,
+from PySide6.QtWidgets import (QApplication, QPushButton, 
+                            QDialog, QTextEdit, QVBoxLayout,
                             QHBoxLayout, QLabel)
-from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QPixmap
-from datetime import datetime
-import base64
-import src.gui.resources.resources
+from PySide6.QtCore import Qt
+from PySide6.QtGui import QPixmap
 
 class ErrorDialog(QDialog):
     def __init__(self, error_info, parent=None):

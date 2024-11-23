@@ -1,10 +1,10 @@
 import os
-from PyQt6.QtWidgets import (QDialog, QVBoxLayout, QHBoxLayout, QTextEdit, 
+from PySide6.QtWidgets import (QDialog, QVBoxLayout, QHBoxLayout, QTextEdit, 
                             QPushButton, QLabel, QMessageBox, QSpacerItem, 
                             QSizePolicy)
-from PyQt6.QtCore import Qt, QTimer, QSettings
-from PyQt6.QtGui import QClipboard, QTextCursor
-from PyQt6.QtWidgets import QApplication
+from PySide6.QtCore import QTimer, QSettings
+from PySide6.QtGui import QTextCursor
+from PySide6.QtWidgets import QApplication
 
 class LogViewerDialog(QDialog):
     def __init__(self, settings: QSettings, parent=None):

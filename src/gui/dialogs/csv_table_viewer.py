@@ -1,9 +1,8 @@
 import sys, os
-from PyQt6.QtWidgets import (QMainWindow, QWidget, QVBoxLayout, QTableView,
-                             QPushButton, QFileDialog, QStatusBar, QMenuBar,
-                             QApplication, QHeaderView)
-from PyQt6.QtCore import Qt, QFileSystemWatcher, QTimer, QAbstractTableModel
-from PyQt6.QtGui import QStandardItemModel, QAction, QKeySequence
+from PySide6.QtWidgets import (QMainWindow, QWidget, QVBoxLayout, QTableView,
+                             QFileDialog, QStatusBar, QApplication, QHeaderView)
+from PySide6.QtCore import Qt, QFileSystemWatcher, QTimer, QAbstractTableModel
+from PySide6.QtGui import QAction, QKeySequence
 import pandas as pd
 import subprocess
 from loguru import logger

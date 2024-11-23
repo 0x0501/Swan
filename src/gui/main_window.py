@@ -1,11 +1,10 @@
-from PyQt6.QtWidgets import (QMainWindow, QMenuBar, QMenu, QSystemTrayIcon,
-                             QStyle, QGraphicsDropShadowEffect, QStatusBar,
+from PySide6.QtWidgets import (QMainWindow, QMenu, QSystemTrayIcon,
+                             QStyle, QStatusBar,
                              QListView)
-from PyQt6.QtCore import Qt, QSettings, QObject, QEvent, QTimer, QSize
-from PyQt6.QtGui import QAction, QKeySequence, QIcon, QColor, QPixmap
+from PySide6.QtCore import Qt, QSettings, QTimer, QSize, QFile
+from PySide6.QtGui import QAction, QKeySequence, QIcon, QPixmap
 from loguru import logger
 from pathlib import Path
-from random import randint
 from src.core.encryption import Encryption
 from src.core.location import Location
 from src.gui.dialogs.about_dialog import AboutDialog
@@ -14,9 +13,7 @@ from src.gui.dialogs.program_settings_dialog import ProgramSettingsDialog
 from src.gui.dialogs.account_settings_dialog import AccountSettingsDialog
 from src.gui.dialogs.log_viewer_dialog import LogViewerDialog
 from src.core.swan import Swan
-from PyQt6.QtWidgets import QApplication, QDialog, QVBoxLayout, QLabel, QPushButton, QProgressBar, QWidget, QHBoxLayout, QComboBox
-import os
-import sys
+from PySide6.QtWidgets import QApplication, QVBoxLayout, QLabel, QPushButton, QProgressBar, QWidget, QHBoxLayout, QComboBox
 from src.gui.event.task_progress_tracker import TaskProgressTracker
 from src.gui.event.event_emitter import EventEmitter
 from src.gui.event.task_worker import TaskWorker
@@ -26,12 +23,14 @@ from src.utils.random_selector import RandomUniqueSelector
 from src.gui.widgets.starter_button import StarterButton
 from src.core.platform import Platform
 from src.gui.dialogs.account_check_dialog import AccountCheckDialog
+from src.gui.resources import resources
 
 
 class MainWindow(QMainWindow):
 
     def __init__(self):
         super().__init__()
+        print("Resource file exists:", QFile(':/strings/sayings.json').exists())
         self.setWindowTitle("Swan - Default")
         self.resize(800, 600)
         self.next_saying = ''

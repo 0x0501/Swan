@@ -1,12 +1,12 @@
-from PyQt6.QtCore import QThread, pyqtSignal
+from PySide6.QtCore import QThread, Signal
 from loguru import logger
 from src.core.swan import Swan
 from src.core.location import Location
 
 
 class TaskWorker(QThread):
-    finished = pyqtSignal()
-    error = pyqtSignal(str)
+    finished = Signal(bool)
+    error = Signal(str)
     
     def __init__(self, swan: Swan, location: Location):
         super().__init__()
@@ -15,6 +15,11 @@ class TaskWorker(QThread):
         self.swan.set_location(location)
         logger.debug('Current Location (in task_worker): %s' % self.swan.location)
         self._is_running = True
+        self._is_finished = False
+        self.finished.connect(lambda result: self._on_finished(result))
+        
+    def _on_finished(self, result):
+        self._is_finished = result
         
     def set_location(self, location : Location):
         self.swan.set_location(location)
@@ -39,6 +44,6 @@ class TaskWorker(QThread):
         if self.swan:
             # 在另一个线程中执行grace_shutdown
             self.swan._running = False  # 立即设置停止标志
-            logger.warning('Send `stop` command to Swan (task_worker), current finished flag: %s' % self.finished.signal)
+            logger.warning('Send `stop` command to Swan (task_worker), signal connected: %s' % self._is_finished)
             # 不要在这里调用wait()，让线程自然结束
             # self.wait()  # 移除这行

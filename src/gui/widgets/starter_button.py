@@ -1,6 +1,6 @@
-from PyQt6.QtWidgets import QApplication, QPushButton, QVBoxLayout, QWidget
-from PyQt6.QtGui import QPixmap, QIcon, QCursor
-from PyQt6.QtCore import Qt
+from PySide6.QtWidgets import QPushButton
+from PySide6.QtGui import QIcon, QCursor
+from PySide6.QtCore import Qt
 
 class StarterButton(QPushButton):
     def __init__(self, pixmap, parent=None):

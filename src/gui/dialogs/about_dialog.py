@@ -1,6 +1,6 @@
 import platform
-from PyQt6.QtWidgets import QDialog, QVBoxLayout, QLabel, QPushButton
-from PyQt6.QtCore import Qt
+from PySide6.QtWidgets import QDialog, QVBoxLayout, QLabel, QPushButton
+from PySide6.QtCore import Qt
 from src.core.swan import Swan
 
 class AboutDialog(QDialog):

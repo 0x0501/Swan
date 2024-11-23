@@ -2,7 +2,7 @@ from loguru import logger
 import traceback
 import sys
 import traceback
-from PyQt6.QtWidgets import QApplication
+from PySide6.QtWidgets import QApplication
 from src.gui.dialogs.error_dialog import ErrorDialog
 
 

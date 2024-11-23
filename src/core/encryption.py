@@ -1,4 +1,4 @@
-from PyQt6.QtCore import QSettings
+from PySide6.QtCore import QSettings
 import base64
 from cryptography.fernet import Fernet
 from loguru import logger

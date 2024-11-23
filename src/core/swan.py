@@ -1,4 +1,4 @@
-from PyQt6.QtCore import QSettings
+from PySide6.QtCore import QSettings
 import os
 from random import randint
 import sys

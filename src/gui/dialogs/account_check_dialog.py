@@ -1,7 +1,7 @@
-from PyQt6.QtWidgets import (QDialog, QVBoxLayout, QHBoxLayout, QLabel,
-                             QLineEdit, QPushButton, QFormLayout, QFrame, QWidget)
-from PyQt6.QtCore import QSettings, Qt
-from PyQt6.QtGui import QFont, QPixmap
+from PySide6.QtWidgets import (QDialog, QVBoxLayout, QHBoxLayout, QLabel,
+                             QPushButton, QWidget)
+from PySide6.QtCore import Qt
+from PySide6.QtGui import QPixmap
 
 class AccountCheckDialog(QDialog):
     def __init__(self, parent: QWidget, message = str) -> None:

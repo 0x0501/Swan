@@ -1,5 +1,5 @@
 import sys
-from PyQt6.QtWidgets import QApplication
+from PySide6.QtWidgets import QApplication
 from src.core.global_error_handler import GlobalErrorHandler
 from src.gui.main_window import MainWindow
 

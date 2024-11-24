@@ -1,7 +1,7 @@
 from PySide6.QtWidgets import (QDialog, QVBoxLayout, QHBoxLayout, QLabel,
                              QLineEdit, QPushButton, QFormLayout, QComboBox,
                              QCheckBox)
-from PySide6.QtCore import QSettings
+from PySide6.QtCore import QSettings, Qt
 from src.core.encryption import Encryption
 from pyqttoast import Toast, ToastPreset
 from PySide6.QtGui import QIntValidator
@@ -30,7 +30,7 @@ class ProgramSettingsDialog(QDialog):
         self.page_maximum.setPlaceholderText('请输入最大抓取的页数（数字）')
 
         self.setWindowTitle('程序设置')
-        self.setFixedSize(500, 300)
+        self.setFixedWidth(500)
         self.is_system_tray_state = False
         # 配置需要加密的qsettings
         self.encryption = Encryption(
@@ -49,6 +49,7 @@ class ProgramSettingsDialog(QDialog):
         # 日志等级
         self.log_level = QComboBox()
         log_level_label = QLabel('日志等级')
+        log_level_label.setStyleSheet("QLabel { margin-right: 72px; }")
         self.log_level.addItem("All")
         self.log_level.addItem("Info")
         self.log_level.addItem("Debug")
@@ -61,7 +62,6 @@ class ProgramSettingsDialog(QDialog):
             self.settings.value('is_system_tray', type=bool))
         self.is_system_tray.stateChanged.connect(self._on_checkbox_changed)
         is_system_tary_label = QLabel('是否开启最小化')
-
         # 密钥状态以及刷新密钥
         # self.crypto_status = QText
         encryption_status_label = QLabel(
@@ -72,6 +72,7 @@ class ProgramSettingsDialog(QDialog):
             self._refresh_encryption_key)
 
         # 添加表单项
+        form_layout.setVerticalSpacing(10)
         form_layout.addRow('配置文件路径:', self.config_path)
         form_layout.addRow('日志文件路径:', self.log_path)
         form_layout.addRow('最大抓取页数:', self.page_maximum)
@@ -89,7 +90,9 @@ class ProgramSettingsDialog(QDialog):
         encryption_layout.addWidget(generate_encryption_key_btn)
 
         layout.addLayout(form_layout)
+        layout.addSpacing(10)
         layout.addLayout(h_layout)
+        layout.addSpacing(10)
         layout.addLayout(encryption_layout)
 
         # 添加按钮

@@ -202,6 +202,14 @@
         "documentation": {}
     },
     {
+        "label": "Qt",
+        "importPath": "PySide6.QtCore",
+        "description": "PySide6.QtCore",
+        "isExtraImport": true,
+        "detail": "PySide6.QtCore",
+        "documentation": {}
+    },
+    {
         "label": "QObject",
         "importPath": "PySide6.QtCore",
         "description": "PySide6.QtCore",
@@ -1490,6 +1498,46 @@
         "documentation": {}
     },
     {
+        "label": "IconLoader",
+        "importPath": "src.utils.icon_loader",
+        "description": "src.utils.icon_loader",
+        "isExtraImport": true,
+        "detail": "src.utils.icon_loader",
+        "documentation": {}
+    },
+    {
+        "label": "StyleSheetManager",
+        "importPath": "src.utils.stylesheet_manager",
+        "description": "src.utils.stylesheet_manager",
+        "isExtraImport": true,
+        "detail": "src.utils.stylesheet_manager",
+        "documentation": {}
+    },
+    {
+        "label": "StyleSheetManager",
+        "importPath": "src.utils.stylesheet_manager",
+        "description": "src.utils.stylesheet_manager",
+        "isExtraImport": true,
+        "detail": "src.utils.stylesheet_manager",
+        "documentation": {}
+    },
+    {
+        "label": "StyleSheetManager",
+        "importPath": "src.utils.stylesheet_manager",
+        "description": "src.utils.stylesheet_manager",
+        "isExtraImport": true,
+        "detail": "src.utils.stylesheet_manager",
+        "documentation": {}
+    },
+    {
+        "label": "StyleSheetManager",
+        "importPath": "src.utils.stylesheet_manager",
+        "description": "src.utils.stylesheet_manager",
+        "isExtraImport": true,
+        "detail": "src.utils.stylesheet_manager",
+        "documentation": {}
+    },
+    {
         "label": "EventEmitter",
         "importPath": "src.gui.event.event_emitter",
         "description": "src.gui.event.event_emitter",
@@ -2035,7 +2083,7 @@
         "kind": 6,
         "importPath": "src.gui.dialogs.error_dialog",
         "description": "src.gui.dialogs.error_dialog",
-        "peekOfCode": "class ErrorDialog(QDialog):\n    def __init__(self, error_info, parent=None):\n        super().__init__(parent)\n        self.setWindowTitle(\"Oops, Swan崩溃了!\")\n        self.setMinimumWidth(600)\n        self.setMinimumHeight(300)\n        # 创建主布局\n        main_layout = QVBoxLayout()\n        # 创建水平布局来放置图片和文本\n        content_layout = QHBoxLayout()",
+        "peekOfCode": "class ErrorDialog(QDialog):\n    def __init__(self, error_info, parent=None):\n        super().__init__(parent)\n        self.setWindowTitle(\"Oops, Swan崩溃了!\")\n        self.setMinimumWidth(600)\n        self.setMinimumHeight(300)\n        self.setWindowIcon(IconLoader.load_icon())\n        self.setStyleSheet(StyleSheetManager.fluent_like_style())\n        # 创建主布局\n        main_layout = QVBoxLayout()",
         "detail": "src.gui.dialogs.error_dialog",
         "documentation": {}
     },
@@ -2044,7 +2092,7 @@
         "kind": 6,
         "importPath": "src.gui.dialogs.log_viewer_dialog",
         "description": "src.gui.dialogs.log_viewer_dialog",
-        "peekOfCode": "class LogViewerDialog(QDialog):\n    def __init__(self, settings: QSettings, parent=None):\n        super().__init__(parent)\n        self.setWindowIcon(IconLoader.load_icon())\n        self.setWindowTitle(\"日志查看器\")\n        self.resize(800, 600)\n        self.settings = settings\n        # 创建主布局\n        layout = QVBoxLayout()\n        # 创建工具栏布局",
+        "peekOfCode": "class LogViewerDialog(QDialog):\n    def __init__(self, settings: QSettings, parent=None):\n        super().__init__(parent)\n        self.setWindowIcon(IconLoader.load_icon())\n        self.setWindowTitle(\"日志查看器\")\n        self.resize(800, 600)\n        self.settings = settings\n        # 应用样式\n        self.setStyleSheet(StyleSheetManager.fluent_like_style())\n        # 创建主布局",
         "detail": "src.gui.dialogs.log_viewer_dialog",
         "documentation": {}
     },
@@ -2184,6 +2232,15 @@
         "documentation": {}
     },
     {
+        "label": "StyleSheetManager",
+        "kind": 6,
+        "importPath": "src.utils.stylesheet_manager",
+        "description": "src.utils.stylesheet_manager",
+        "peekOfCode": "class StyleSheetManager():\n    def __init__(self) -> None:\n        pass\n    @staticmethod\n    def fluent_like_style():\n        return \"\"\"\n        /* 全局样式 */\n        * {\n            font-family: \"Segoe UI\", \"Microsoft YaHei\";\n            color: #2b2b2b;",
+        "detail": "src.utils.stylesheet_manager",
+        "documentation": {}
+    },
+    {
         "label": "load_json",
         "kind": 2,
         "importPath": "src.utils.text",
@@ -2217,15 +2274,6 @@
         "description": "src.utils.text",
         "peekOfCode": "def extract_and_convert_score(text: str):\n    # 定义映射关系\n    score_mapping = {\n        'sml-str5': 0.5,\n        'sml-str10': 1.0,\n        'sml-str15': 1.5,\n        'sml-str20': 2.0,\n        'sml-str25': 2.5,\n        'sml-str30': 3.0,\n        'sml-str35': 3.5,",
         "detail": "src.utils.text",
-        "documentation": {}
-    },
-    {
-        "label": "exit_code",
-        "kind": 5,
-        "importPath": "test.build.scons-debug",
-        "description": "test.build.scons-debug",
-        "peekOfCode": "exit_code = subprocess.call(\n    ['E:\\\\Code Space\\\\comment\\\\env\\\\Scripts\\\\python.exe', '-W', 'ignore', 'E:\\\\Code Space\\\\comment\\\\env\\\\Lib\\\\site-packages\\\\nuitka\\\\build\\\\inline_copy\\\\bin\\\\scons.py', '-f', 'E:\\\\Code Space\\\\comment\\\\env\\\\Lib\\\\site-packages\\\\nuitka\\\\build\\\\Backend.scons', '--jobs', '12', '--warn=no-deprecated', '--no-site-dir', '--debug=stacktrace', 'source_dir=.', 'nuitka_python=false', 'debug_mode=false', 'debugger_mode=false', 'python_debug=false', 'module_mode=false', 'full_compat=false', 'experimental=', 'trace_mode=false', 'file_reference_mode=runtime', 'module_count=266', 'gil_mode=true', 'result_exe=E:\\\\Code Space\\\\comment\\\\test.dist\\\\test.exe', 'standalone_mode=true', 'frozen_modules=152', 'python_sysflag_no_site=true', 'nuitka_src=E:\\\\Code Space\\\\comment\\\\env\\\\Lib\\\\site-packages\\\\nuitka\\\\build', 'python_version=3.10', 'python_prefix=C:\\\\Users\\\\kar\\\\scoop\\\\apps\\\\python310\\\\3.10.11', 'debug_modes=', 'no_deployment=', 'show_scons=true', 'console_mode=force', 'noelf_mode=true', 'target_arch=x86_64'],\n    env={'ALLUSERSPROFILE': 'C:\\\\ProgramData', 'APPDATA': 'C:\\\\Users\\\\kar\\\\AppData\\\\Roaming', 'ASL.LOG': 'Destination=file', 'CARGO_HOME': 'C:\\\\Users\\\\kar\\\\scoop\\\\persist\\\\rustup\\\\.cargo', 'CHROME_CRASHPAD_PIPE_NAME': '\\\\\\\\.\\\\pipe\\\\crashpad_6812_AHGIOHAVNAVLPQST', 'COMMONPROGRAMFILES': 'C:\\\\Program Files\\\\Common Files', 'COMMONPROGRAMFILES(X86)': 'C:\\\\Program Files (x86)\\\\Common Files', 'COMMONPROGRAMW6432': 'C:\\\\Program Files\\\\Common Files', 'COMPUTERNAME': 'LAPTOP-V6E93N4N', 'COMSPEC': 'C:\\\\Windows\\\\system32\\\\cmd.exe', 'DOKANLIBRARY2': 'C:\\\\Program Files\\\\Dokan\\\\DokanLibrary-2.0.6\\\\', 'DRIVERDATA': 'C:\\\\Windows\\\\System32\\\\Drivers\\\\DriverData', 'EFC_17160': '1', 'FPS_BROWSER_APP_PROFILE_STRING': 'Internet Explorer', 'FPS_BROWSER_USER_PROFILE_STRING': 'Default', 'GIT_INSTALL_ROOT': 'C:\\\\Users\\\\kar\\\\scoop\\\\apps\\\\git\\\\current', 'HOMEDRIVE': 'C:', 'HOMEPATH': '\\\\Users\\\\kar', 'INTEL_DEV_REDIST': 'C:\\\\Program Files (x86)\\\\Common Files\\\\Intel\\\\Shared Libraries\\\\', 'LIBCLANG_PATH': 'C:\\\\Users\\\\kar\\\\scoop\\\\apps\\\\llvm\\\\current\\\\bin', 'LLVM_LIB_DIR': 'C:\\\\Users\\\\kar\\\\scoop\\\\apps\\\\llvm\\\\current\\\\lib', 'LOCALAPPDATA': 'C:\\\\Users\\\\kar\\\\AppData\\\\Local', 'LOGONSERVER': '\\\\\\\\LAPTOP-V6E93N4N', 'MIC_LD_LIBRARY_PATH': 'C:\\\\Program Files (x86)\\\\Common Files\\\\Intel\\\\Shared Libraries\\\\compiler\\\\lib\\\\mic', 'NUITKA_SITE_FILENAME': '28060:C:\\\\Users\\\\kar\\\\scoop\\\\apps\\\\python310\\\\current\\\\lib\\\\site.py', 'NUMBER_OF_PROCESSORS': '12', 'ONEDRIVE': 'C:\\\\Users\\\\kar\\\\OneDrive', 'ORIGINAL_XDG_CURRENT_DESKTOP': 'undefined', 'OS': 'Windows_NT', 'PATH': 'c:\\\\Users\\\\kar\\\\.vscode\\\\extensions\\\\ms-python.python-2024.20.0-win32-x64\\\\python_files\\\\deactivate\\\\powershell;E:\\\\Code Space\\\\comment\\\\env\\\\Scripts;c:\\\\Users\\\\kar\\\\.vscode\\\\extensions\\\\ms-python.python-2024.20.0-win32-x64\\\\python_files\\\\deactivate\\\\powershell;E:\\\\Code Space\\\\comment\\\\env\\\\Scripts;C:\\\\Program Files (x86)\\\\Common Files\\\\Intel\\\\Shared Libraries\\\\redist\\\\intel64\\\\compiler;C:\\\\Program Files (x86)\\\\VMware\\\\VMware Workstation\\\\bin\\\\;C:\\\\Windows\\\\system32;C:\\\\Windows;C:\\\\Windows\\\\System32\\\\Wbem;C:\\\\Windows\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\;C:\\\\Windows\\\\System32\\\\OpenSSH\\\\;C:\\\\Program Files\\\\Calibre2\\\\;C:\\\\Program Files\\\\Cloudflare\\\\Cloudflare WARP\\\\;D:\\\\Xshell\\\\;C:\\\\Program Files\\\\dotnet\\\\;C:\\\\Users\\\\kar\\\\scoop\\\\apps\\\\python310\\\\current\\\\Scripts;C:\\\\Users\\\\kar\\\\scoop\\\\apps\\\\python310\\\\current;C:\\\\Users\\\\kar\\\\scoop\\\\apps\\\\nodejs\\\\current\\\\bin;C:\\\\Users\\\\kar\\\\scoop\\\\apps\\\\nodejs\\\\current;C:\\\\Users\\\\kar\\\\scoop\\\\apps\\\\llvm\\\\current\\\\bin;C:\\\\Users\\\\kar\\\\scoop\\\\apps\\\\rustup\\\\current\\\\.cargo\\\\bin;C:\\\\Users\\\\kar\\\\scoop\\\\shims;C:\\\\Users\\\\kar\\\\AppData\\\\Local\\\\Microsoft\\\\WindowsApps;D:\\\\Microsoft VS Code\\\\bin', 'PATHEXT': '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.CPL', 'PROCESSOR_ARCHITECTURE': 'AMD64', 'PROCESSOR_IDENTIFIER': 'Intel64 Family 6 Model 154 Stepping 3, GenuineIntel', 'PROCESSOR_LEVEL': '6', 'PROCESSOR_REVISION': '9a03', 'PROGRAMDATA': 'C:\\\\ProgramData', 'PROGRAMFILES': 'C:\\\\Program Files', 'PROGRAMFILES(X86)': 'C:\\\\Program Files (x86)', 'PROGRAMW6432': 'C:\\\\Program Files', 'PROMPT': '$P$G', 'PSMODULEPATH': 'C:\\\\Users\\\\kar\\\\Documents\\\\WindowsPowerShell\\\\Modules;C:\\\\Program Files\\\\WindowsPowerShell\\\\Modules;C:\\\\Windows\\\\system32\\\\WindowsPowerShell\\\\v1.0\\\\Modules', 'PUBLIC': 'C:\\\\Users\\\\Public', 'PYTHONHASHSEED': '0', 'RG_GPU_FRAMEWORK_ENGINE_RESOURCEDIR': 'C:\\\\Program Files\\\\Red Giant\\\\RGFX', 'RG_UNIVERSE_FRAMEWORK_RESOURCEDIR': 'C:\\\\Program Files\\\\Red Giant\\\\RGFX', 'RUSTUP_HOME': 'C:\\\\Users\\\\kar\\\\scoop\\\\persist\\\\rustup\\\\.rustup', 'SESSIONNAME': 'Console', 'SYSTEMDRIVE': 'C:', 'SYSTEMROOT': 'C:\\\\Windows', 'TEMP': 'C:\\\\Users\\\\kar\\\\AppData\\\\Local\\\\Temp', 'TMP': 'C:\\\\Users\\\\kar\\\\AppData\\\\Local\\\\Temp', 'USERDOMAIN': 'LAPTOP-V6E93N4N', 'USERDOMAIN_ROAMINGPROFILE': 'LAPTOP-V6E93N4N', 'USERNAME': 'kar', 'USERPROFILE': 'C:\\\\Users\\\\kar', 'WINDIR': 'C:\\\\Windows', 'ZES_ENABLE_SYSMAN': '1', 'TERM_PROGRAM': 'vscode', 'TERM_PROGRAM_VERSION': '1.95.3', 'LANG': 'en_US.UTF-8', 'COLORTERM': 'truecolor', 'GIT_ASKPASS': 'd:\\\\Microsoft VS Code\\\\resources\\\\app\\\\extensions\\\\git\\\\dist\\\\askpass.sh', 'VSCODE_GIT_ASKPASS_NODE': 'D:\\\\Microsoft VS Code\\\\Code.exe', 'VSCODE_GIT_ASKPASS_EXTRA_ARGS': '', 'VSCODE_GIT_ASKPASS_MAIN': 'd:\\\\Microsoft VS Code\\\\resources\\\\app\\\\extensions\\\\git\\\\dist\\\\askpass-main.js', 'VSCODE_GIT_IPC_HANDLE': '\\\\\\\\.\\\\pipe\\\\vscode-git-ffaae7119d-sock', 'VIRTUAL_ENV': 'E:\\\\Code Space\\\\comment\\\\env', 'VIRTUAL_ENV_PROMPT': 'env', 'VSCODE_INJECTION': '1', 'NUITKA_PYTHON_EXE_PATH': 'E:\\\\Code Space\\\\comment\\\\env\\\\Scripts\\\\python.exe', 'NUITKA_PACKAGE_DIR': 'E:\\\\Code Space\\\\comment\\\\env\\\\lib\\\\site-packages\\\\nuitka', 'NUITKA_CACHE_DIR_DOWNLOADS': 'C:\\\\Users\\\\kar\\\\AppData\\\\Local\\\\Nuitka\\\\Nuitka\\\\Cache\\\\DOWNLO~1', '_NUITKA_BUILD_DEFINITIONS_CATALOG': '_NUITKA_BUILD_DEFINITIONS_CATALOG', 'NUITKA_QUIET': '0'},\n    shell=False\n)",
-        "detail": "test.build.scons-debug",
         "documentation": {}
     },
     {
@@ -2386,7 +2434,7 @@
         "kind": 2,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "def main():\n    # 设置全局异常处理\n    sys.excepthook = exception_hook\n    # Windows 10/11 风格设置\n    QApplication.setStyle(\"Macintosh\")\n    app = QApplication(sys.argv)\n    # 设置Qt的异常处理\n    window = MainWindow()\n    window.show()\n    sys.exit(app.exec())",
+        "peekOfCode": "def main():\n    # 设置全局异常处理\n    sys.excepthook = exception_hook\n    # Windows 10/11 风格设置\n    QApplication.setStyle(\"Macintosh\")\n    app = QApplication(sys.argv)\n    # 设置Qt的异常处理\n    window = MainWindow()\n    window.setStyleSheet(StyleSheetManager.fluent_like_style())\n    window.show()",
         "detail": "main",
         "documentation": {}
     }

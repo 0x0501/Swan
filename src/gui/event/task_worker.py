@@ -2,7 +2,7 @@ from PySide6.QtCore import QThread, Signal
 from loguru import logger
 from src.core.swan import Swan
 from src.core.location import Location
-
+import traceback
 
 class TaskWorker(QThread):
     finished = Signal(bool)
@@ -33,9 +33,10 @@ class TaskWorker(QThread):
                 # flush data into disk
                 recorder.record()
                 logger.debug('Swan task has finished (task_worker).')
-            self.finished.emit()
+            self.finished.emit(True)
         except Exception as e:
             self.error.emit(str(e))
+            logger.error(e)
         finally:
             self._is_running = False
             

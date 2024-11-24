@@ -3,6 +3,8 @@ from PySide6.QtWidgets import (QApplication, QPushButton,
                             QHBoxLayout, QLabel)
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QPixmap
+from src.utils.stylesheet_manager import StyleSheetManager
+from src.utils.icon_loader import IconLoader
 
 class ErrorDialog(QDialog):
     def __init__(self, error_info, parent=None):
@@ -10,6 +12,8 @@ class ErrorDialog(QDialog):
         self.setWindowTitle("Oops, Swan崩溃了!")
         self.setMinimumWidth(600)
         self.setMinimumHeight(300)
+        self.setWindowIcon(IconLoader.load_icon())
+        self.setStyleSheet(StyleSheetManager.fluent_like_style())
 
         # 创建主布局
         main_layout = QVBoxLayout()

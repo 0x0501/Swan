@@ -26,6 +26,7 @@ from src.gui.dialogs.account_check_dialog import AccountCheckDialog
 from src.gui.resources import resources_rc
 from os import getenv
 from src.utils.icon_loader import IconLoader
+import traceback
 
 class MainWindow(QMainWindow):
 
@@ -70,54 +71,7 @@ class MainWindow(QMainWindow):
         self.statusBar.addWidget(self.statusBar_extra)
 
         self.setStatusBar(self.statusBar)
-        # 设置菜单栏样式
-        self.setStyleSheet("""
-            QMenuBar {
-                border-bottom:1px solid #d9d9d9;
-                font-size: 10pt;
-                padding: 0;
-                margin: 0;
-            }
-            QMenuBar::item {
-                padding-top: 5px;
-                padding-left: 15px;
-                padding-right: 15px;
-                padding-bottom: 5px;
-                font-size: 10pt;
-                background: transparent;  /* 确保背景透明 */
-            }
-            QMenuBar::item::selected, QMenuBar::item::hover  {
-                color: black;
-                background-color: #f0f0f0;
-                font-size: 10pt;
-                padding: 5px 15px;  /* 确保悬停时padding不变 */
-            }
-            QMenu {
-                color:black;
-                background-color:white; 
-                border-radius:0;
-                font-size: 10pt;
-                border:1px solid #bbbbbb;
-            }
-            QMenu::item {
-                padding: 4px 20px;
-            }
-            QMenu::item::text {
-                margin: 5px 2px;
-            }
 
-            QMenu::item:selected { 
-                color:#1aa3ff;
-                background-color: #e5f5ff;
-            }
-            QMenu::separator{
-                height:10px;
-                background:#bbbbbb;
-                margin:5px;
-                margin-left:10px;
-                margin-right:10px;
-            }
-        """)
         # 判断是最小化还是退出
         self.settings = QSettings('swan_gui', 'settings')
         self.encryption = Encryption(self.settings.value('encryption_dir_path', './bin'), self.settings, None)
@@ -480,8 +434,9 @@ class MainWindow(QMainWindow):
         toast.setText('Swan运行出错: %s' % error_message)
         toast.applyPreset(ToastPreset.ERROR)
         toast.show()
+        logger.error(error_message)
         # throw an error for global error handler
-        # raise Exception(error_message)
+        raise Exception(error_message)
 
     def _test_update_progress(self):
         # 模拟进度更新

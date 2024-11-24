@@ -2,6 +2,7 @@ import sys
 from PySide6.QtWidgets import QApplication
 from src.core.global_error_handler import GlobalErrorHandler
 from src.gui.main_window import MainWindow
+from src.utils.stylesheet_manager import StyleSheetManager
 
 
 def exception_hook(exc_type, exc_value, exc_traceback):
@@ -17,14 +18,15 @@ def exception_hook(exc_type, exc_value, exc_traceback):
 def main():
     # 设置全局异常处理
     sys.excepthook = exception_hook
-    
+
     # Windows 10/11 风格设置
     QApplication.setStyle("Macintosh")
 
     app = QApplication(sys.argv)
     # 设置Qt的异常处理
-    
+
     window = MainWindow()
+    window.setStyleSheet(StyleSheetManager.fluent_like_style())
     window.show()
     sys.exit(app.exec())
 

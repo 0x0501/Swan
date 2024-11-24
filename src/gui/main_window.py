@@ -81,6 +81,9 @@ class MainWindow(QMainWindow):
         # 初始化Swan实例, 在Launch中再赋值
         self.swan = None
         self.task_worker = None
+        
+        # initialization
+        logger.add(self.settings.value('log_path', './logs/swan.log'))
 
         self._create_menu_bar()
         self._create_status_bar()

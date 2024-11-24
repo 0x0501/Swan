@@ -87,7 +87,7 @@ class Encryption:
                             old_data[key] = decrypted_data
                             logger.debug(f"Successfully decrypted old data for key: {key}")
                 except Exception as e:
-                    logger.error(f"解密键 {key} 时出错: {str(e)}")
+                    logger.error(f"Decrypted the `{key}` error: {str(e)}")
                     continue
 
             # 生成新密钥
@@ -105,7 +105,7 @@ class Encryption:
                     self.settings.setValue(key, encoded_value)
                     logger.debug(f"Successfully re-encrypted data for key: {key}")
                 except Exception as e:
-                    logger.error(f"重新加密键 {key} 时出错: {str(e)}")
+                    logger.error(f"Re-encrypted `{key}` error (regenerate_key): {str(e)}")
                     # 如果重新加密失败，恢复使用旧密钥
                     self.fernet = old_fernet
                     return -1
@@ -116,7 +116,7 @@ class Encryption:
             return len(old_data)
 
         except Exception as e:
-            logger.error(f"重新生成密钥时发生错误: {str(e)}")
+            logger.error(f"Regenerate Key Error (regenerate_key): {str(e)}")
             return -1
 
     def set_encrypted(self, key: str, value: str):
@@ -155,7 +155,7 @@ class Encryption:
             self.settings.sync()
             
         except Exception as e:
-            logger.error(f"加密失败 - 键: {key}, 错误: {str(e)}")
+            logger.error(f"Encrypted with the key `{key}` error: {str(e)}")
             raise
 
     def get_encrypted(self, key: str, default: str = None) -> str:
@@ -184,9 +184,9 @@ class Encryption:
             decrypted_data = self.fernet.decrypt(encrypted_data)
             return decrypted_data.decode()
         except Exception as e:
-            logger.error(f"解密失败 - 键: {key}, 错误: {str(e)}")
+            logger.error(f"Decrypted with the key `{key}` error: {str(e)}")
             # 记录更详细的错误信息用于调试
-            logger.debug(f"当前值: {value}")
+            logger.debug(f"Current value (encrypted) with the key {key}: {value}")
             return default
 
     def setValue(self, key: str, value):

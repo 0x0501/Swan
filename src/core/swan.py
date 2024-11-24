@@ -42,7 +42,7 @@ class Swan():
             None)
         self.page_maximum = self.settings.value('page_maximum', 600, type=int)
         # log initialization
-        logger.add(self.log_file_path)
+        # logger.add(self.log_file_path)
         self.progress_tracker = progress_tracker
         
     @staticmethod

@@ -72,7 +72,8 @@ class StyleSheetManager():
         }
 
         QComboBox::down-arrow {
-            image: url(down_arrow.png);  /* 需要自行提供下拉箭头图标 */
+            image: url(:/icons/chevron-down.svg);  /* 需要自行提供下拉箭头图标 */
+            margin-right: 10px;
             width: 12px;
             height: 12px;
         }

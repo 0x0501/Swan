@@ -186,6 +186,30 @@
         "documentation": {}
     },
     {
+        "label": "Signal",
+        "importPath": "PySide6.QtCore",
+        "description": "PySide6.QtCore",
+        "isExtraImport": true,
+        "detail": "PySide6.QtCore",
+        "documentation": {}
+    },
+    {
+        "label": "QThread",
+        "importPath": "PySide6.QtCore",
+        "description": "PySide6.QtCore",
+        "isExtraImport": true,
+        "detail": "PySide6.QtCore",
+        "documentation": {}
+    },
+    {
+        "label": "QTimer",
+        "importPath": "PySide6.QtCore",
+        "description": "PySide6.QtCore",
+        "isExtraImport": true,
+        "detail": "PySide6.QtCore",
+        "documentation": {}
+    },
+    {
         "label": "QSettings",
         "importPath": "PySide6.QtCore",
         "description": "PySide6.QtCore",
@@ -741,6 +765,62 @@
         "documentation": {}
     },
     {
+        "label": "QApplication",
+        "importPath": "PySide6.QtWidgets",
+        "description": "PySide6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PySide6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QMainWindow",
+        "importPath": "PySide6.QtWidgets",
+        "description": "PySide6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PySide6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QPushButton",
+        "importPath": "PySide6.QtWidgets",
+        "description": "PySide6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PySide6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QDialog",
+        "importPath": "PySide6.QtWidgets",
+        "description": "PySide6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PySide6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QProgressBar",
+        "importPath": "PySide6.QtWidgets",
+        "description": "PySide6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PySide6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QVBoxLayout",
+        "importPath": "PySide6.QtWidgets",
+        "description": "PySide6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PySide6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QLabel",
+        "importPath": "PySide6.QtWidgets",
+        "description": "PySide6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PySide6.QtWidgets",
+        "documentation": {}
+    },
+    {
         "label": "QDialog",
         "importPath": "PySide6.QtWidgets",
         "description": "PySide6.QtWidgets",
@@ -942,6 +1022,14 @@
     },
     {
         "label": "QListView",
+        "importPath": "PySide6.QtWidgets",
+        "description": "PySide6.QtWidgets",
+        "isExtraImport": true,
+        "detail": "PySide6.QtWidgets",
+        "documentation": {}
+    },
+    {
+        "label": "QDialog",
         "importPath": "PySide6.QtWidgets",
         "description": "PySide6.QtWidgets",
         "isExtraImport": true,
@@ -1506,11 +1594,11 @@
         "documentation": {}
     },
     {
-        "label": "StyleSheetManager",
-        "importPath": "src.utils.stylesheet_manager",
-        "description": "src.utils.stylesheet_manager",
+        "label": "IconLoader",
+        "importPath": "src.utils.icon_loader",
+        "description": "src.utils.icon_loader",
         "isExtraImport": true,
-        "detail": "src.utils.stylesheet_manager",
+        "detail": "src.utils.icon_loader",
         "documentation": {}
     },
     {
@@ -1535,6 +1623,30 @@
         "description": "src.utils.stylesheet_manager",
         "isExtraImport": true,
         "detail": "src.utils.stylesheet_manager",
+        "documentation": {}
+    },
+    {
+        "label": "StyleSheetManager",
+        "importPath": "src.utils.stylesheet_manager",
+        "description": "src.utils.stylesheet_manager",
+        "isExtraImport": true,
+        "detail": "src.utils.stylesheet_manager",
+        "documentation": {}
+    },
+    {
+        "label": "TaskWorker",
+        "importPath": "src.gui.event.task_worker",
+        "description": "src.gui.event.task_worker",
+        "isExtraImport": true,
+        "detail": "src.gui.event.task_worker",
+        "documentation": {}
+    },
+    {
+        "label": "TaskWorker",
+        "importPath": "src.gui.event.task_worker",
+        "description": "src.gui.event.task_worker",
+        "isExtraImport": true,
+        "detail": "src.gui.event.task_worker",
         "documentation": {}
     },
     {
@@ -1602,14 +1714,6 @@
         "documentation": {}
     },
     {
-        "label": "TaskWorker",
-        "importPath": "src.gui.event.task_worker",
-        "description": "src.gui.event.task_worker",
-        "isExtraImport": true,
-        "detail": "src.gui.event.task_worker",
-        "documentation": {}
-    },
-    {
         "label": "RandomUniqueSelector",
         "importPath": "src.utils.random_selector",
         "description": "src.utils.random_selector",
@@ -1647,6 +1751,22 @@
         "description": "src.gui.resources",
         "isExtraImport": true,
         "detail": "src.gui.resources",
+        "documentation": {}
+    },
+    {
+        "label": "ExitDialog",
+        "importPath": "src.gui.dialogs.exit_dialog",
+        "description": "src.gui.dialogs.exit_dialog",
+        "isExtraImport": true,
+        "detail": "src.gui.dialogs.exit_dialog",
+        "documentation": {}
+    },
+    {
+        "label": "StatusChecker",
+        "importPath": "src.gui.dialogs.exit_dialog",
+        "description": "src.gui.dialogs.exit_dialog",
+        "isExtraImport": true,
+        "detail": "src.gui.dialogs.exit_dialog",
         "documentation": {}
     },
     {
@@ -2085,6 +2205,24 @@
         "description": "src.gui.dialogs.error_dialog",
         "peekOfCode": "class ErrorDialog(QDialog):\n    def __init__(self, error_info, parent=None):\n        super().__init__(parent)\n        self.setWindowTitle(\"Oops, Swan崩溃了!\")\n        self.setMinimumWidth(600)\n        self.setMinimumHeight(300)\n        self.setWindowIcon(IconLoader.load_icon())\n        self.setStyleSheet(StyleSheetManager.fluent_like_style())\n        # 创建主布局\n        main_layout = QVBoxLayout()",
         "detail": "src.gui.dialogs.error_dialog",
+        "documentation": {}
+    },
+    {
+        "label": "StatusChecker",
+        "kind": 6,
+        "importPath": "src.gui.dialogs.exit_dialog",
+        "description": "src.gui.dialogs.exit_dialog",
+        "peekOfCode": "class StatusChecker(QThread):\n    status_changed = Signal(bool)\n    def __init__(self, task_worker : TaskWorker = None):\n        super().__init__()\n        # 这里可以添加需要检查的状态变量\n        self.is_running = True\n        self.task_worker = task_worker\n    def check_status(self) -> bool:\n        # 在这里实现您的状态检测逻辑\n        # 返回True表示任务完成，返回False表示任务未完成",
+        "detail": "src.gui.dialogs.exit_dialog",
+        "documentation": {}
+    },
+    {
+        "label": "ExitDialog",
+        "kind": 6,
+        "importPath": "src.gui.dialogs.exit_dialog",
+        "description": "src.gui.dialogs.exit_dialog",
+        "peekOfCode": "class ExitDialog(QDialog):\n    def __init__(self, task_worker : TaskWorker = None, parent=None):\n        super().__init__(parent)\n        self.setWindowTitle(\"Swan\")\n        self.setWindowIcon(IconLoader.load_icon())\n        self.setFixedSize(300, 100)\n        self.setStyleSheet(\"\"\"\n            QProgressBar {\n                border: 1px solid grey;\n                border-radius: 5px;",
+        "detail": "src.gui.dialogs.exit_dialog",
         "documentation": {}
     },
     {

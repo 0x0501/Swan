@@ -1,6 +1,6 @@
 from PySide6.QtWidgets import (QMainWindow, QMenu, QSystemTrayIcon,
                              QStyle, QStatusBar,
-                             QListView)
+                             QListView, QDialog)
 from PySide6.QtCore import Qt, QSettings, QTimer, QSize, QFile
 from PySide6.QtGui import QAction, QKeySequence, QIcon, QPixmap
 from loguru import logger
@@ -27,6 +27,7 @@ from src.gui.resources import resources_rc
 from os import getenv
 from src.utils.icon_loader import IconLoader
 import traceback
+from src.gui.dialogs.exit_dialog import ExitDialog, StatusChecker
 
 class MainWindow(QMainWindow):
 
@@ -474,11 +475,11 @@ class MainWindow(QMainWindow):
 
     def _setup_tray_icon(self):
         # 获取系统主题的应用程序图标
-        icon = self.style().standardIcon(QStyle.StandardPixmap.SP_ComputerIcon)
+        # icon = self.style().standardIcon(QStyle.StandardPixmap.SP_ComputerIcon)
 
         # 创建系统托盘图标
-        self.tray_icon = QSystemTrayIcon(icon, self)
-        self.tray_icon.setToolTip('Swan GUI')
+        self.tray_icon = QSystemTrayIcon(IconLoader.load_icon(), self)
+        self.tray_icon.setToolTip('Swan')
 
         # 创建托盘菜单
         tray_menu = QMenu()
@@ -584,8 +585,18 @@ class MainWindow(QMainWindow):
         # 如果Swan正在运行，先停止
         if self.task_worker and self.task_worker.isRunning():
             self.task_worker.stop()
-            self.swan.grace_shutdown(
-                after_grace_shut_down=lambda: logger.error('Closure'))
+            self.swan.grace_shutdown()
+            logger.warning('Task_worker finished (before check): %s' % self.task_worker.whether_finished())
+            # 建立轮询检测
+            exit_check_dialog = ExitDialog(self.task_worker)
+            check_result = exit_check_dialog.exec()
+            # 状态改变关闭程序
+            if check_result == QDialog.DialogCode.Accepted:
+                logger.warning('Task_worker finished (after check and accept close event): %s' % self.task_worker.whether_finished())
+                event.accept()
+            else:
+                logger.warning('Task_worker finished (after check and ignore close event): %s' % self.task_worker.whether_finished())
+                event.ignore()
 
         if not self.settings.value('is_system_tray', type=bool):  # 如果是强制退出
             event.accept()

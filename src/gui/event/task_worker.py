@@ -18,6 +18,9 @@ class TaskWorker(QThread):
         self._is_finished = False
         self.finished.connect(lambda result: self._on_finished(result))
         
+    def whether_finished(self):
+        return self._is_finished
+    
     def _on_finished(self, result):
         self._is_finished = result
         

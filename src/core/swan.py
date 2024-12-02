@@ -154,15 +154,22 @@ class Swan():
     def read_resume_status(
             self, data_file_path: Path) -> Union[int, Tuple[int, int]]:
 
-        # data frame
-        csv_data = pd.read_csv(data_file_path, sep='|').tail(1)
+        last_row_data = 0
 
-        if csv_data.empty:
-            return -1
+        try:
+            # data frame
+            csv_data = pd.read_csv(data_file_path, sep='|').tail(1)
 
-        last_row = csv_data.iloc[-1]
+            if csv_data.empty:
+                return -1
 
-        return (int(last_row['Page']), int(last_row['Index']))
+            last_row = csv_data.iloc[-1]
+            last_row_data = int(last_row['Page']), int(last_row['Index'])
+        except Exception as e:
+            logger.error(e)
+            last_row_data = -1
+        finally:
+            return last_row_data
 
     def task_dzdp_login(self, tab):
         username = self.settings.value('dzdp_username', '')

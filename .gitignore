@@ -1,6 +1,7 @@
 # Swan config
 swan.config.toml
-data/
+data/**
+backup/**
 bin/**
 .vscode/PythonImportHelper-v2-Completion.json
 .VSCodeCounter

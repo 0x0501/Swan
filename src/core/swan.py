@@ -3,6 +3,7 @@ import os
 from random import randint
 import sys
 import time
+import pandas as pd
 from DataRecorder import Recorder
 from DrissionPage import Chromium
 from DrissionPage import ChromiumOptions
@@ -12,7 +13,7 @@ from pathlib import Path
 from src.core.location import Location
 from src.utils.text import extract_and_convert_score, extract_update_date, sanitize_text
 from src.gui.event.task_progress_tracker import TaskProgressTracker
-from typing import Optional
+from typing import Optional, Union, Tuple
 import traceback
 from src.core.encryption import Encryption
 
@@ -34,8 +35,7 @@ class Swan():
                  q_settings: QSettings,
                  progress_tracker: TaskProgressTracker = None) -> None:
         self.settings = q_settings
-        self.log_file_path = self.settings.value('log_path',
-                                                    './logs/swan.log')
+        self.log_file_path = self.settings.value('log_path', './logs/swan.log')
         self._running = False
         self._encryption = Encryption(
             self.settings.value('encryption_dir_path', './bin'), self.settings,
@@ -44,7 +44,7 @@ class Swan():
         # log initialization
         # logger.add(self.log_file_path)
         self.progress_tracker = progress_tracker
-        
+
     @staticmethod
     def swan_version() -> str:
         return Swan._swan_version
@@ -149,14 +149,29 @@ class Swan():
         logger.warning('Grace shutdown Swan, closing all the tabs.')
         return
 
+    # return [page, index], index started from 0
+    # every page has 15 items
+    def read_resume_status(
+            self, data_file_path: Path) -> Union[int, Tuple[int, int]]:
+
+        # data frame
+        csv_data = pd.read_csv(data_file_path, sep='|').tail(1)
+
+        if csv_data.empty:
+            return -1
+
+        last_row = csv_data.iloc[-1]
+
+        return (int(last_row['Page']), int(last_row['Index']))
+
     def task_dzdp_login(self, tab):
         username = self.settings.value('dzdp_username', '')
         password = self._encryption.get_encrypted('dzdp_password', '')
-        
+
         if username == '' or password == '':
             logger.error('Username or password don\'t configure properly.')
             raise Exception('Username or password don\'t configure properly.')
-        
+
         tab.get(
             'https://account.dianping.com/pclogin?redir=https://m.dianping.com/dphome',
             True)
@@ -307,7 +322,25 @@ class Swan():
 
             # set the start time from here
             start_time = time.time()
-            for current_page in range(1, page_maximum):
+            # if `dazhongdianping.csv` exist, read the last line from this file, and started task from that point (page + item)
+            initial_page = 1
+            last_row_data = self.read_resume_status(data_file_path)
+
+            if last_row_data != -1:
+                # get item index
+                if last_row_data[1] < 14:
+                    initial_page = last_row_data[0]
+                else:
+                    initial_page = last_row_data[0] + 1
+                logger.debug('Resume data collect from page: [%d].' %
+                             initial_page)
+
+            if initial_page >= page_maximum:
+                logger.error(
+                    'Initial page number >= page_maximum. That\'s impossible.')
+                return recorder
+
+            for current_page in range(initial_page, page_maximum):
 
                 # check the running state
                 if self._running == False:
@@ -336,6 +369,7 @@ class Swan():
                     logger.info("The page %d has %d comments, grab them!" %
                                 (current_page, len(review_list)))
                     # iterate review items
+                    logger.debug('Review list length: %d' % len(review_list))
                     for index, review_item in enumerate(review_list):
 
                         # check the running state for the second time

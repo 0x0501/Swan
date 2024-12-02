@@ -34,12 +34,16 @@ class TaskWorker(QThread):
             if self.swan:
                 recorder = self.swan.task_dzdp()
                 # flush data into disk
-                recorder.record()
-                logger.debug('Swan task has finished (task_worker).')
+                if recorder != None:
+                    recorder.record()
+                    logger.debug('Swan task has finished (task_worker).')
+                else:
+                    logger.error('Trying to flush data to file, but recorder is None.')
             self.finished.emit(True)
         except Exception as e:
             self.error.emit(str(e))
-            logger.error(e)
+            # logger.error(e)
+            traceback.print_exc(e)
         finally:
             self._is_running = False
             

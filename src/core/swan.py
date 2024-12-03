@@ -44,6 +44,8 @@ class Swan():
         # log initialization
         # logger.add(self.log_file_path)
         self.progress_tracker = progress_tracker
+        # attempt-retry
+        self.retry_count = 0
 
     @staticmethod
     def swan_version() -> str:
@@ -78,11 +80,11 @@ class Swan():
 
         # 动态调整休眠时间
         if runtime_minutes < 30:
-            sleep_time = randint(10, 15)
+            sleep_time = randint(15, 20)
         elif runtime_minutes < 60:
-            sleep_time = randint(18, 20)
+            sleep_time = randint(25, 35)
         else:
-            sleep_time = randint(23, 30)
+            sleep_time = randint(35, 40)
 
         return sleep_time
 
@@ -172,6 +174,8 @@ class Swan():
             return last_row_data
 
     def task_dzdp_login(self, tab):
+        # switch to dynamic mode
+        tab.change_mode('d')
         username = self.settings.value('dzdp_username', '')
         password = self._encryption.get_encrypted('dzdp_password', '')
 
@@ -229,6 +233,8 @@ class Swan():
                 'Verification code was required, please get it and fill out in the box, Swan will wait 60 seconds.'
             )
             tab.wait(60)
+        # switch to session mode
+        tab.change_mode('s')
 
     def task_dzdp(self) -> Recorder:
         # change running state
@@ -454,8 +460,19 @@ class Swan():
                     recorder.record()
             logger.warning('The task `dzdp` has finished.')
         except Exception as e:
+            # if the document is empty, it means we got some problem:
+            # 1. The account was restricted, we need to re-login
+            # 2. Other error occurred. (Have no idea)
             logger.error(f"Error in task_dzdp: {e}")
             traceback.print_exc()
+            if self.retry_count <= 3:
+                logger.warning('Retrying re-login solving this problem, attempt: %d (maximum 3 times)' % self.retry_count)
+                self.retry_count += 1
+                self.task_dzdp_login(tab)
+                #retry
+                self.task_dzdp()
+            else:
+                logger.warning('Retry attempt was up to maximum(3), Swan has to stop, please check Swan log. Chances are that your account has been banned.')
         finally:
             # 确保资源被清理
             logger.debug('Swan state in Finally Statement: %s' % self._running)

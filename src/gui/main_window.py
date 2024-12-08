@@ -395,7 +395,7 @@ class MainWindow(QMainWindow):
 
     def _cancel_swan(self):
         if self.task_worker and self.task_worker.isRunning():
-            self._update_status_bar_info('正在停止任务...')
+            self._update_status_bar_info('正在停止任务...', stick_to=True)
             toast = Toast()
             toast.setDuration(3000)
             toast.setPositionRelativeToWidget(self)
@@ -412,7 +412,7 @@ class MainWindow(QMainWindow):
         self.start_button.setEnabled(True)
         self.cancel_button.setEnabled(False)
         self._update_status_bar_info('任务已完成')
-        self.progress_bar.setValue(0)
+        # self.progress_bar.setValue(0)
 
         toast = Toast()
         toast.setDuration(3500)

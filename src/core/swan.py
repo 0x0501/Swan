@@ -174,6 +174,9 @@ class Swan():
             return last_row_data
 
     def task_dzdp_login(self, tab):
+        logger.debug('Re-login has been triggered. (dzdp)')
+        tab.cookies().clear()  # clear all the cookies
+        tab.clear_cache()  # clear all the cache
         # switch to dynamic mode
         tab.change_mode('d')
         username = self.settings.value('dzdp_username', '')
@@ -263,7 +266,7 @@ class Swan():
                        tab.cookies().as_dict().items()))
 
             if len(logged_in_cookie) == 0:
-                self.task_dzdp_login()
+                self.task_dzdp_login(tab)
                 # tab.ele('@@class=bottom-password-login@@tag()=span').click()
                 # tab.ele('@@class=pwd@@tag()=div').click()
                 # logger.info(
@@ -315,8 +318,8 @@ class Swan():
                     'Oops, our ip address might have been banned, let\'s try to re-login in. :('
                 )
                 logger.info('Clear all the cookies and cache.')
-                tab.cookies().clear()  # clear all the cookies
-                tab.clear_cache()  # clear all the cache
+                # tab.cookies().clear()  # clear all the cookies
+                # tab.clear_cache()  # clear all the cache
                 self.task_dzdp_login(tab)
 
             ############################## Data collector #######################################
@@ -381,6 +384,10 @@ class Swan():
                         'css:div[class=reviews-items] > ul > li')
                     logger.info("The page %d has %d comments, grab them!" %
                                 (current_page, len(review_list)))
+                    
+                    # if the comment list was empty, try re-login
+                    if len(review_list) == 0:
+                        self.task_dzdp_login(tab)
                     # iterate review items
                     logger.debug('Review list length: %d' % len(review_list))
                     for index, review_item in enumerate(review_list):

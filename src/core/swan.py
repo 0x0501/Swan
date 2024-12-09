@@ -12,13 +12,15 @@ from loguru import logger
 from DrissionPage.errors import *
 from pathlib import Path
 from src.core.location import Location
-from src.utils.text import extract_and_convert_score, extract_update_date, sanitize_text
+from src.utils.text import (concatenate_with_conditions, extract_and_convert_score,
+    extract_update_date, sanitize_text, star_string_to_int)
 from src.gui.event.task_progress_tracker import TaskProgressTracker
 from typing import Optional, Union, Tuple
 import traceback
 from src.core.encryption import Encryption
 from src.core.platform import Platform
 from src.core.location_mapping import LocationMapping
+from tests.test_date import text
 
 
 class Swan():
@@ -523,6 +525,20 @@ class Swan():
     def _map_location_to_red(self, location: Location) -> Location:
         pass
 
+    def _map_location_to_qnw(self, location: Location) -> Location:
+        match location:
+            case Location.SHUHE_TOWN:
+                return LocationMapping(
+                    location.name,
+                    'https://travel.qunar.com/p-oi715281-shuheguzhen-0-1#lydp',
+                    '束河古镇')
+            case Location.BAISHA_TOWN:
+                return LocationMapping(
+                    location.name,
+                    'https://travel.qunar.com/p-oi5475589-baishaguzhen-0-1#lydp',
+                    '白沙古镇')
+        return location
+
     def task_xiecheng(self) -> Recorder:
 
         # change running state
@@ -533,7 +549,7 @@ class Swan():
             'xiecheng.csv')
         recorder = Recorder(path=data_file_path, cache_size=75)
         logger.debug('Swan (in) _running state: %s' % self._running)
-        
+
         is_never_jumped = True
 
         try:
@@ -549,19 +565,20 @@ class Swan():
 
             logger.info(location.name)
             logger.info(location.value)
-            
+
             # navigate to shuhe/baisha town
             tab.get(location.value)
-            
+
             # get the maximum page number
-            page_maximum_label = tab.ele('css:.myPagination > ul').child(index=8)
-            page_maximum : int = int(page_maximum_label.texts()[0])
-            
+            page_maximum_label = tab.ele('css:.myPagination > ul').child(
+                index=8)
+            page_maximum: int = int(page_maximum_label.texts()[0])
+
             # change browser mode to `s` (session mode)
             # tab.change_mode()
             # tab.close()
-            logger.info('Change browser mode to: `%s`' % tab.mode)
-            
+            # logger.info('Change browser mode to: `%s`' % tab.mode)
+
             if self.progress_tracker:
                 self.progress_tracker.total_pages = page_maximum
 
@@ -570,7 +587,7 @@ class Swan():
             # if `dazhongdianping.csv` exist, read the last line from this file, and started task from that point (page + item)
             initial_page = 1
             last_row_data = self.read_resume_status(data_file_path)
-            
+
             if last_row_data != -1:
                 # get item index
                 initial_page = last_row_data[0] + 1
@@ -581,10 +598,10 @@ class Swan():
                 logger.error(
                     'Initial page number >= page_maximum. That\'s impossible.')
                 return recorder
-            
+
             logger.info('Page maximum %s' % page_maximum)
             for current_page in range(initial_page, page_maximum):
-                
+
                 # check the running state
                 if self._running == False:
                     logger.warning(
@@ -596,18 +613,20 @@ class Swan():
                 if self.progress_tracker:
                     self.progress_tracker.current_page = current_page
                 logger.info("Task `xiecheng` current page %d" % current_page)
-                
+
                 if initial_page != 1 and is_never_jumped == True:
                     # jump to the specified page
-                    jump_input = tab.ele('css:.ant-pagination-options-quick-jumper > input')
+                    jump_input = tab.ele(
+                        'css:.ant-pagination-options-quick-jumper > input')
                     jump_input.input(initial_page)
-                    jump_btn = tab.ele('css:.ant-pagination-options-quick-jumper button')
+                    jump_btn = tab.ele(
+                        'css:.ant-pagination-options-quick-jumper button')
                     # wait until all the elements were loaded
                     tab.wait(3)
                     jump_btn.click()
                     logger.info(jump_btn)
                     is_never_jumped = False
-                    
+
                 tab.wait(3)
                 # alter comment sort method
                 sort_list = tab.ele('css:.sortList').child(index=-1)
@@ -619,10 +638,10 @@ class Swan():
                 root = tab.ele('@tag()=body')
                 review_list = root.s_eles('css:.commentList .contentInfo')
                 logger.info('Comment list length: %d' % len(review_list))
-                
+
                 # parse the content
                 for index, review_item in enumerate(review_list):
-                    
+
                     # check the running state for the second time
                     if self._running == False:
                         logger.error(
@@ -632,19 +651,219 @@ class Swan():
                         recorder.record()
                         return recorder
 
-                    raw_score = review_item.ele('css:.scroreInfo > span').texts(text_node_only=True)[0]
-                    raw_date  = review_item.ele('css:.commentFooter > .commentTime').texts(text_node_only=True)[0]
-                    raw_content = review_item.ele('css:.commentDetail').texts(text_node_only=True)[0]
-                    
+                    raw_score = review_item.ele(
+                        'css:.scroreInfo > span').texts(text_node_only=True)[0]
+                    raw_date = review_item.ele(
+                        'css:.commentFooter > .commentTime').texts(
+                            text_node_only=True)[0]
+                    raw_content = review_item.ele('css:.commentDetail').texts(
+                        text_node_only=True)[0]
+
                     review_content = [sanitize_text(raw_content)]
                     review_content.append(raw_date)
                     review_content.append(int(raw_score))
                     review_content.append(current_page)
                     review_content.append(index)
-                    
+
+                    logger.info(review_content)
+
+                    # write the data
+                    recorder.set.delimiter('|')
+                    recorder.set.encoding('utf-8')
+                    # set header and backup
+                    recorder.set.head(
+                        ['Comment', 'Comment Date', 'Score', 'Page', 'Index'])
+                    recorder.set.auto_backup(60)
+                    recorder.add_data(review_content)
+
+                # sleep for 3 ~ 10 secs
+                sleep_time = self.calculate_sleep_time(start_time)
+                if sleep_time in [600, 1100]:
+                    start_time = time.time()
+
+                logger.info(
+                    "Sleep %s seconds before the next move. Take your time master >_="
+                    % sleep_time)
+                tab.wait(sleep_time)
+
+                # navigate to the next page
+                next_page_btn = tab.ele(
+                    'css:.myPagination > ul > .ant-pagination-next')
+                next_page_btn.click()
+
+        except Exception as e:
+            logger.error(f"Error in task_xiecheng: {e}")
+            traceback.print_exc(e)
+        finally:
+            # 确保资源被清理
+            logger.debug('Swan state in Finally Statement: %s' % self._running)
+            if not self._running:
+                logger.debug('Finally statement revoke grace shutdown!')
+                self.grace_shutdown(recorder)
+                return recorder
+
+    # 去哪网
+    def task_qnw(self) -> Recorder:
+        # change running state
+        self._running = True
+        # store the data as CSV file
+        data_file_path = Path.joinpath(
+            Path(self.settings.value('data_directory', './data')),
+            'qunaerwang.csv')
+        recorder = Recorder(path=data_file_path, cache_size=75)
+        logger.debug('Swan (in) _running state: %s' % self._running)
+
+        try:
+            # launch a new tab
+            tab = Chromium(self.chromium_options).latest_tab
+
+            # push the tab into list
+            self.chromium_tabs.append(tab)
+
+            # set location and map it to corresponding links
+            self.set_location(self.location)
+            location = self._map_location_to_qnw(self.location)
+
+            logger.info(location.name)
+            logger.info(location.value)
+
+            # navigate to shuhe/baisha town
+            tab.get(location.value)
+            navigation_retry_count = 0
+            while not tab.ele('css:.b_paging > .page.next') and navigation_retry_count <= 3:
+                sleep_time = randint(3, 5)
+                logger.warning('Navigate to url: %s failed, sleep %d sec and retrying.' % (location.value, sleep_time))
+                tab.wait(sleep_time)
+                logger.warning('Retrying to navigate to %s (%d)' % (location.value, navigation_retry_count))
+                tab.refresh()
+                navigation_retry_count += 1
+
+            if not tab.ele('css:.b_paging > .page.next') and navigation_retry_count == 3:
+                logger.error('Oops. our ip seems to be banned, stop Swan.')
+                return recorder
+            # get the maximum page number
+            page_maximum_label = tab.ele('css:.b_paging > .page.next').prev()
+            page_maximum: int = int(page_maximum_label.texts()[0])
+
+            if self.progress_tracker:
+                self.progress_tracker.total_pages = page_maximum
+
+            # set the start time from here
+            start_time = time.time()
+            # if `dazhongdianping.csv` exist, read the last line from this file, and started task from that point (page + item)
+            initial_page = 1
+            logger.info('Page maximum %s' % page_maximum)
+
+            for current_page in range(initial_page, page_maximum):
+
+                # check the running state
+                if self._running == False:
+                    logger.warning(
+                        'Swan received `stop` command on the first layer.')
+                    # flush the data first, and return `recorder` for convenient
+                    recorder.record()
+                    return recorder
+
+                if self.progress_tracker:
+                    self.progress_tracker.current_page = current_page
+                logger.info("Task `qnw` current page %d" % current_page)
+
+                # retrieve comment list (wrapper)
+                root = tab.ele('@tag()=body')
+                review_list = root.s_eles('css:#comment_box > li')
+                logger.info('Comment list length: %d' % len(review_list))
+
+                # parse the content
+                for index, review_item in enumerate(review_list):
+                    # check the running state for the second time
+                    if self._running == False:
+                        logger.error(
+                            'Swan received `stop` command on the second layer.'
+                        )
+                        # flush the data first, and return `recorder` for convenient
+                        recorder.record()
+                        return recorder
+                    raw_date = review_item.ele(
+                        'css:.e_comment_add_info > ul').child(1).texts(
+                            text_node_only=True)[0]
+                    raw_score = review_item.ele(
+                        'css:.e_comment_star_box > .total_star').child(1).attr(
+                            'class')
+                    raw_content = ''
+                    # if no element was found, return false
+                    if not review_item.ele('css:.e_comment_content .seeMore'):
+                        logger.warning('No expanded content was detected.')
+                        raw_content = ''.join(
+                            review_item.ele('css:.e_comment_content').texts())
+                    else:
+                        # if the review has expanded content, we need to parse it
+                        # sleep 3 to 6 second
+                        tab.scroll.down(
+                            randint(
+                                int(tab.rect.viewport_size_with_scrollbar[1] /
+                                    3),
+                                int(tab.rect.viewport_size_with_scrollbar[1] -
+                                    10)))
+                        tab.scroll.up(randint(20, 100))
+                        tab.wait(5, 10)
+                        deep_link = review_item.ele(
+                            'css:.e_comment_content .seeMore').attr('href')
+                        logger.info('Deep link: %s' % deep_link)
+                        deep_link_tab = Chromium(
+                            self.chromium_options).new_tab(deep_link)
+
+                        retry_count = 0
+                        while not deep_link_tab.ele(
+                                'css:.comment_content') and retry_count <= 5:
+                            sleep_time = randint(3, 8)
+                            logger.warning(
+                                'No deep content was found, sleep %d sec and retry.'
+                            % sleep_time)
+                            # sleep
+                            deep_link_tab.wait(sleep_time)
+                            retry_count += 1
+                            logger.warning('Now, retrying...(%d)' %
+                                           retry_count)
+                            deep_link_tab.refresh()
+                            deep_link_tab.wait(1)
+
+                        if not deep_link_tab.ele('css:.comment_content'):
+                            logger.warning(
+                                'No deep content was found, leave it nothing.')
+                        else:
+                            # raw_content = ''.join(
+                            #     deep_link_tab.ele(
+                            #         'css:.comment_content').texts())
+                            
+                            
+                            # chances are that some page trending to have more than one `comment_content` element
+                            deep_contents = deep_link_tab.eles('css:.comment_content')
+                            temp = []
+                            for content in deep_contents:
+                                # logger.info(content.texts())
+                                temp.append(''.join(content.texts()))
+                            
+                            # concatenate strings
+                            raw_content = concatenate_with_conditions(temp)
+                            
+                            logger.debug('Get deep content: %s' % raw_content)
+                            
+                        deep_link_tab.scroll.to_half()
+                        deep_link_tab.scroll.up(randint(30, 150))
+                        deep_link_tab.scroll.down(randint(10, 60))
+                        deep_link_tab.wait(3, 5)
+                        deep_link_tab.close()
+                        Chromium(self.chromium_options).activate_tab(tab)
+
+                    # preparing data
+                    review_score = star_string_to_int(raw_score)
+                    review_content = [raw_content]
+                    review_content.append(raw_date)
+                    review_content.append(review_score)
+                    review_content.append(current_page)
+                    review_content.append(index)
                     logger.info(review_content)
                     
-                    # write the data
                     recorder.set.delimiter('|')
                     recorder.set.encoding('utf-8')
                     # set header and backup
@@ -665,12 +884,13 @@ class Swan():
                 tab.wait(sleep_time)
                 
                 # navigate to the next page
-                next_page_btn = tab.ele('css:.myPagination > ul > .ant-pagination-next')
+                next_page_btn = tab.ele('css:.b_paging > .page.next')
                 next_page_btn.click()
-            
-            
+                # wait until the element was replace by js
+                tab.wait(3)
+
         except Exception as e:
-            logger.error(f"Error in task_xiecheng: {e}")
+            logger.error(f"Error in task_qnw: {e}")
             traceback.print_exc(e)
         finally:
             # 确保资源被清理
@@ -679,6 +899,8 @@ class Swan():
                 logger.debug('Finally statement revoke grace shutdown!')
                 self.grace_shutdown(recorder)
                 return recorder
+
+        return None
 
     def task_red(self) -> Recorder:
         pass
@@ -692,10 +914,12 @@ class Swan():
                 return self.task_xiecheng()
             case Platform.RED:
                 return self.task_red()
+            case Platform.QUNAERWANG:
+                return self.task_qnw()
 
 
 def comment_swan_main():
-    
+
     swan = Swan('./swan.config.toml').launch()
     try:
         swan.task_dzdp()

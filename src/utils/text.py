@@ -3,19 +3,22 @@ from PySide6.QtCore import QFile, QTextStream
 from loguru import logger
 import json
 
-def load_json(qt_resource_path : str) -> dict:
+
+def load_json(qt_resource_path: str) -> dict:
     json_file = QFile(qt_resource_path)
-    if not json_file.open(QFile.OpenModeFlag.ReadOnly | QFile.OpenModeFlag.Text):
+    if not json_file.open(QFile.OpenModeFlag.ReadOnly
+                          | QFile.OpenModeFlag.Text):
         logger.error(f"Cannot open file {qt_resource_path} for reading.")
         return {}
     stream = QTextStream(json_file)
     json_data = stream.readAll()
     json_file.close()
-    
+
     try:
         return json.loads(json_data)
     except json.JSONDecodeError:
         logger.error(f"Error decoding JSON from file {qt_resource_path}.")
+
 
 def extract_update_date(text):
     # 使用正则表达式匹配“更新于”后面的日期
@@ -70,3 +73,48 @@ def extract_and_convert_score(text: str):
             return -1
     else:
         return -1
+
+
+def star_string_to_int(text: str):
+    # 定义一个字典，用于映射不同的星星字符串到其对应的整数值
+    star_mapping = {
+        'star_5': 5,
+        'star_4': 4,
+        'star_3': 3,
+        'star_2': 2,
+        'star_1': 1,
+        'star_0': 0
+    }
+
+    # 使用正则表达式查找匹配的星星字符串
+    match = re.search(r'star_(\d)', text)
+
+    # 如果找到匹配项，则根据字典返回对应的整数值
+    if match:
+        matched_star = match.group(0)  # 获取匹配的整个字符串
+        return star_mapping.get(matched_star, None)  # 根据字典返回值或None
+
+    # 如果没有找到匹配项，则返回None或其他默认值
+    return -1
+
+
+def concatenate_with_conditions(str_list):
+    if not str_list:  # 如果列表为空，则返回空字符串
+        return ''
+
+    result = []
+    for i, s in enumerate(str_list):
+        result.append(s)
+        if i < len(str_list) - 1:  # 检查是否是最后一个元素
+            # 检查当前字符串的最后一个字符是否不是指定的标点符号，并且不是最后一个元素
+            if not s.endswith(('。', '，', '！', '!', '~', ',', '.', '……')):
+                result.append('。')  # 添加分隔符
+
+    # 移除可能在最后一个字符串后面多加的分隔符
+    final_string = ''.join(result)
+    for punct in ('。', '，', '！', '!', '~', ',', '.', '……'):
+        if final_string.endswith(punct + '。'):
+            final_string = final_string[:-1]
+            break
+
+    return final_string

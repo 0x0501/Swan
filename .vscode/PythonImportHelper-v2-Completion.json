@@ -1265,6 +1265,14 @@
         "documentation": {}
     },
     {
+        "label": "concatenate_with_conditions",
+        "importPath": "src.utils.text",
+        "description": "src.utils.text",
+        "isExtraImport": true,
+        "detail": "src.utils.text",
+        "documentation": {}
+    },
+    {
         "label": "extract_and_convert_score",
         "importPath": "src.utils.text",
         "description": "src.utils.text",
@@ -1282,6 +1290,14 @@
     },
     {
         "label": "sanitize_text",
+        "importPath": "src.utils.text",
+        "description": "src.utils.text",
+        "isExtraImport": true,
+        "detail": "src.utils.text",
+        "documentation": {}
+    },
+    {
+        "label": "star_string_to_int",
         "importPath": "src.utils.text",
         "description": "src.utils.text",
         "isExtraImport": true,
@@ -1374,6 +1390,14 @@
         "description": "src.core.location_mapping",
         "isExtraImport": true,
         "detail": "src.core.location_mapping",
+        "documentation": {}
+    },
+    {
+        "label": "text",
+        "importPath": "tests.test_date",
+        "description": "tests.test_date",
+        "isExtraImport": true,
+        "detail": "tests.test_date",
         "documentation": {}
     },
     {
@@ -2180,7 +2204,7 @@
         "kind": 6,
         "importPath": "src.core.platform",
         "description": "src.core.platform",
-        "peekOfCode": "class Platform(Enum):\n    DAZHONGDIANPING = 0      # 大众点评\n    XIECHENG        = 1       # 美团\n    RED             = 2       # 小红书",
+        "peekOfCode": "class Platform(Enum):\n    DAZHONGDIANPING = 0       # 大众点评\n    XIECHENG        = 1       # 美团\n    RED             = 2       # 小红书\n    QUNAERWANG      = 3       # 去哪儿网",
         "detail": "src.core.platform",
         "documentation": {}
     },
@@ -2432,7 +2456,7 @@
         "kind": 2,
         "importPath": "src.utils.text",
         "description": "src.utils.text",
-        "peekOfCode": "def load_json(qt_resource_path : str) -> dict:\n    json_file = QFile(qt_resource_path)\n    if not json_file.open(QFile.OpenModeFlag.ReadOnly | QFile.OpenModeFlag.Text):\n        logger.error(f\"Cannot open file {qt_resource_path} for reading.\")\n        return {}\n    stream = QTextStream(json_file)\n    json_data = stream.readAll()\n    json_file.close()\n    try:\n        return json.loads(json_data)",
+        "peekOfCode": "def load_json(qt_resource_path: str) -> dict:\n    json_file = QFile(qt_resource_path)\n    if not json_file.open(QFile.OpenModeFlag.ReadOnly\n                          | QFile.OpenModeFlag.Text):\n        logger.error(f\"Cannot open file {qt_resource_path} for reading.\")\n        return {}\n    stream = QTextStream(json_file)\n    json_data = stream.readAll()\n    json_file.close()\n    try:",
         "detail": "src.utils.text",
         "documentation": {}
     },
@@ -2460,6 +2484,24 @@
         "importPath": "src.utils.text",
         "description": "src.utils.text",
         "peekOfCode": "def extract_and_convert_score(text: str):\n    # 定义映射关系\n    score_mapping = {\n        'sml-str5': 0.5,\n        'sml-str10': 1.0,\n        'sml-str15': 1.5,\n        'sml-str20': 2.0,\n        'sml-str25': 2.5,\n        'sml-str30': 3.0,\n        'sml-str35': 3.5,",
+        "detail": "src.utils.text",
+        "documentation": {}
+    },
+    {
+        "label": "star_string_to_int",
+        "kind": 2,
+        "importPath": "src.utils.text",
+        "description": "src.utils.text",
+        "peekOfCode": "def star_string_to_int(text: str):\n    # 定义一个字典，用于映射不同的星星字符串到其对应的整数值\n    star_mapping = {\n        'star_5': 5,\n        'star_4': 4,\n        'star_3': 3,\n        'star_2': 2,\n        'star_1': 1,\n        'star_0': 0\n    }",
+        "detail": "src.utils.text",
+        "documentation": {}
+    },
+    {
+        "label": "concatenate_with_conditions",
+        "kind": 2,
+        "importPath": "src.utils.text",
+        "description": "src.utils.text",
+        "peekOfCode": "def concatenate_with_conditions(str_list):\n    if not str_list:  # 如果列表为空，则返回空字符串\n        return ''\n    result = []\n    for i, s in enumerate(str_list):\n        result.append(s)\n        if i < len(str_list) - 1:  # 检查是否是最后一个元素\n            # 检查当前字符串的最后一个字符是否不是指定的标点符号，并且不是最后一个元素\n            if not s.endswith(('。', '，', '！', '!', '~', ',', '.', '……')):\n                result.append('。')  # 添加分隔符",
         "detail": "src.utils.text",
         "documentation": {}
     },

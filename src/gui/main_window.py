@@ -1,6 +1,5 @@
-from PySide6.QtWidgets import (QMainWindow, QMenu, QSystemTrayIcon,
-                             QStyle, QStatusBar,
-                             QListView, QDialog)
+from PySide6.QtWidgets import (QMainWindow, QMenu, QSystemTrayIcon, QStyle,
+                               QStatusBar, QListView, QDialog)
 from PySide6.QtCore import Qt, QSettings, QTimer, QSize, QFile
 from PySide6.QtGui import QAction, QKeySequence, QIcon, QPixmap
 from loguru import logger
@@ -29,17 +28,18 @@ from src.utils.icon_loader import IconLoader
 import traceback
 from src.gui.dialogs.exit_dialog import ExitDialog, StatusChecker
 
+
 class MainWindow(QMainWindow):
 
     def __init__(self):
         super().__init__()
-        
+
         profile = "Ming" if getenv("APP_PROFILE") == "ming" else ""
         if profile != '':
             self.setWindowTitle(f"Swan - {profile}")
         else:
             self.setWindowTitle('Swan')
-        
+
         self.resize(800, 600)
         # 设置应用Icon
         self.setWindowIcon(IconLoader.load_icon())
@@ -75,13 +75,16 @@ class MainWindow(QMainWindow):
 
         # 判断是最小化还是退出
         self.settings = QSettings('swan_gui', 'settings')
-        self.encryption = Encryption(self.settings.value('encryption_dir_path', './bin'), self.settings, None)
+        self.encryption = Encryption(
+            self.settings.value('encryption_dir_path', './bin'), self.settings,
+            None)
         self.force_quit = not self.settings.value('is_system_tray', type=bool)
         self.is_first_time_hide_tray = False
         # 初始化Swan实例, 在Launch中再赋值
         self.swan = None
         self.task_worker = None
-        
+        self.platform : Platform = None
+
         # initialization
         logger.add(self.settings.value('log_path', './logs/swan.log'))
 
@@ -124,7 +127,7 @@ class MainWindow(QMainWindow):
 
         # Right combobox (可以根据需要添加其他选项)
         self.platform_combo = QComboBox()
-        self.platform_combo.addItems(['大众点评（美团）', '携程'])
+        self.platform_combo.addItems(['大众点评（美团）', '携程', '小红书', '去哪儿网'])
         self.platform_combo.setStyleSheet("""
             QComboBox {
                 min-height: 30px;
@@ -228,9 +231,10 @@ class MainWindow(QMainWindow):
         self.emitter.progress_updated.connect(self._update_progress)
         # Add bottom spacing
         main_layout.addSpacing(20)
-        
+
         # check whether sayings file exist
-        logger.debug("Resource file exists:", QFile(':/strings/sayings.json').exists())
+        logger.debug("Resource file exists:",
+                     QFile(':/strings/sayings.json').exists())
 
     def _create_menu_bar(self):
         menubar = self.menuBar()
@@ -273,10 +277,21 @@ class MainWindow(QMainWindow):
 
     def _csv_shortcut(self):
         # Swan正在运行
-        if self.swan != None and self.swan.is_running():
+        if self.swan != None and self.swan.is_running() and self.platform != None:
             data_file = Path(self.settings.value(
-                'data_directory', './data')).joinpath('dazhongdianping.csv')
-            print(data_file)
+                'data_directory', './data'))
+            match self.platform:
+                case Platform.DAZHONGDIANPING:
+                    data_file = data_file.joinpath('dazhongdianping.csv')
+                case Platform.XIECHENG:
+                    data_file = data_file.joinpath('xiecheng.csv')
+                case Platform.RED:
+                    self._show_csv_viewer_dialog()
+                    return
+                case Platform.QUNAERWANG:
+                    data_file = data_file.joinpath('qunaerwang.csv')
+            logger.debug("Current selected platform: %s" % self.platform)
+            logger.debug('Current CSV file location: %s' % data_file)
             self._show_csv_viewer_dialog(data_file)
         else:
             # Swan没有运行
@@ -342,15 +357,18 @@ class MainWindow(QMainWindow):
             case Platform.DAZHONGDIANPING.value:
                 username = self.settings.value('dzdp_username', '')
                 password = self.encryption.get_encrypted('dzdp_password')
-                
+
                 if username == '' or password == '':
-                    logger.warning('Username or password don\'t configure properly.')
+                    logger.warning(
+                        'Username or password don\'t configure properly.')
                     return False
                 logger.debug('Current select platform: %s' % '大众点评')
             case Platform.XIECHENG.value:
                 logger.debug('Current select platform: %s' % '携程')
             case Platform.RED.value:
                 logger.debug('Current select platform: %s' % '小红书')
+            case Platform.QUNAERWANG.value:
+                logger.debug('Current select platform: %s' % '去哪儿网')
         pass
 
     def _start_swan(self):
@@ -365,7 +383,8 @@ class MainWindow(QMainWindow):
         platform = self.platform_combo.currentIndex()
         if self._account_check(platform) == False:
 
-            self._show_account_check_dialog('%s账号未配置' % Platform(platform).name)
+            self._show_account_check_dialog('%s账号未配置' %
+                                            Platform(platform).name)
             return
 
         # Create and start the worker thread
@@ -376,6 +395,7 @@ class MainWindow(QMainWindow):
         self.task_worker.set_location(location)
         # set platform
         self.task_worker.set_platform(Platform(platform))
+        self.platform = Platform(platform)
         self.task_worker.start()
 
         # Update UI
@@ -443,7 +463,7 @@ class MainWindow(QMainWindow):
         toast.show()
         logger.error(error_message)
         # throw an error for global error handler
-        raise Exception(error_message)
+        # raise Exception(error_message)
 
     def _test_update_progress(self):
         # 模拟进度更新
@@ -529,10 +549,10 @@ class MainWindow(QMainWindow):
                 self.show()
                 self.activateWindow()
 
-    def _show_account_check_dialog(self, message : str):
+    def _show_account_check_dialog(self, message: str):
         dialog = AccountCheckDialog(self, message)
         dialog.exec()
-        
+
     def _show_program_settings(self):
         dialog = ProgramSettingsDialog(self.settings, self)
         dialog.exec()
@@ -542,7 +562,7 @@ class MainWindow(QMainWindow):
         dialog.exec()
 
     def _show_csv_viewer_dialog(self, specific_file_path: str = ''):
-        print(specific_file_path)
+        logger.debug("[_show_csv_viewer_dialog] CSV file path: %s" % specific_file_path)
         try:
             logger.debug("Opening CSV viewer...")  # 调试信息
             self.csv_viewer = CSVViewer(self.settings.value('data_directory'))
@@ -592,16 +612,21 @@ class MainWindow(QMainWindow):
         if self.task_worker and self.task_worker.isRunning():
             self.task_worker.stop()
             self.swan.grace_shutdown()
-            logger.warning('Task_worker finished (before check): %s' % self.task_worker.whether_finished())
+            logger.warning('Task_worker finished (before check): %s' %
+                           self.task_worker.whether_finished())
             # 建立轮询检测
             exit_check_dialog = ExitDialog(self.task_worker)
             check_result = exit_check_dialog.exec()
             # 状态改变关闭程序
             if check_result == QDialog.DialogCode.Accepted:
-                logger.warning('Task_worker finished (after check and accept close event): %s' % self.task_worker.whether_finished())
+                logger.warning(
+                    'Task_worker finished (after check and accept close event): %s'
+                    % self.task_worker.whether_finished())
                 event.accept()
             else:
-                logger.warning('Task_worker finished (after check and ignore close event): %s' % self.task_worker.whether_finished())
+                logger.warning(
+                    'Task_worker finished (after check and ignore close event): %s'
+                    % self.task_worker.whether_finished())
                 event.ignore()
 
         if not self.settings.value('is_system_tray', type=bool):  # 如果是强制退出

@@ -124,7 +124,7 @@ class MainWindow(QMainWindow):
 
         # Right combobox (可以根据需要添加其他选项)
         self.platform_combo = QComboBox()
-        self.platform_combo.addItems(['大众点评（美团）'])
+        self.platform_combo.addItems(['大众点评（美团）', '携程'])
         self.platform_combo.setStyleSheet("""
             QComboBox {
                 min-height: 30px;
@@ -364,7 +364,8 @@ class MainWindow(QMainWindow):
         # index from 0
         platform = self.platform_combo.currentIndex()
         if self._account_check(platform) == False:
-            self._show_account_check_dialog('大众点评账号未配置')
+
+            self._show_account_check_dialog('%s账号未配置' % Platform(platform).name)
             return
 
         # Create and start the worker thread
@@ -373,6 +374,8 @@ class MainWindow(QMainWindow):
             self.task_worker.finished.connect(self._on_task_finished)
             self.task_worker.error.connect(self._on_task_error)
         self.task_worker.set_location(location)
+        # set platform
+        self.task_worker.set_platform(Platform(platform))
         self.task_worker.start()
 
         # Update UI

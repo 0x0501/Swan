@@ -1,5 +1,6 @@
 from PySide6.QtCore import QSettings
 import os
+import platform
 from random import randint
 import sys
 import time
@@ -16,6 +17,8 @@ from src.gui.event.task_progress_tracker import TaskProgressTracker
 from typing import Optional, Union, Tuple
 import traceback
 from src.core.encryption import Encryption
+from src.core.platform import Platform
+from src.core.location_mapping import LocationMapping
 
 
 class Swan():
@@ -28,6 +31,7 @@ class Swan():
     settings: QSettings
     location: Location = None
     chromium_tabs: list = []
+    platform: Platform = Platform.DAZHONGDIANPING
     chromium_options = ChromiumOptions
     _encryption = Encryption
 
@@ -115,6 +119,10 @@ class Swan():
                 location.literal = '白沙古镇'
         self.location = location
         return location
+
+    def set_platform(self, platform: Platform) -> Platform:
+        self.platform = platform
+        return self.platform
 
     def safe_wait(self, tab, sec: int):
         if self._running == False:
@@ -293,6 +301,13 @@ class Swan():
                 # TODO! 2024-11-16 how to handle location fixing failed
                 logger.error('Location fixing failed. [%s]' %
                              self.land_page_location)
+            # check the running state for the second time
+            if self._running == False:
+                logger.error(
+                    'Swan received `stop` command on the second layer.')
+                # flush the data first, and return `recorder` for convenient
+                recorder.record()
+                return recorder
 
             # navigate to shuhe/baisha town, given them the literal name
             self.set_location(self.location)
@@ -384,7 +399,7 @@ class Swan():
                         'css:div[class=reviews-items] > ul > li')
                     logger.info("The page %d has %d comments, grab them!" %
                                 (current_page, len(review_list)))
-                    
+
                     # if the comment list was empty, try re-login
                     if len(review_list) == 0:
                         self.task_dzdp_login(tab)
@@ -473,13 +488,17 @@ class Swan():
             logger.error(f"Error in task_dzdp: {e}")
             traceback.print_exc()
             if self.retry_count <= 3:
-                logger.warning('Retrying re-login solving this problem, attempt: %d (maximum 3 times)' % self.retry_count)
+                logger.warning(
+                    'Retrying re-login solving this problem, attempt: %d (maximum 3 times)'
+                    % self.retry_count)
                 self.retry_count += 1
                 self.task_dzdp_login(tab)
                 #retry
                 self.task_dzdp()
             else:
-                logger.warning('Retry attempt was up to maximum(3), Swan has to stop, please check Swan log. Chances are that your account has been banned.')
+                logger.warning(
+                    'Retry attempt was up to maximum(3), Swan has to stop, please check Swan log. Chances are that your account has been banned.'
+                )
         finally:
             # 确保资源被清理
             logger.debug('Swan state in Finally Statement: %s' % self._running)
@@ -488,8 +507,195 @@ class Swan():
                 self.grace_shutdown(recorder)
                 return recorder
 
+    def _map_location_to_xiecheng(self, location: Location) -> LocationMapping:
+        match location:
+            case Location.SHUHE_TOWN:
+                return LocationMapping(
+                    location.name,
+                    'https://you.ctrip.com/sight/lijiang32/17963.html', '束河古镇')
+            case Location.BAISHA_TOWN:
+                return LocationMapping(
+                    location.name,
+                    'https://you.ctrip.com/sight/yulong1446279/17965.html',
+                    '白沙古镇')
+        return location
+
+    def _map_location_to_red(self, location: Location) -> Location:
+        pass
+
+    def task_xiecheng(self) -> Recorder:
+
+        # change running state
+        self._running = True
+        # store the data as CSV file
+        data_file_path = Path.joinpath(
+            Path(self.settings.value('data_directory', './data')),
+            'xiecheng.csv')
+        recorder = Recorder(path=data_file_path, cache_size=75)
+        logger.debug('Swan (in) _running state: %s' % self._running)
+        
+        is_never_jumped = True
+
+        try:
+            # launch a new tab
+            tab = Chromium(self.chromium_options).latest_tab
+
+            # push the tab into list
+            self.chromium_tabs.append(tab)
+
+            # set location and map it to corresponding links
+            self.set_location(self.location)
+            location = self._map_location_to_xiecheng(self.location)
+
+            logger.info(location.name)
+            logger.info(location.value)
+            
+            # navigate to shuhe/baisha town
+            tab.get(location.value)
+            
+            # get the maximum page number
+            page_maximum_label = tab.ele('css:.myPagination > ul').child(index=8)
+            page_maximum : int = int(page_maximum_label.texts()[0])
+            
+            # change browser mode to `s` (session mode)
+            # tab.change_mode()
+            # tab.close()
+            logger.info('Change browser mode to: `%s`' % tab.mode)
+            
+            if self.progress_tracker:
+                self.progress_tracker.total_pages = page_maximum
+
+            # set the start time from here
+            start_time = time.time()
+            # if `dazhongdianping.csv` exist, read the last line from this file, and started task from that point (page + item)
+            initial_page = 1
+            last_row_data = self.read_resume_status(data_file_path)
+            
+            if last_row_data != -1:
+                # get item index
+                initial_page = last_row_data[0] + 1
+                logger.debug('Resume data collect from page: [%d].' %
+                             initial_page)
+
+            if initial_page >= page_maximum:
+                logger.error(
+                    'Initial page number >= page_maximum. That\'s impossible.')
+                return recorder
+            
+            logger.info('Page maximum %s' % page_maximum)
+            for current_page in range(initial_page, page_maximum):
+                
+                # check the running state
+                if self._running == False:
+                    logger.warning(
+                        'Swan received `stop` command on the first layer.')
+                    # flush the data first, and return `recorder` for convenient
+                    recorder.record()
+                    return recorder
+
+                if self.progress_tracker:
+                    self.progress_tracker.current_page = current_page
+                logger.info("Task `xiecheng` current page %d" % current_page)
+                
+                if initial_page != 1 and is_never_jumped == True:
+                    # jump to the specified page
+                    jump_input = tab.ele('css:.ant-pagination-options-quick-jumper > input')
+                    jump_input.input(initial_page)
+                    jump_btn = tab.ele('css:.ant-pagination-options-quick-jumper button')
+                    # wait until all the elements were loaded
+                    tab.wait(3)
+                    jump_btn.click()
+                    logger.info(jump_btn)
+                    is_never_jumped = False
+                    
+                tab.wait(3)
+                # alter comment sort method
+                sort_list = tab.ele('css:.sortList').child(index=-1)
+                sort_list.click()
+                # wait until all the elements were loaded
+                tab.wait(3)
+
+                # retrieve comment list (wrapper)
+                root = tab.ele('@tag()=body')
+                review_list = root.s_eles('css:.commentList .contentInfo')
+                logger.info('Comment list length: %d' % len(review_list))
+                
+                # parse the content
+                for index, review_item in enumerate(review_list):
+                    
+                    # check the running state for the second time
+                    if self._running == False:
+                        logger.error(
+                            'Swan received `stop` command on the second layer.'
+                        )
+                        # flush the data first, and return `recorder` for convenient
+                        recorder.record()
+                        return recorder
+
+                    raw_score = review_item.ele('css:.scroreInfo > span').texts(text_node_only=True)[0]
+                    raw_date  = review_item.ele('css:.commentFooter > .commentTime').texts(text_node_only=True)[0]
+                    raw_content = review_item.ele('css:.commentDetail').texts(text_node_only=True)[0]
+                    
+                    review_content = [sanitize_text(raw_content)]
+                    review_content.append(raw_date)
+                    review_content.append(int(raw_score))
+                    review_content.append(current_page)
+                    review_content.append(index)
+                    
+                    logger.info(review_content)
+                    
+                    # write the data
+                    recorder.set.delimiter('|')
+                    recorder.set.encoding('utf-8')
+                    # set header and backup
+                    recorder.set.head([
+                        'Comment', 'Comment Date', 'Score', 'Page', 'Index'
+                    ])
+                    recorder.set.auto_backup(60)
+                    recorder.add_data(review_content)
+                    
+                # sleep for 3 ~ 10 secs
+                sleep_time = self.calculate_sleep_time(start_time)
+                if sleep_time in [600, 1100]:
+                    start_time = time.time()
+
+                logger.info(
+                    "Sleep %s seconds before the next move. Take your time master >_="
+                    % sleep_time)
+                tab.wait(sleep_time)
+                
+                # navigate to the next page
+                next_page_btn = tab.ele('css:.myPagination > ul > .ant-pagination-next')
+                next_page_btn.click()
+            
+            
+        except Exception as e:
+            logger.error(f"Error in task_xiecheng: {e}")
+            traceback.print_exc(e)
+        finally:
+            # 确保资源被清理
+            logger.debug('Swan state in Finally Statement: %s' % self._running)
+            if not self._running:
+                logger.debug('Finally statement revoke grace shutdown!')
+                self.grace_shutdown(recorder)
+                return recorder
+
+    def task_red(self) -> Recorder:
+        pass
+        return None
+
+    def run_task(self) -> Recorder:
+        match self.platform:
+            case Platform.DAZHONGDIANPING:
+                return self.task_dzdp()
+            case Platform.XIECHENG:
+                return self.task_xiecheng()
+            case Platform.RED:
+                return self.task_red()
+
 
 def comment_swan_main():
+    
     swan = Swan('./swan.config.toml').launch()
     try:
         swan.task_dzdp()

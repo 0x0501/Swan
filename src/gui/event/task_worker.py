@@ -3,6 +3,7 @@ from loguru import logger
 from src.core.swan import Swan
 from src.core.location import Location
 import traceback
+from src.core.platform import Platform
 
 class TaskWorker(QThread):
     finished = Signal(bool)
@@ -27,12 +28,15 @@ class TaskWorker(QThread):
     def set_location(self, location : Location):
         self.swan.set_location(location)
         
+    def set_platform(self, platform : Platform):
+        self.swan.set_platform(platform)
+        
     def run(self):
         logger.debug('Swan Status (in task_worker): %s' % self.swan)
         logger.debug('Swan running state (in task_worker): %s' % self._is_running)
         try:
             if self.swan:
-                recorder = self.swan.task_dzdp()
+                recorder = self.swan.run_task()
                 # flush data into disk
                 if recorder != None:
                     recorder.record()

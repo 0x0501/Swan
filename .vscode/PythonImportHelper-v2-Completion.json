@@ -1165,12 +1165,46 @@
         "documentation": {}
     },
     {
-        "label": "platform",
+        "label": "requests",
         "kind": 6,
         "isExtraImport": true,
-        "importPath": "platform",
-        "description": "platform",
-        "detail": "platform",
+        "importPath": "requests",
+        "description": "requests",
+        "detail": "requests",
+        "documentation": {}
+    },
+    {
+        "label": "time",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "time",
+        "description": "time",
+        "detail": "time",
+        "documentation": {}
+    },
+    {
+        "label": "pandas",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pandas",
+        "description": "pandas",
+        "detail": "pandas",
+        "documentation": {}
+    },
+    {
+        "label": "BeautifulSoup",
+        "importPath": "bs4",
+        "description": "bs4",
+        "isExtraImport": true,
+        "detail": "bs4",
+        "documentation": {}
+    },
+    {
+        "label": "BeautifulSoup",
+        "importPath": "bs4",
+        "description": "bs4",
+        "isExtraImport": true,
+        "detail": "bs4",
         "documentation": {}
     },
     {
@@ -1191,21 +1225,19 @@
         "documentation": {}
     },
     {
-        "label": "time",
-        "kind": 6,
+        "label": "randint",
+        "importPath": "random",
+        "description": "random",
         "isExtraImport": true,
-        "importPath": "time",
-        "description": "time",
-        "detail": "time",
+        "detail": "random",
         "documentation": {}
     },
     {
-        "label": "pandas",
-        "kind": 6,
+        "label": "Recorder",
+        "importPath": "DataRecorder",
+        "description": "DataRecorder",
         "isExtraImport": true,
-        "importPath": "pandas",
-        "description": "pandas",
-        "detail": "pandas",
+        "detail": "DataRecorder",
         "documentation": {}
     },
     {
@@ -1361,30 +1393,6 @@
         "documentation": {}
     },
     {
-        "label": "Platform",
-        "importPath": "src.core.platform",
-        "description": "src.core.platform",
-        "isExtraImport": true,
-        "detail": "src.core.platform",
-        "documentation": {}
-    },
-    {
-        "label": "Platform",
-        "importPath": "src.core.platform",
-        "description": "src.core.platform",
-        "isExtraImport": true,
-        "detail": "src.core.platform",
-        "documentation": {}
-    },
-    {
-        "label": "Platform",
-        "importPath": "src.core.platform",
-        "description": "src.core.platform",
-        "isExtraImport": true,
-        "detail": "src.core.platform",
-        "documentation": {}
-    },
-    {
         "label": "LocationMapping",
         "importPath": "src.core.location_mapping",
         "description": "src.core.location_mapping",
@@ -1393,11 +1401,36 @@
         "documentation": {}
     },
     {
-        "label": "text",
-        "importPath": "tests.test_date",
-        "description": "tests.test_date",
+        "label": "Platform",
+        "importPath": "src.core.swan_platform",
+        "description": "src.core.swan_platform",
         "isExtraImport": true,
-        "detail": "tests.test_date",
+        "detail": "src.core.swan_platform",
+        "documentation": {}
+    },
+    {
+        "label": "Platform",
+        "importPath": "src.core.swan_platform",
+        "description": "src.core.swan_platform",
+        "isExtraImport": true,
+        "detail": "src.core.swan_platform",
+        "documentation": {}
+    },
+    {
+        "label": "Platform",
+        "importPath": "src.core.swan_platform",
+        "description": "src.core.swan_platform",
+        "isExtraImport": true,
+        "detail": "src.core.swan_platform",
+        "documentation": {}
+    },
+    {
+        "label": "platform",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "platform",
+        "description": "platform",
+        "detail": "platform",
         "documentation": {}
     },
     {
@@ -2200,15 +2233,6 @@
         "documentation": {}
     },
     {
-        "label": "Platform",
-        "kind": 6,
-        "importPath": "src.core.platform",
-        "description": "src.core.platform",
-        "peekOfCode": "class Platform(Enum):\n    DAZHONGDIANPING = 0       # 大众点评\n    XIECHENG        = 1       # 美团\n    RED             = 2       # 小红书\n    QUNAERWANG      = 3       # 去哪儿网",
-        "detail": "src.core.platform",
-        "documentation": {}
-    },
-    {
         "label": "Swan",
         "kind": 6,
         "importPath": "src.core.swan",
@@ -2224,6 +2248,15 @@
         "description": "src.core.swan",
         "peekOfCode": "def comment_swan_main():\n    swan = Swan('./swan.config.toml').launch()\n    try:\n        swan.task_dzdp()\n    except KeyboardInterrupt:\n        swan.grace_shutdown()\n        sys.exit(0)\nif __name__ == '__main__':\n    comment_swan_main()",
         "detail": "src.core.swan",
+        "documentation": {}
+    },
+    {
+        "label": "Platform",
+        "kind": 6,
+        "importPath": "src.core.swan_platform",
+        "description": "src.core.swan_platform",
+        "peekOfCode": "class Platform(Enum):\n    DAZHONGDIANPING = 0       # 大众点评\n    XIECHENG        = 1       # 美团\n    RED             = 2       # 小红书\n    QUNAERWANG      = 3       # 去哪儿网",
+        "detail": "src.core.swan_platform",
         "documentation": {}
     },
     {
@@ -2593,6 +2626,15 @@
         "description": "tests.test_gui",
         "peekOfCode": "setting_menu = tk.Menu(menu_bar, tearoff=0)\nmenu_bar.add_cascade(label='设置', menu=setting_menu)\nsetting_menu.add_command(label='程序设置 (Ctrl + E)')\nsetting_menu.add_command(label='账号设置 (Ctrl + R)')\ndef show_about():\n    message = f\"\"\"\n    Swan (天鹅)\n    为了完成这该死的论文开发的程序，能够方便的爬取网络文本。\n    作者: Elias\n    版本号: 1.0.0",
         "detail": "tests.test_gui",
+        "documentation": {}
+    },
+    {
+        "label": "task_qnw",
+        "kind": 2,
+        "importPath": "tests.test_qnw",
+        "description": "tests.test_qnw",
+        "peekOfCode": "def task_qnw() -> Recorder:\n    page_maximum = 100\n    headers = {\n        \"User-Agent\":\n        \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36\",\n    }\n    try:\n        for i in range(1, page_maximum):\n            response = requests.get(\n                'https://travel.qunar.com/place/api/html/comments/poi/715281?poiList=true&sortField=0&rank=0&pageSize=10&page=%d'",
+        "detail": "tests.test_qnw",
         "documentation": {}
     },
     {

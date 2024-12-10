@@ -20,7 +20,7 @@ from pyqttoast import Toast, ToastPreset, ToastPosition
 from src.utils.text import load_json
 from src.utils.random_selector import RandomUniqueSelector
 from src.gui.widgets.starter_button import StarterButton
-from src.core.platform import Platform
+from src.core.swan_platform import Platform
 from src.gui.dialogs.account_check_dialog import AccountCheckDialog
 from src.gui.resources import resources_rc
 from os import getenv
@@ -451,7 +451,9 @@ class MainWindow(QMainWindow):
         self.start_button.setEnabled(True)
         self.cancel_button.setEnabled(False)
         self._update_status_bar_info(f'任务出错: {error_message}')
-        self.progress_bar.setValue(0)
+        # self.progress_bar.setValue(0)
+        # terminate QThread
+        self.task_worker.quit()
         toast = Toast()
         toast.setDuration(3000)
         toast.setPositionRelativeToWidget(self)
@@ -492,7 +494,7 @@ class MainWindow(QMainWindow):
         self.progress_bar.setFormat(
             f'{round((current_page / max_page) * 100, 2)}% [{current_page}/{max_page}]'
         )
-        logger.debug('Current progress: %s' % progress)
+        logger.debug('Current progress: %s%.' % progress)
         logger.debug('Current page: %s' % current_page)
         logger.debug('Current maximum page: %s' % max_page)
         # Re-enable start button when complete

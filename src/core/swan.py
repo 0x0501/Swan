@@ -1,10 +1,12 @@
-from PySide6.QtCore import QSettings
 import os
-import platform
-from random import randint
+import requests
+import traceback
 import sys
 import time
 import pandas as pd
+from bs4 import BeautifulSoup
+from PySide6.QtCore import QSettings
+from random import randint
 from DataRecorder import Recorder
 from DrissionPage import Chromium
 from DrissionPage import ChromiumOptions
@@ -12,19 +14,17 @@ from loguru import logger
 from DrissionPage.errors import *
 from pathlib import Path
 from src.core.location import Location
-from src.utils.text import (concatenate_with_conditions, extract_and_convert_score,
-    extract_update_date, sanitize_text, star_string_to_int)
+from src.utils.text import (concatenate_with_conditions,
+                            extract_and_convert_score, extract_update_date,
+                            sanitize_text, star_string_to_int)
 from src.gui.event.task_progress_tracker import TaskProgressTracker
 from typing import Optional, Union, Tuple
-import traceback
 from src.core.encryption import Encryption
-from src.core.platform import Platform
 from src.core.location_mapping import LocationMapping
-from tests.test_date import text
+from src.core.swan_platform import Platform
 
 
 class Swan():
-
     _swan_version = '1.0.0'
     log_file_path = ''
     data_directory = ''
@@ -724,13 +724,13 @@ class Swan():
             self.set_location(self.location)
             location = self._map_location_to_qnw(self.location)
 
-            logger.info(location.name)
-            logger.info(location.value)
+            # logger.info(location.name)
+            # logger.info(location.value)
 
             # navigate to shuhe/baisha town
             tab.get(location.value)
             navigation_retry_count = 0
-            while not tab.ele('css:.b_paging > .page.next') and navigation_retry_count <= 3:
+            while not tab.ele('css:.b_paging > .page.next') and navigation_retry_count <= 5:
                 sleep_time = randint(3, 5)
                 logger.warning('Navigate to url: %s failed, sleep %d sec and retrying.' % (location.value, sleep_time))
                 tab.wait(sleep_time)
@@ -746,15 +746,30 @@ class Swan():
             page_maximum: int = int(page_maximum_label.texts()[0])
 
             if self.progress_tracker:
-                self.progress_tracker.total_pages = page_maximum
+                self.progress_tracker.total_pages = page_maximum + 1
 
             # set the start time from here
             start_time = time.time()
-            # if `dazhongdianping.csv` exist, read the last line from this file, and started task from that point (page + item)
+            # if `qunaerwang.csv` exist, read the last line from this file, and started task from that point (page + item)
             initial_page = 1
+            last_row_data = self.read_resume_status(data_file_path)
             logger.info('Page maximum %s' % page_maximum)
+            
+            if last_row_data != -1:
+                # get item index
+                if last_row_data[1] < 9:
+                    initial_page = last_row_data[0]
+                else:
+                    initial_page = last_row_data[0] + 1
+                logger.debug('Resume data collect from page: [%d].' %
+                             initial_page)
 
-            for current_page in range(initial_page, page_maximum):
+            if initial_page > page_maximum:
+                logger.error(
+                    'Initial page number >= page_maximum. That\'s impossible.')
+                return recorder
+
+            for current_page in range(initial_page, page_maximum + 1):
 
                 # check the running state
                 if self._running == False:
@@ -768,11 +783,42 @@ class Swan():
                     self.progress_tracker.current_page = current_page
                 logger.info("Task `qnw` current page %d" % current_page)
 
-                # retrieve comment list (wrapper)
-                root = tab.ele('@tag()=body')
-                review_list = root.s_eles('css:#comment_box > li')
-                logger.info('Comment list length: %d' % len(review_list))
+                # # retrieve comment list (wrapper)
+                # root = tab.ele('@tag()=body')
+                # review_list = root.s_eles('css:#comment_box > li')
+                # logger.info('Comment list length: %d' % len(review_list))
+                headers = {
+                    "User-Agent":
+                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36",
+                }
 
+                request_uri = 'https://travel.qunar.com/place/api/html/comments/poi/715281?poiList=true&sortField=0&rank=0&pageSize=10&page=%d' % current_page
+
+                response = requests.get(request_uri, headers=headers)
+                json_data = response.json()
+
+                navigation_retry_count = 0
+                while json_data['success'] == False and json_data['data'] == None and navigation_retry_count <= 5:
+                    if navigation_retry_count <=3:
+                        sleep_time = randint(8, 15)
+                    else:
+                        sleep_time = randint(15, 30)
+                    time.sleep(sleep_time)
+                    logger.info('Sleep %s sec, and retry.' % sleep_time)
+                    response = requests.get(request_uri, headers=headers)
+                    json_data = response.json()
+                    logger.warning('Retrying to navigate to: %s (%s)' %
+                                   (request_uri, navigation_retry_count))
+                    navigation_retry_count += 1
+                if json_data['success'] == False and navigation_retry_count <= 5:
+                    logger.error('Failed to navigate to url: %s' % request_uri)
+                    return recorder
+                else:
+                    logger.debug('Successful get json data, size: %d' % sys.getsizeof(json_data))
+                    logger.debug('Json data: %s' % json_data)
+                soup = BeautifulSoup(json_data['data'], 'lxml')
+                logger.info('Loading json data to BeautifulSoup4...')
+                review_list = soup.select('#comment_box > li')
                 # parse the content
                 for index, review_item in enumerate(review_list):
                     # check the running state for the second time
@@ -783,31 +829,21 @@ class Swan():
                         # flush the data first, and return `recorder` for convenient
                         recorder.record()
                         return recorder
-                    raw_date = review_item.ele(
-                        'css:.e_comment_add_info > ul').child(1).texts(
-                            text_node_only=True)[0]
-                    raw_score = review_item.ele(
-                        'css:.e_comment_star_box > .total_star').child(1).attr(
-                            'class')
                     raw_content = ''
-                    # if no element was found, return false
-                    if not review_item.ele('css:.e_comment_content .seeMore'):
+                    raw_date = review_item.select(
+                    '.e_comment_add_info > ul > li:first-child')[0].get_text(
+                        separator='|').split('|')[0]
+                    raw_score = review_item.select(
+                    '.e_comment_star_box > .total_star > span')[0].get(
+                        'class')[1]
+                    if len(review_item.select('.e_comment_content .seeMore')) == 0:
                         logger.warning('No expanded content was detected.')
                         raw_content = ''.join(
-                            review_item.ele('css:.e_comment_content').texts())
+                        review_item.select('.e_comment_content')[0].getText(
+                            strip=True))
                     else:
                         # if the review has expanded content, we need to parse it
-                        # sleep 3 to 6 second
-                        tab.scroll.down(
-                            randint(
-                                int(tab.rect.viewport_size_with_scrollbar[1] /
-                                    3),
-                                int(tab.rect.viewport_size_with_scrollbar[1] -
-                                    10)))
-                        tab.scroll.up(randint(20, 100))
-                        tab.wait(5, 10)
-                        deep_link = review_item.ele(
-                            'css:.e_comment_content .seeMore').attr('href')
+                        deep_link = review_item.select('.e_comment_content .seeMore')[0].get('href')
                         logger.info('Deep link: %s' % deep_link)
                         deep_link_tab = Chromium(
                             self.chromium_options).new_tab(deep_link)
@@ -818,7 +854,7 @@ class Swan():
                             sleep_time = randint(3, 8)
                             logger.warning(
                                 'No deep content was found, sleep %d sec and retry.'
-                            % sleep_time)
+                                % sleep_time)
                             # sleep
                             deep_link_tab.wait(sleep_time)
                             retry_count += 1
@@ -829,25 +865,21 @@ class Swan():
 
                         if not deep_link_tab.ele('css:.comment_content'):
                             logger.warning(
-                                'No deep content was found, leave it nothing.')
+                                'No deep content was found, leave it nothing, skip it')
                         else:
-                            # raw_content = ''.join(
-                            #     deep_link_tab.ele(
-                            #         'css:.comment_content').texts())
-                            
-                            
                             # chances are that some page trending to have more than one `comment_content` element
-                            deep_contents = deep_link_tab.eles('css:.comment_content')
+                            deep_contents = deep_link_tab.eles(
+                                'css:.comment_content')
                             temp = []
                             for content in deep_contents:
                                 # logger.info(content.texts())
                                 temp.append(''.join(content.texts()))
-                            
+
                             # concatenate strings
                             raw_content = concatenate_with_conditions(temp)
-                            
-                            logger.debug('Get deep content: %s' % raw_content)
-                            
+
+                            logger.debug('Get content from the deep link: %s' % raw_content)
+
                         deep_link_tab.scroll.to_half()
                         deep_link_tab.scroll.up(randint(30, 150))
                         deep_link_tab.scroll.down(randint(10, 60))
@@ -862,32 +894,26 @@ class Swan():
                     review_content.append(review_score)
                     review_content.append(current_page)
                     review_content.append(index)
-                    logger.info(review_content)
-                    
+                    # logger.info(review_content)
+
                     recorder.set.delimiter('|')
                     recorder.set.encoding('utf-8')
                     # set header and backup
-                    recorder.set.head([
-                        'Comment', 'Comment Date', 'Score', 'Page', 'Index'
-                    ])
+                    recorder.set.head(
+                        ['Comment', 'Comment Date', 'Score', 'Page', 'Index'])
                     recorder.set.auto_backup(60)
                     recorder.add_data(review_content)
-                    
+
                 # sleep for 3 ~ 10 secs
                 sleep_time = self.calculate_sleep_time(start_time)
-                if sleep_time in [600, 1100]:
+                if sleep_time in [400, 900]:
                     start_time = time.time()
 
                 logger.info(
                     "Sleep %s seconds before the next move. Take your time master >_="
                     % sleep_time)
-                tab.wait(sleep_time)
-                
-                # navigate to the next page
-                next_page_btn = tab.ele('css:.b_paging > .page.next')
-                next_page_btn.click()
-                # wait until the element was replace by js
-                tab.wait(3)
+                # tab.wait(sleep_time)
+                time.sleep(sleep_time)
 
         except Exception as e:
             logger.error(f"Error in task_qnw: {e}")

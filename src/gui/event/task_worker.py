@@ -1,9 +1,9 @@
+import traceback
 from PySide6.QtCore import QThread, Signal
 from loguru import logger
 from src.core.swan import Swan
 from src.core.location import Location
-import traceback
-from src.core.platform import Platform
+from src.core.swan_platform import Platform
 
 class TaskWorker(QThread):
     finished = Signal(bool)

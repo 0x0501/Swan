@@ -2237,7 +2237,7 @@
         "kind": 6,
         "importPath": "src.core.swan",
         "description": "src.core.swan",
-        "peekOfCode": "class Swan():\n    _swan_version = '1.0.0'\n    log_file_path = ''\n    data_directory = ''\n    land_page_location = 'Lijiang'\n    start_time = 0.0\n    settings: QSettings\n    location: Location = None\n    chromium_tabs: list = []\n    platform: Platform = Platform.DAZHONGDIANPING",
+        "peekOfCode": "class Swan():\n    _swan_version = '1.0.1'\n    log_file_path = ''\n    data_directory = ''\n    land_page_location = 'Lijiang'\n    start_time = 0.0\n    settings: QSettings\n    location: Location = None\n    chromium_tabs: list = []\n    platform: Platform = Platform.DAZHONGDIANPING",
         "detail": "src.core.swan",
         "documentation": {}
     },

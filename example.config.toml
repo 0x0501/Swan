@@ -1,5 +1,5 @@
 [application]
-version = "1.0.0"
+version = "1.0.1"
 log_level = "all"
 log_file_path = "./log/swan.log"
 chrome_executable_path = "C:/Program Files/Google/Chrome/Application/chrome.exe"

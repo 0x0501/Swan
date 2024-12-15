@@ -25,7 +25,7 @@ from src.core.swan_platform import Platform
 
 
 class Swan():
-    _swan_version = '1.0.0'
+    _swan_version = '1.0.1'
     log_file_path = ''
     data_directory = ''
     land_page_location = 'Lijiang'
@@ -523,7 +523,18 @@ class Swan():
         return location
 
     def _map_location_to_red(self, location: Location) -> Location:
-        pass
+        match location:
+            case Location.SHUHE_TOWN:
+                return LocationMapping(
+                    location.name,
+                    'https://www.xiaohongshu.com/search_result/?keyword=%25E6%259D%259F%25E6%25B2%25B3%25E5%258F%25A4%25E9%2595%2587&type=54&source=web_note_detail_r10',
+                    '束河古镇')
+            case Location.BAISHA_TOWN:
+                return LocationMapping(
+                    location.name,
+                    'https://www.xiaohongshu.com/search_result?keyword=%25E7%2599%25BD%25E6%25B2%2599%25E5%258F%25A4%25E9%2595%2587&source=web_search_result_notes',
+                    '白沙古镇')
+        return location
 
     def _map_location_to_qnw(self, location: Location) -> Location:
         match location:
@@ -730,15 +741,20 @@ class Swan():
             # navigate to shuhe/baisha town
             tab.get(location.value)
             navigation_retry_count = 0
-            while not tab.ele('css:.b_paging > .page.next') and navigation_retry_count <= 5:
+            while not tab.ele('css:.b_paging > .page.next'
+                              ) and navigation_retry_count <= 5:
                 sleep_time = randint(3, 5)
-                logger.warning('Navigate to url: %s failed, sleep %d sec and retrying.' % (location.value, sleep_time))
+                logger.warning(
+                    'Navigate to url: %s failed, sleep %d sec and retrying.' %
+                    (location.value, sleep_time))
                 tab.wait(sleep_time)
-                logger.warning('Retrying to navigate to %s (%d)' % (location.value, navigation_retry_count))
+                logger.warning('Retrying to navigate to %s (%d)' %
+                               (location.value, navigation_retry_count))
                 tab.refresh()
                 navigation_retry_count += 1
 
-            if not tab.ele('css:.b_paging > .page.next') and navigation_retry_count == 3:
+            if not tab.ele('css:.b_paging > .page.next'
+                           ) and navigation_retry_count == 3:
                 logger.error('Oops. our ip seems to be banned, stop Swan.')
                 return recorder
             # get the maximum page number
@@ -754,7 +770,7 @@ class Swan():
             initial_page = 1
             last_row_data = self.read_resume_status(data_file_path)
             logger.info('Page maximum %s' % page_maximum)
-            
+
             if last_row_data != -1:
                 # get item index
                 if last_row_data[1] < 9:
@@ -798,8 +814,9 @@ class Swan():
                 json_data = response.json()
 
                 navigation_retry_count = 0
-                while json_data['success'] == False and json_data['data'] == None and navigation_retry_count <= 5:
-                    if navigation_retry_count <=3:
+                while json_data['success'] == False and json_data[
+                        'data'] == None and navigation_retry_count <= 5:
+                    if navigation_retry_count <= 3:
                         sleep_time = randint(8, 15)
                     else:
                         sleep_time = randint(15, 30)
@@ -810,11 +827,13 @@ class Swan():
                     logger.warning('Retrying to navigate to: %s (%s)' %
                                    (request_uri, navigation_retry_count))
                     navigation_retry_count += 1
-                if json_data['success'] == False and navigation_retry_count <= 5:
+                if json_data[
+                        'success'] == False and navigation_retry_count <= 5:
                     logger.error('Failed to navigate to url: %s' % request_uri)
                     return recorder
                 else:
-                    logger.debug('Successful get json data, size: %d' % sys.getsizeof(json_data))
+                    logger.debug('Successful get json data, size: %d' %
+                                 sys.getsizeof(json_data))
                     logger.debug('Json data: %s' % json_data)
                 soup = BeautifulSoup(json_data['data'], 'lxml')
                 logger.info('Loading json data to BeautifulSoup4...')
@@ -831,19 +850,21 @@ class Swan():
                         return recorder
                     raw_content = ''
                     raw_date = review_item.select(
-                    '.e_comment_add_info > ul > li:first-child')[0].get_text(
-                        separator='|').split('|')[0]
+                        '.e_comment_add_info > ul > li:first-child'
+                    )[0].get_text(separator='|').split('|')[0]
                     raw_score = review_item.select(
-                    '.e_comment_star_box > .total_star > span')[0].get(
-                        'class')[1]
-                    if len(review_item.select('.e_comment_content .seeMore')) == 0:
+                        '.e_comment_star_box > .total_star > span')[0].get(
+                            'class')[1]
+                    if len(review_item.select(
+                            '.e_comment_content .seeMore')) == 0:
                         logger.warning('No expanded content was detected.')
                         raw_content = ''.join(
-                        review_item.select('.e_comment_content')[0].getText(
-                            strip=True))
+                            review_item.select('.e_comment_content')
+                            [0].getText(strip=True))
                     else:
                         # if the review has expanded content, we need to parse it
-                        deep_link = review_item.select('.e_comment_content .seeMore')[0].get('href')
+                        deep_link = review_item.select(
+                            '.e_comment_content .seeMore')[0].get('href')
                         logger.info('Deep link: %s' % deep_link)
                         deep_link_tab = Chromium(
                             self.chromium_options).new_tab(deep_link)
@@ -865,7 +886,8 @@ class Swan():
 
                         if not deep_link_tab.ele('css:.comment_content'):
                             logger.warning(
-                                'No deep content was found, leave it nothing, skip it')
+                                'No deep content was found, leave it nothing, skip it'
+                            )
                         else:
                             # chances are that some page trending to have more than one `comment_content` element
                             deep_contents = deep_link_tab.eles(
@@ -878,7 +900,8 @@ class Swan():
                             # concatenate strings
                             raw_content = concatenate_with_conditions(temp)
 
-                            logger.debug('Get content from the deep link: %s' % raw_content)
+                            logger.debug('Get content from the deep link: %s' %
+                                         raw_content)
 
                         deep_link_tab.scroll.to_half()
                         deep_link_tab.scroll.up(randint(30, 150))
@@ -929,7 +952,44 @@ class Swan():
         return None
 
     def task_red(self) -> Recorder:
-        pass
+        # change running state
+        self._running = True
+        # store the data as CSV file
+        data_file_path = Path.joinpath(
+            Path(self.settings.value('data_directory', './data')),
+            'red.csv')
+        recorder = Recorder(path=data_file_path, cache_size=75)
+        logger.debug('Swan (in) _running state: %s' % self._running)
+
+        try:
+            # launch a new tab
+            tab = Chromium(self.chromium_options).latest_tab
+
+            # push the tab into list
+            self.chromium_tabs.append(tab)
+
+            # set location and map it to corresponding links
+            self.set_location(self.location)
+            location = self._map_location_to_red(self.location)
+
+            # logger.info(location.name)
+            # logger.info(location.value)
+
+            # navigate to shuhe/baisha town
+            tab.get(location.value)
+            
+            # RED require login before any operations
+            
+        except Exception as e:
+            logger.error(f"Error in task_qnw: {e}")
+            traceback.print_exc(e)
+        finally:
+            # 确保资源被清理
+            logger.debug('Swan state in Finally Statement: %s' % self._running)
+            if not self._running:
+                logger.debug('Finally statement revoke grace shutdown!')
+                self.grace_shutdown(recorder)
+                return recorder
         return None
 
     def run_task(self) -> Recorder:

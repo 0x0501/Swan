@@ -1,4 +1,5 @@
 # Swan
+<img src="src/gui/resources/images/swan_icon.png" width="300" alt="描述文字">
 
 A tool for collecting online comments from various websites.
 

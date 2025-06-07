@@ -2,7 +2,7 @@ import os
 import subprocess
 import sys
 from pathlib import Path
-import pkg_resources
+import pkg_resources # type: ignore
 
 def get_installed_packages():
     """获取已安装的包及其版本"""

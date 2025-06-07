@@ -3,7 +3,7 @@ from PySide6.QtWidgets import QApplication
 from src.core.global_error_handler import GlobalErrorHandler
 from src.gui.main_window import MainWindow
 from src.utils.stylesheet_manager import StyleSheetManager
-import src.gui.resources.resources_rc
+import src.gui.resources.resources_rc  # noqa: F401
 
 
 def exception_hook(exc_type, exc_value, exc_traceback):

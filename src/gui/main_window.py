@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import (QMainWindow, QMenu, QSystemTrayIcon, QStyle,
+from PySide6.QtWidgets import (QMainWindow, QMenu, QSystemTrayIcon,
                                QStatusBar, QListView, QDialog)
 from PySide6.QtCore import Qt, QSettings, QTimer, QSize, QFile
 from PySide6.QtGui import QAction, QKeySequence, QIcon, QPixmap
@@ -275,7 +275,7 @@ class MainWindow(QMainWindow):
 
     def _csv_shortcut(self):
         # Swan正在运行
-        if self.swan != None and self.swan.is_running() and self.platform != None:
+        if self.swan is not None and self.swan.is_running() and self.platform is not None:
             data_file = Path(self.settings.value(
                 'data_directory', './data'))
             match self.platform:
@@ -310,7 +310,7 @@ class MainWindow(QMainWindow):
             status_bar_label.setText('')
             status_bar_label.setVisible(False)
 
-        if stick_to == False:
+        if stick_to is False:
             # 单次触发
             self.status_bar_info_timer = QTimer(self)
             self.status_bar_info_timer.setSingleShot(True)
@@ -322,8 +322,8 @@ class MainWindow(QMainWindow):
     # 自更新status bar
     def _update_status_bar_extra(self, million_sec: int = 5000):
 
-        if hasattr(self, 'saying') == False and hasattr(
-                self, 'random_saying') == False:
+        if hasattr(self, 'saying') is False and hasattr(
+                self, 'random_saying') is False:
             saying = load_json(':/strings/sayings.json')['sayings']
             self.random_saying = RandomUniqueSelector(saying)
 
@@ -337,7 +337,7 @@ class MainWindow(QMainWindow):
             self.status_bar_extra_timer.setInterval(display_time)
 
         # if the first time, delay 5sec to display
-        if hasattr(self, 'status_bar_extra_timer') == False:
+        if hasattr(self, 'status_bar_extra_timer') is False:
             first_timer = QTimer()
             first_timer.setSingleShot(True)
             first_timer.timeout.connect(
@@ -387,7 +387,7 @@ class MainWindow(QMainWindow):
         #     return
 
         # Create and start the worker thread
-        if self.task_worker == None:
+        if self.task_worker is None:
             self.task_worker = TaskWorker(self.swan, location)  # TODO: bug fix
             self.task_worker.finished.connect(self._on_task_finished)
             self.task_worker.error.connect(self._on_task_error)
@@ -493,7 +493,7 @@ class MainWindow(QMainWindow):
         self.progress_bar.setFormat(
             f'{round((current_page / max_page) * 100, 2)}% [{current_page}/{max_page}]'
         )
-        logger.debug('Current progress: %s%.' % progress)
+        logger.debug('Current progress: %s%%' % progress)
         logger.debug('Current page: %s' % current_page)
         logger.debug('Current maximum page: %s' % max_page)
         # Re-enable start button when complete
@@ -637,7 +637,7 @@ class MainWindow(QMainWindow):
         else:  # 如果是普通关闭，最小化到托盘
             if self.tray_icon.isVisible():
                 self.hide()
-                if self.is_first_time_hide_tray == False:
+                if self.is_first_time_hide_tray is False:
                     self.tray_icon.showMessage(
                         'Swan GUI', '应用程序已最小化到系统托盘，双击图标可以重新打开窗口。',
                         QSystemTrayIcon.MessageIcon.Information, 2000)

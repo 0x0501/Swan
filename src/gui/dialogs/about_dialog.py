@@ -74,7 +74,7 @@ class AboutDialog(QDialog):
         python_label = QLabel(python_info)
         python_label.setAlignment(Qt.AlignmentFlag.AlignLeft)
         
-        build_date = f"编译日期: 2024.12.15"
+        build_date = "编译日期: 2024.12.15"
         build_date_label = QLabel(build_date)
         build_date_label.setAlignment(Qt.AlignmentFlag.AlignLeft)
         

@@ -9,8 +9,8 @@ A program for collecting online comments from various websites. Roadmap:
 |_fei zhu_   | Plan |
 |_qu na'er wang_ | Plan |
 
-For personal use, for Me and Ming, one for Ming one for all.
+For personal use, for Me and Xiao Ming, one for Ming one for all.
 
-# License
+## License
 
-This program was released under MIT License. 
+This program was released under MIT License.

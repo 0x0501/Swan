@@ -58,7 +58,7 @@ class AboutDialog(QDialog):
         version_label = QLabel(f"版本: {Swan.swan_version()}")
         version_label.setAlignment(Qt.AlignmentFlag.AlignLeft)
         
-        description_label = QLabel("Swan 是为了完成这该死的论文开发的程序，能够方便的爬取网络文本。")
+        description_label = QLabel("Swan 是为了完成这该死的论文开发的程序，能够方便的爬取网络文本，编写这个程序极大成分是为了接近小明同学，逃~")
         description_label.setWordWrap(True)
         description_label.setAlignment(Qt.AlignmentFlag.AlignLeft)
         

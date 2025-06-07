@@ -3,10 +3,14 @@ swan.config.toml
 data/**
 backup/**
 bin/**
-.vscode/PythonImportHelper-v2-Completion.json
+.vscode/**
+logs/**
+.venv
+*.csv
 .VSCodeCounter
 nuitka-crash-report.xml
 main.dist
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

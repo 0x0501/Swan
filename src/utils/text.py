@@ -43,6 +43,19 @@ def sanitize_text(text: str, remove_all: bool = True) -> str:
         return text.strip()
 
 
+def sanitize_text_for_red(text: str) -> str:
+    # 去除所有 #符号及其后面的文字，直到空白符或字符串结尾
+    text = re.sub(r'#\S*', '', text)
+    
+    # 替换多个连续的句号为一个句号
+    text = re.sub(r'。+', '。', text)
+    
+    # 删除所有空白符（包括 \t、\n 和空格）
+    text = re.sub(r'\s+', '', text)
+    
+    return text.strip()
+
+
 def extract_and_convert_score(text: str):
     # 定义映射关系
     score_mapping = {

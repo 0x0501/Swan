@@ -22,11 +22,9 @@ from src.utils.random_selector import RandomUniqueSelector
 from src.gui.widgets.starter_button import StarterButton
 from src.core.swan_platform import Platform
 from src.gui.dialogs.account_check_dialog import AccountCheckDialog
-from src.gui.resources import resources_rc
 from os import getenv
 from src.utils.icon_loader import IconLoader
-import traceback
-from src.gui.dialogs.exit_dialog import ExitDialog, StatusChecker
+from src.gui.dialogs.exit_dialog import ExitDialog
 
 
 class MainWindow(QMainWindow):
@@ -91,7 +89,7 @@ class MainWindow(QMainWindow):
         self._create_menu_bar()
         self._create_status_bar()
         self._setup_tray_icon()
-        self._update_status_bar_extra()
+        # self._update_status_bar_extra()
         # setting up progress tracker
         self.emitter = EventEmitter()
         self.progress_tracker = TaskProgressTracker(self.emitter)
@@ -369,7 +367,8 @@ class MainWindow(QMainWindow):
                 logger.debug('Current select platform: %s' % '小红书')
             case Platform.QUNAERWANG.value:
                 logger.debug('Current select platform: %s' % '去哪儿网')
-        pass
+        return False
+
 
     def _start_swan(self):
         if not self.swan:
@@ -381,11 +380,11 @@ class MainWindow(QMainWindow):
 
         # index from 0
         platform = self.platform_combo.currentIndex()
-        if self._account_check(platform) == False:
+        # if self._account_check(platform) == False:
 
-            self._show_account_check_dialog('%s账号未配置' %
-                                            Platform(platform).name)
-            return
+        #     self._show_account_check_dialog('%s账号未配置' %
+        #                                     Platform(platform).name)
+        #     return
 
         # Create and start the worker thread
         if self.task_worker == None:
